@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.calibrage.a3ffarmerapp">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.LanguageActivity"></activity>
+        <activity android:name=".Activities.CollectionCenterActivity" />
+        <activity android:name=".Activities.BasicPlayerActivity" />
+        <activity
+            android:name=".Activities.LabourRecommendationsActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity android:name=".Testactivity" />
+        <activity
+            android:name=".Activities.MyReqDeatilsActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.RequestVisitDailogActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.RecommendationListActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity android:name=".Activities.FertilizerRecomendations" />
+        <activity
+            android:name=".Activities.EncyclopediaActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.RequestVisitActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.PaymentSummaryActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.PaymentHistoryActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.PaymentActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.QuickPayActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.FertilizerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.OrderPlacedActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.PoleActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.LabourActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.LoanActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.VisitActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.RecommendationActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.CollectionsActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
+        <activity
+            android:name=".Activities.SideMenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.ScannerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.OtpActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+    </application>
+
+</manifest>
