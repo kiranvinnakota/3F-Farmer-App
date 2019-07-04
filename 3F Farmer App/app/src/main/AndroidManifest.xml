@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.LanguageActivity"></activity>
+        <activity android:name=".Activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Activities.CollectionCenterActivity" />
         <activity android:name=".Activities.BasicPlayerActivity" />
         <activity
@@ -78,7 +79,7 @@
             android:name=".Activities.SideMenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name=".Activities.LanguageActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

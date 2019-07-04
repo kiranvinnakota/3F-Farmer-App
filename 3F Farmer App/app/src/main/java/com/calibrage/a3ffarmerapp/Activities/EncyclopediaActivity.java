@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -49,9 +50,9 @@ public class EncyclopediaActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFrag(new VideoFragment(), String.valueOf(R.string.videos));
+        pagerAdapter.addFrag(new VideoFragment(),getString(R.string.videos));
      //   pagerAdapter.addFrag(new AudioFragment(), "Audios");
-        pagerAdapter.addFrag(new PhotoFragment(), String.valueOf(R.string.doc));
+        pagerAdapter.addFrag(new PhotoFragment(),getString(R.string.doc));
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         DisplayActionBar();
@@ -67,7 +68,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        textviewTitle.setText(R.string.encyclopaedia);
+        textviewTitle.setText(R.string.knowledge);
 /*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
 
         textviewTitle.setText(Html.fromHtml(header));*/

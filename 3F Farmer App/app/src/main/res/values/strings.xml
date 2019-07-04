@@ -16,7 +16,7 @@
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="success">Success</string>
     <string name="agree">Agree</string>
-    <string name="otp_desc">Enter the 4 digits code sent your registered mobile number</string>
+    <string name="otp_desc">Enter the 6 digits code sent your registered mobile number</string>
     <string name="resend_otp"><u>Resend Otp</u></string>
     <string name="submit">Submit</string>
     <string name="submit_req">Submit Request</string>
@@ -61,7 +61,8 @@
     <string name="visit">Visit</string>
     <string name="req_visit">Request a Visit</string>
     <string name="learning">Learning</string>
-    <string name="knowledge_zone">Knowledge \n Zone</string>
+    <string name="knowledge_zone">Knowledge\n Zone</string>
+    <string name="knowledge">Knowledge zone</string>
     <string name="collection_center">Collection \n Center</string>
     <string name="fertilizer_center">Fertilizer \n Center</string>
     <string name="category1">Category1</string>
@@ -129,4 +130,13 @@
     <string name="tap_text">Select any language below:</string>
     <string name="btn_en">Englisch</string>
     <string name="btn_te">Telugu</string>
+    <string name="labour_request">Labour Request</string>
+    <string name="fertilizer_request">Fertilizer Request</string>
+    <string name="my_requests">My Requests</string>
+    <string name="only_date">Date</string>
+    <string name="only_time">Time</string>
+    <string name="datentime">Date&amp;Time of submission</string>
+    <string name="approve_date">Approve Date</string>
+    <string name="only_status">Status</string>
+
 </resources>

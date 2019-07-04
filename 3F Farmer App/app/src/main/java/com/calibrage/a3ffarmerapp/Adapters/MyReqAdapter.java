@@ -58,27 +58,27 @@ public class MyReqAdapter extends RecyclerView.Adapter {
             rowViewHolder.txtMobileNo.setBackgroundResource(R.drawable.table_header_cell_bg);
             rowViewHolder.txtPin.setBackgroundResource(R.drawable.table_header_cell_bg);
 
-            rowViewHolder.txtPlotId.setText("Plot Id");
+            rowViewHolder.txtPlotId.setText(R.string.plot_id);
             rowViewHolder.txtPlotId.setTextColor(Color.WHITE);
-            rowViewHolder.txtDate.setText("Date");
+            rowViewHolder.txtDate.setText(R.string.only_date);
             rowViewHolder.txtDate.setTextColor(Color.WHITE);
-            rowViewHolder.txtTime.setText("Time");
+            rowViewHolder.txtTime.setText(R.string.only_time);
             rowViewHolder.txtTime.setTextColor(Color.WHITE);
-            rowViewHolder.txtComments.setText("Comments");
+            rowViewHolder.txtComments.setText(R.string.comments);
             rowViewHolder.txtComments.setTextColor(Color.WHITE);
-            rowViewHolder.txtDateNTime.setText("Date&Time of submission");
+            rowViewHolder.txtDateNTime.setText(R.string.date_n_time);
             rowViewHolder.txtDateNTime.setTextColor(Color.WHITE);
-            rowViewHolder.txtReqDate.setText("Requested Date");
+            rowViewHolder.txtReqDate.setText(R.string.req_date);
             rowViewHolder.txtReqDate.setTextColor(Color.WHITE);
-            rowViewHolder.txtApproveDate.setText("Approve Date");
+            rowViewHolder.txtApproveDate.setText(R.string.approve_date);
             rowViewHolder.txtApproveDate.setTextColor(Color.WHITE);
-            rowViewHolder.txtStatus.setText("Status");
+            rowViewHolder.txtStatus.setText(R.string.only_status);
             rowViewHolder.txtStatus.setTextColor(Color.WHITE);
-            rowViewHolder.txtname.setText("Name");
+            rowViewHolder.txtname.setText(R.string.name_field);
             rowViewHolder.txtname.setTextColor(Color.WHITE);
-            rowViewHolder.txtMobileNo.setText("Mobile Number");
+            rowViewHolder.txtMobileNo.setText(R.string.mobile_number);
             rowViewHolder.txtMobileNo.setTextColor(Color.WHITE);
-            rowViewHolder.txtPin.setText("Pin");
+            rowViewHolder.txtPin.setText(R.string.pin);
             rowViewHolder.txtPin.setTextColor(Color.WHITE);
         } else {
             MyReqModel modal = movieList.get(rowPos-1);

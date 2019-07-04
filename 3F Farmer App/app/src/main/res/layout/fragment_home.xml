@@ -24,27 +24,140 @@
             android:orientation="vertical"
             android:id="@+id/linear1"
             >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/view"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="3"
-                android:padding="15dp"
-                android:background="#4e4e94"
                 android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+
+                    >
+
+                    <ImageButton
+                        android:id="@+id/collections_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/collections" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/Collections"
+                        android:textColor="#111"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
                 <LinearLayout
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
+                    android:layout_marginStart="40dp"
+                    android:padding="5dp"
                     >
 
                     <ImageButton
-                        android:id="@+id/collections_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:id="@+id/payments_button"
+                        android:background="@drawable/payments"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                       />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/payments"
+                        android:textColor="#111"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginStart="-5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+
+                    android:padding="5dp"
+
+                    >
+
+                    <ImageButton
+                        android:layout_gravity="center"
+                        android:id="@+id/recommendations_button"
+                        android:background="@drawable/recommendations"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/Recommend"
+                        android:textColor="#111"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+
+                        />
+
+                </LinearLayout>
+
+          <!--  <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_marginStart="-20dp"
+                    >
+
+                    <ImageButton
+
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_10"
+                          android:id="@+id/collections_button"
                         android:background="@drawable/collections" />
 
                     <TextView
@@ -52,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/Collections"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
@@ -67,23 +180,24 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="0dp"
                     >
 
                     <ImageButton
-                        android:id="@+id/payments_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="20dp"
-                        android:background="@drawable/imageedit_1_3706984635" />
+                         android:id="@+id/payments_button"
+                        android:background="@drawable/payments" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/payments"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_gravity="center"
                         android:layout_marginStart="20dp"
                         android:textSize="15dp"
@@ -97,23 +211,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="2"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="50dp"
                     >
 
                     <ImageButton
-                        android:id="@+id/recommendations_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/imageedit_2_2628132659"/>
+                           android:id="@+id/recommendations_button"
+                        android:background="@drawable/recommendations"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/Recommend"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="15dp"
                         android:layout_marginStart="1dp"
                         android:textStyle="bold"
@@ -123,8 +238,22 @@
                 </LinearLayout>
 
 
-
+-->
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:id="@+id/textbg1"
+                android:background="@color/lightGray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/req_services"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_margin="3dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,13 +265,14 @@
                     android:orientation="vertical"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:background="@drawable/rectangle_shape_grey_border"
+                    android:layout_marginStart="-3dp"
+
                     >
 
                     <ImageButton
                         android:id="@+id/labour_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/labour" />
 
@@ -165,15 +295,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
+                    android:layout_marginStart="3dp"
                     android:padding="5dp"
-                    android:layout_marginStart="-2dp"
                     >
 
                     <ImageButton
                         android:id="@+id/pole_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/pole"/>
 
@@ -198,7 +327,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
+
                     android:padding="5dp"
 
                     >
@@ -206,8 +335,8 @@
                     <ImageButton
                         android:layout_gravity="center"
                         android:id="@+id/fertilizer_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/fertilizer" />
 
                     <TextView
@@ -241,14 +370,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginStart="-3dp"
-                    android:background="@drawable/rectangle_shape_grey_border"
+                    android:layout_marginStart="-15dp"
+
                     android:padding="5dp"
                     >
                     <ImageButton
                         android:id="@+id/quickPay_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/quick_pay" />
 
@@ -273,15 +402,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginStart="-3dp"
-                    android:background="@drawable/rectangle_shape_grey_border"
+                    android:layout_marginStart="-14dp"
+
                     android:padding="5dp"
                     >
 
                     <ImageButton
                         android:id="@+id/visit_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/visit"
                         android:layout_gravity="center"
                         />
@@ -306,15 +435,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
+
                     android:padding="5dp"
                     >
 
 
                     <ImageButton
                         android:id="@+id/loan_button"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/loan"/>
 
@@ -348,9 +477,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/learning"
-                android:textSize="@dimen/text_size_15"
+                android:textSize="@dimen/text_size"
                 android:textColor="@color/black"
-                android:layout_margin="@dimen/margin_10"/>
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_margin="3dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -363,17 +494,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
                     android:layout_marginEnd="5dp"
-                    android:padding="5dp"
+
                     >
 
                     <ImageButton
                         android:id="@+id/knowledge_zone"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/knowledge"
+                        android:background="@drawable/encylopedia"
                         />
 
                     <TextView
@@ -394,16 +524,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
                     android:layout_marginStart="-24dp"
-                    android:padding="5dp"
 
                     >
 
                     <ImageButton
                         android:id="@+id/collection_center"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/collection_center" />
 
@@ -424,17 +552,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
                     android:layout_marginStart="-15dp"
-                    android:padding="5dp"
                     >
 
                     <ImageButton
                         android:id="@+id/fertilizer_center"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/godowns" />
+                        android:background="@drawable/fertilizer_center" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -456,6 +582,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="3"
+                android:padding="5dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -464,17 +591,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
-                    android:layout_marginEnd="5dp"
-                    android:padding="5dp"
+
+                   android:layout_marginStart="3dp"
+
                     >
 
                     <ImageButton
                         android:id="@+id/category1"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/knowledge"
+                        android:background="@drawable/category1"
                         />
 
                     <TextView
@@ -495,18 +622,19 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
-                    android:layout_marginStart="-24dp"
-                    android:padding="5dp"
+
+                    android:layout_marginStart="0dp"
+
+
 
                     >
 
                     <ImageButton
                         android:id="@+id/category2"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/collection_center" />
+                        android:background="@drawable/category2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -525,17 +653,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rectangle_shape_grey_border"
-                    android:layout_marginStart="-15dp"
+                    android:layout_marginStart="-9dp"
                     android:padding="5dp"
                     >
 
                     <ImageButton
                         android:id="@+id/category3"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/godowns" />
+                        android:background="@drawable/category3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -552,10 +679,10 @@
         </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/learning_relative"
         android:src="@drawable/call_center_banner"
-        android:layout_margin="@dimen/margin_10"
+
 
         android:id="@+id/call_center_banner"/>
    <!-- <RelativeLayout

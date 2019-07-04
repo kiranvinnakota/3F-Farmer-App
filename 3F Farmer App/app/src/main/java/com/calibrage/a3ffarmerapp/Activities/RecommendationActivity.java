@@ -48,10 +48,10 @@ public class RecommendationActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_recommendation);
 
         RecommendationModel[] myListData = new RecommendationModel[] {
-                new RecommendationModel("Plot252019","2 hectare ","Chinnakoduru","Near Shiavalayam"),
-                new RecommendationModel("Plot242019","1 hectare  ","Dundigal","Opposite govt school"),
-                new RecommendationModel("Plot232019","3 hectare ","Baswapur","Flowers market"),
-                new RecommendationModel("Plot222019","4 hectare  ","Medipally","Main road"),
+                new RecommendationModel("Plot252019","2 hec ","Chinnakoduru","Near Shiavalayam"),
+                new RecommendationModel("Plot242019","1 hec  ","Dundigal","Opposite govt school"),
+                new RecommendationModel("Plot232019","3 hec ","Baswapur","Flowers market"),
+                new RecommendationModel("Plot222019","4 hec  ","Medipally","Main road"),
 
         };
 

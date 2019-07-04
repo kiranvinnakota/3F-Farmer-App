@@ -86,7 +86,7 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
     @Override
     public void onFooterClicked() {
        // Toast.makeText(this, "onFooterClicked", Toast.LENGTH_SHORT).show();
-        Intent intent= new Intent(getApplicationContext(),LoginActivity.class);
+        Intent intent= new Intent(getApplicationContext(),LanguageActivity.class);
         startActivity(intent);
     }
 

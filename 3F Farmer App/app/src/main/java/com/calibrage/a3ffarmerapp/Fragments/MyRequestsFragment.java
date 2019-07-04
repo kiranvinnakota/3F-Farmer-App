@@ -1,6 +1,7 @@
 package com.calibrage.a3ffarmerapp.Fragments;
 
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -31,8 +32,8 @@ public class MyRequestsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_requests,
                 container, false);
         MyReqListData[] myListData = new MyReqListData[] {
-                new MyReqListData("Labour Request", android.R.drawable.ic_dialog_info),
-                new MyReqListData("Fertilizer Request", android.R.drawable.ic_dialog_info),
+                new MyReqListData(getResources().getString(R.string.labour_request), android.R.drawable.ic_dialog_info),
+                new MyReqListData(getResources().getString(R.string.fertilizer_request), android.R.drawable.ic_dialog_info),
 
         };
 
