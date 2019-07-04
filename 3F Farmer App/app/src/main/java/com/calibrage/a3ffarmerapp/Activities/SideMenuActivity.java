@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.Fragments.HomeFragment;
@@ -92,7 +95,7 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
 
     @Override
     public void onHeaderClicked() {
-    //    Toast.makeText(this, "onHeaderClicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "onHeaderClicked", Toast.LENGTH_SHORT).show();
     }
 
     private void goToFragment(Fragment fragment, boolean addToBackStack) {
@@ -145,6 +148,12 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
             mDuoDrawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
             mDuoMenuView = (DuoMenuView) mDuoDrawerLayout.getMenuView();
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+            View header = mDuoMenuView.getHeaderView();
+            TextView textUsername = header.findViewById(R.id.duo_view_header_text_title);
+            textUsername.setText("you text here ");
+            TextView textrole = header.findViewById(R.id.duo_view_header_text_sub_title);
+            textrole.setText("you text role ");
         }
     }
 }

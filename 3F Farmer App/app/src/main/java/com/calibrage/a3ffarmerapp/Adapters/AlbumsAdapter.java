@@ -16,6 +16,9 @@ import com.bumptech.glide.Glide;
 import com.calibrage.a3ffarmerapp.Model.Album;
 import com.calibrage.a3ffarmerapp.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +31,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     private List<Album> albumList;
     int minteger = 0;
     HashMap<String,Integer> positiveNumbers = new HashMap<String,Integer>() ;
-    Integer count=0;
+    
 
     public  TextView displayInteger;
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -85,6 +88,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+
+        final ArrayList<Integer> count = new ArrayList<>();
         Album album = albumList.get(position);
         holder.title.setText(album.getName());
         holder.price.setText(album.getPrice());
@@ -98,10 +103,13 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count = count + 1;
-                holder.number.setText(count.toString());
-                positiveNumbers.put(holder.uniqueKey, count); //Key -> String.valueOf(position) and Value -> int count
-                notifyDataSetChanged();
+                Integer i = 0;
+                i++;
+                count.add(holder.getAdapterPosition());
+               // Log.e("", ""+Arrays.(count));
+                holder.number.setText(""+count.size());
+                positiveNumbers.put(holder.uniqueKey, count.size()); //Key -> String.valueOf(position) and Value -> int count
+               // notifyDataSetChanged();
 
             }
 
@@ -111,11 +119,12 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                count = count - 1;
-                holder.number.setText(count.toString());
-                positiveNumbers.put(holder.uniqueKey, count);   //Key -> String.valueOf(position) and Value -> int count
-                notifyDataSetChanged();
+                if(count.size()>0 ){
+                    count.remove(count.size()-1);
+                }
+                holder.number.setText(""+count.size());
+                positiveNumbers.put(holder.uniqueKey, count.size());   //Key -> String.valueOf(position) and Value -> int count
+               // notifyDataSetChanged();
             }
         });
 
