@@ -70,7 +70,7 @@
     <string name="category3">Category3</string>
     <string name="encyclopaedia">Encyclopaedia</string>
     <string name="custom_msg">Custom Message to be displayed here</string>
-    <string name="name">KRISHAKTHI</string>
+    <string name="name">Ramu</string>
     <string name="time_peroid">Time Peroid</string>
     <string name="from_date">From Date</string>
     <string name="to_date">To Date</string>
@@ -138,5 +138,6 @@
     <string name="datentime">Date&amp;Time of submission</string>
     <string name="approve_date">Approve Date</string>
     <string name="only_status">Status</string>
+    <string name="total_rs">Total RS:</string>
 
 </resources>

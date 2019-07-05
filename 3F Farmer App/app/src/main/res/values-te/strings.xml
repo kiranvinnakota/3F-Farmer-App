@@ -51,7 +51,7 @@
         <string name = "labour_charges">కార్మిక ఛార్జీలు</string>
         <string name = "pole_charges">పోల్ ఛార్జీలు</string>
         <string name = "convenience_charge">సౌలభ్యం \n ఛార్జ్</string>
-        <string name = "total_amt_pay">మొత్తం మొత్తం pay n చెల్లించవలసిన</string>
+        <string name = "total_amt_pay">మొత్తం \n చెల్లించవలసిన</string>
         <string name = "confirm_req">అభ్యర్థనను నిర్ధారించండి</string>
         <string name = "frquency">Frquency</string>
         <string name = "pole">పోల్</string>
@@ -70,7 +70,7 @@
         <string name = "category3">వర్గం 3</string>
         <string name = "encyclopaedia">ఎన్సైక్లోపీడియా</string>
         <string name = "custom_msg">ఇక్కడ ప్రదర్శించబడే అనుకూల సందేశం</string>
-        <string name = "name">KRISHAKTHI</string>
+        <string name = "name">రాము</string>
         <string name = "time_peroid">టైమ్ పెరాయిడ్</string>
         <string name = "from_date">తేదీ నుండి</string>
         <string name = "to_date">తేదీకి</string>
@@ -114,7 +114,7 @@
          <string name = "pin">పిన్</string>
          <string name = "collection">సేకరణ</string>
          <string name = "land_mark">మైలురాయి:</string>
-         <string name = "select_collection">రైతుకు payment n చెల్లింపు అవసరమయ్యే సేకరణలను ఎంచుకోండి</string>
+         <string name = "select_collection">రైతుకు payment \n చెల్లింపు అవసరమయ్యే సేకరణలను ఎంచుకోండి</string>
          <string name = "show">మరింత సమాచారం</string>
          <string name = "hide">తక్కువ సమాచారం</string>
          <string name = "profile_name">జాన్ డో</string>
@@ -139,4 +139,5 @@
      <string name="datentime">సమర్పించిన తేదీ సమయం</string>
      <string name="approve_date">తేదీని ఆమోదించండి</string>
      <string name="only_status">స్థితి</string>
+     <string name="total_rs">మొత్తం RS:</string>
  </resources>

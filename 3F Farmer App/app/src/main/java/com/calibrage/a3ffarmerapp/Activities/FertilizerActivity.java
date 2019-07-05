@@ -223,17 +223,16 @@ public class FertilizerActivity extends AppCompatActivity {
                   R.drawable.album9,
                   R.drawable.album10,
                   R.drawable.album11*/};
-
-        Album a = new Album("Fertilizer" , covers[0], "Rs.300", "mprove soil structure, it encourages beneficial soil", "20kgs");
+        Album a = new Album("SICKLE" ,  100,covers[0], "The blade is heavier than that of a normal sickle", "450mm");
         albumList.add(a);
 
-        a = new Album("Lawn Fertilizer",  covers[1], "Rs.400", " The primary nutrients for soil are oxygen", "25 kgs");
+        a = new Album("Grub Hoe",  200, covers[1], "Digging and Tilling Using a grubbing hoe", "4.25'/1.3 lb");
         albumList.add(a);
 
-        a = new Album("Lewis", covers[2], "Rs.200", "An exciting attacking midfielder,", " 15 kgs");
+        a = new Album("panga",  200, covers[2],"Convenient access to all your gear", " 5.2 pounds");
         albumList.add(a);
 
-        a = new Album("Triple pro", covers[3], "Rs.500", "Allows farmers in the Cotton-Growing Area", "30kgs");
+        a = new Album("Rake",  500,covers[3], "a long-handled tool with a row of teeth at its head", "58 wagons");
         albumList.add(a);
        /* a = new Album("Honeymoon",  covers[4]);
         albumList.add(a);

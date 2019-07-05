@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.calibrage.a3ffarmerapp.Adapters.AlbumsAdapter;
 import com.calibrage.a3ffarmerapp.Model.Album;
 import com.calibrage.a3ffarmerapp.R;
@@ -29,9 +31,12 @@ import java.util.List;
 
 public class PoleActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+
+    TextView mealTotalText;
+    private RecyclerView storedOrders;
     private AlbumsAdapter adapter;
-    private List<Album> albumList;
+
+    private List<Album> orders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +53,30 @@ public class PoleActivity extends AppCompatActivity {
                 finish();
             }
         });*/
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        storedOrders=(RecyclerView)findViewById(R.id.selected_food_list);
 
-        albumList = new ArrayList<>();
-        adapter = new AlbumsAdapter(this, albumList);
+
+        mealTotalText = (TextView)findViewById(R.id.meal_total);
+
+        orders = new ArrayList<>();
+        adapter = new AlbumsAdapter(this, orders);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+        storedOrders.setLayoutManager(mLayoutManager);
+        storedOrders.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        storedOrders.setItemAnimator(new DefaultItemAnimator());
+        storedOrders.setAdapter(adapter);
+        //  adapter.registerDataSetObserver(observer);
+        //   adapter.registerAdapterDataObserver(observer);
+
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setMealTotal();
+            }
+        });
+        getListItemData();
         Button buttonBarCodeScan = findViewById(R.id.confirm);
        // buttonBarCodeScan.setTypeface(faceBold);
 
@@ -69,7 +88,7 @@ public class PoleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        prepareAlbums();
+      //  prepareAlbums();
 
         /*try {
             Glide.with(this).load(R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
@@ -77,6 +96,48 @@ public class PoleActivity extends AppCompatActivity {
             e.printStackTrace();
         }*/
         DisplayActionBar();
+    }
+    private void getListItemData() {
+        orders.clear();
+        int[] covers = new int[]{
+                R.drawable.sickle,
+                R.drawable.grub,
+                R.drawable.panga,
+                R.drawable.rake,
+                /*  R.drawable.album5,
+                  R.drawable.album6,
+                  R.drawable.album7,
+                  R.drawable.album8,
+                  R.drawable.album9,
+                  R.drawable.album10,
+                  R.drawable.album11*/};
+
+        Album a = new Album("SICKLE" ,300,covers[0],"The blade is heavier than that of a normal sickle", "450mm");
+        orders.add(a);
+
+        a = new Album("Grub Hoe",   400,covers[1], "Digging and Tilling Using a grubbing hoe", "4.25'/1.3 lb");
+        orders.add(a);
+        a = new Album("panga", 200, covers[2],"Convenient access to all your gear", " 5.2 pounds");
+        orders.add(a);
+
+        a = new Album("Rake", 500, covers[3], "a long-handled tool with a row of teeth at its head", "58 wagons");
+        orders.add(a);
+        adapter.notifyDataSetChanged();
+
+        //  adapter.registerDataSetObserver(observer);
+
+    }
+    public int calculateMealTotal(){
+        int mealTotal = 0;
+        for(Album order : orders){
+            mealTotal += order.getmAmount() * order.getmQuantity();
+            Log.e("mealTotal==", String.valueOf(order.getmAmount()));
+            Log.e("mealTotal==", String.valueOf(order.getmQuantity()));
+        }
+        return mealTotal;
+    }
+    public void setMealTotal(){
+        mealTotalText.setText("Rs"+" "+ calculateMealTotal());
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
@@ -139,36 +200,36 @@ public class PoleActivity extends AppCompatActivity {
     /**
      * Adding few albums for testing
      */
-    private void prepareAlbums() {
+   /* private void prepareAlbums() {
         int[] covers = new int[]{
                 R.drawable.sickle,
                 R.drawable.grub,
                R.drawable.panga,
                 R.drawable.rake,
-              /*  R.drawable.album5,
+              *//*  R.drawable.album5,
                 R.drawable.album6,
                 R.drawable.album7,
                 R.drawable.album8,
                 R.drawable.album9,
                 R.drawable.album10,
-                R.drawable.album11*/};
+                R.drawable.album11*//*};
 
-        Album a = new Album("SICKLE" , covers[0], "Rs.300", "The blade is heavier than that of a normal sickle", "450mm");
-        albumList.add(a);
+        Album a = new Album("SICKLE" , covers[0], 100, "The blade is heavier than that of a normal sickle", "450mm");
+        orders.add(a);
 
-        a = new Album("Grub Hoe",  covers[1], "Rs.400", "Digging and Tilling Using a grubbing hoe", "4.25'/1.3 lb");
-        albumList.add(a);
+        a = new Album("Grub Hoe",  covers[1], 200, "Digging and Tilling Using a grubbing hoe", "4.25'/1.3 lb");
+        orders.add(a);
 
-        a = new Album("panga", covers[2], "Rs.200", "Convenient access to all your gear", " 5.2 pounds");
-        albumList.add(a);
+        a = new Album("panga", covers[2], 200, "Convenient access to all your gear", " 5.2 pounds");
+        orders.add(a);
 
-        a = new Album("Rake", covers[3], "Rs.500", "a long-handled tool with a row of teeth at its head", "58 wagons");
-        albumList.add(a);
+        a = new Album("Rake", covers[3], 500, "a long-handled tool with a row of teeth at its head", "58 wagons");
+        orders.add(a);
 
-       /* a = new Album("Honeymoon",  covers[4]);
+       *//* a = new Album("Honeymoon",  covers[4]);
         albumList.add(a);
-*/
-      /*  a = new Album("I Need a Doctor",  covers[5]);
+*//*
+      *//*  a = new Album("I Need a Doctor",  covers[5]);
         albumList.add(a);
 
         a = new Album("Loud",  covers[6]);
@@ -181,10 +242,10 @@ public class PoleActivity extends AppCompatActivity {
         albumList.add(a);
 
         a = new Album("Greatest Hits", covers[9]);
-        albumList.add(a);*/
+        albumList.add(a);*//*
 
         adapter.notifyDataSetChanged();
-    }
+    }*/
 
     /**
      * RecyclerView item decoration - give equal margin around grid item

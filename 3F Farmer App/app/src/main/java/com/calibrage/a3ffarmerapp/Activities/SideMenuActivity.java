@@ -151,9 +151,13 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
 
             View header = mDuoMenuView.getHeaderView();
             TextView textUsername = header.findViewById(R.id.duo_view_header_text_title);
-            textUsername.setText("you text here ");
+            textUsername.setText(R.string.name);
             TextView textrole = header.findViewById(R.id.duo_view_header_text_sub_title);
-            textrole.setText("you text role ");
+            textrole.setText("");
+
+            View footer = mDuoMenuView.getFooterView();
+            TextView logout = footer.findViewById(R.id.duo_view_footer_text);
+            logout.setText(R.string.log_off);
         }
     }
 }

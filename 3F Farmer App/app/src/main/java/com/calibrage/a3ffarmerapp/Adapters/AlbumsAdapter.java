@@ -22,51 +22,54 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Ravi Tamada on 18/05/16.
- */
-public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHolder> {
+
+
+
+
+
+public  class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Album> albumList;
+    private List<Album> orders;
     int minteger = 0;
     HashMap<String,Integer> positiveNumbers = new HashMap<String,Integer>() ;
-    
 
-    public  TextView displayInteger;
+    HashMap<String,Integer> rs = new HashMap<String,Integer>() ;
+    Integer man=0;
+
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public ImageView thumbnail, overflow;
-        Button plus, minus;
-        public TextView number,price;
+        TextView currentFoodName,
+                currentCost,
+                quantityText,
+                addMeal,
+                subtractMeal,
+                removeMeal;
+        public ImageView thumbnail;
         public TextView disc,size;
-        public String uniqueKey;
 
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            //  count = (TextView) view.findViewById(R.id.count);
+
+            currentFoodName = (TextView) view.findViewById(R.id.selected_food_name);
+            currentCost = (TextView) view.findViewById(R.id.selected_food_amount);
+            subtractMeal = (TextView) view.findViewById(R.id.minus_meal);
+            quantityText = (TextView) view.findViewById(R.id.quantity);
+            addMeal = (TextView) view.findViewById(R.id.plus_meal);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            number = (TextView) view.findViewById(
-                    R.id.integer_number);
-            price = (TextView) view.findViewById(
-                    R.id.price);
             disc = (TextView) view.findViewById(
                     R.id.desc);
             size = (TextView) view.findViewById(
                     R.id.size);
-            plus = (Button) view.findViewById(
-                    R.id.increase);
+            //  removeMeal = (TextView) view.findViewById(R.id.delete_item);
 
-            minus = (Button) view.findViewById(R.id.decrease);
 
         }
-
     }
-    public AlbumsAdapter(Context mContext, List<Album> albumList) {
+    public AlbumsAdapter(Context mContext, List<Album> orders) {
         this.mContext = mContext;
-        this.albumList = albumList;
+        this.orders = orders;
     }
 
     @Override
@@ -76,108 +79,62 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
 
         return new MyViewHolder(itemView);
     }
-   /* public void increaseInteger(View view) {
-        minteger = minteger + 1;
-        display(minteger);
-
-    }public void decreaseInteger(View view) {
-        minteger = minteger - 1;
-        display(minteger);
-    }
-*/
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        final Album currentFood = orders.get(position);
 
-        final ArrayList<Integer> count = new ArrayList<>();
-        Album album = albumList.get(position);
-        holder.title.setText(album.getName());
-        holder.price.setText(album.getPrice());
-        holder.disc.setText(album.getDisc());
-        holder.size.setText(album.getSize());
+        holder.currentFoodName.setText(currentFood.getmName());
+        holder.currentCost.setText("RS"+ (currentFood.getmAmount() * currentFood.getmQuantity()));
+        holder.quantityText.setText(""+ currentFood.getmQuantity());
+
+        holder.disc.setText(currentFood.getDisc());
+        holder.size.setText(currentFood.getSize());
         //   holder.count.setText(album.getNumOfSongs() + " songs");
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(currentFood.getThumbnail()).into(holder.thumbnail);
 
-        holder.plus.setOnClickListener(new View.OnClickListener() {
+        //OnClick listeners for all the buttons on the ListView Item
+        holder.addMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Integer i = 0;
-                i++;
-                count.add(holder.getAdapterPosition());
-               // Log.e("", ""+Arrays.(count));
-                holder.number.setText(""+count.size());
-                positiveNumbers.put(holder.uniqueKey, count.size()); //Key -> String.valueOf(position) and Value -> int count
-               // notifyDataSetChanged();
-
-            }
-
-
-        });
-
-        holder.minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(count.size()>0 ){
-                    count.remove(count.size()-1);
-                }
-                holder.number.setText(""+count.size());
-                positiveNumbers.put(holder.uniqueKey, count.size());   //Key -> String.valueOf(position) and Value -> int count
-               // notifyDataSetChanged();
+                currentFood.addToQuantity();
+                holder.quantityText.setText("x "+ currentFood.getmQuantity());
+                holder.currentCost.setText("GH"+ (currentFood.getmAmount() * currentFood.getmQuantity()));
+                notifyDataSetChanged();
             }
         });
 
-        ;
-
-
-
-      /*  holder.overflow.setOnClickListener(new View.OnClickListener() {
+        holder.subtractMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // showPopupMenu(holder.overflow);
+                currentFood.removeFromQuantity();
+                holder. quantityText.setText("x "+currentFood.getmQuantity());
+                holder.currentCost.setText("GH"+ (currentFood.getmAmount() * currentFood.getmQuantity()));
+                notifyDataSetChanged();
+            }
+        });
+
+       /* holder.removeMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                orders.remove(position);
+                notifyDataSetChanged();
             }
         });*/
+
+        // loading album cover using Glide library
+        //  Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+
+
+
     }
-
-
-    /**
-     * Showing popup menu when tapping on 3 dots
-    /* *//*
-    private void showPopupMenu(View view) {
-        // inflate menu
-        PopupMenu popup = new PopupMenu(mContext, view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_album, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-        popup.show();
-    }
-
-    *//**
-     * Click listener for popup menu items
-     *//*
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-
-        public MyMenuItemClickListener() {
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.action_add_favourite:
-                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-                    return true;
-                case R.id.action_play_next:
-                    Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
-                    return true;
-                default:
-            }
-            return false;
-        }
-    }*/
 
     @Override
     public int getItemCount() {
-        return albumList.size();
+        return orders.size();
     }
 }
+
+

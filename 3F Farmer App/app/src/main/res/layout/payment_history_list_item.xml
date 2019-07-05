@@ -193,7 +193,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="gone"
+
         android:id="@+id/content"
         android:gravity="top|center_horizontal"
         android:layout_below="@+id/linear">
@@ -202,8 +202,9 @@
             android:id="@+id/tabla_cuerpo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="70dp"
-            android:layout_marginEnd="70dp"
+            android:paddingStart="0dp"
+            android:visibility="gone"
+
             >
 
             <TableRow
@@ -223,7 +224,7 @@
                 <TextView
                     android:id="@+id/collectionAmt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="57dp"
                     android:background="@drawable/cell_shape_black"
                     android:padding="5dp"
                     android:text="29000"

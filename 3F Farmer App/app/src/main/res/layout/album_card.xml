@@ -19,7 +19,7 @@
 
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/selected_food_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/album_title_padding"
@@ -30,11 +30,11 @@
                 android:textSize="@dimen/album_title" />
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/selected_food_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="price"
-                android:layout_below="@id/title"
+                android:layout_below="@id/selected_food_name"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
@@ -43,9 +43,8 @@
             <ImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
-                android:layout_below="@id/price"
+                android:layout_below="@id/selected_food_amount"
                 android:layout_height="@dimen/album_cover_height"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:scaleType="fitXY" />
             <TextView
@@ -77,62 +76,141 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:layout_below="@+id/size">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/album_title_padding"
-    android:textSize="@dimen/album_title"
-    android:text="Qty"/>
-                <Button
-                    android:id="@+id/decrease"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="Qty"/>
+                <TextView
+                    android:id="@+id/minus_meal"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="@dimen/margin_10"
-                    android:background="@drawable/minus"/>
+
+                    android:background="@drawable/minus"
+                    />
 
                 <TextView
-                    android:id="@+id/integer_number"
+                    android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="10dp"
                     android:text="0"
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/increase"
+                <TextView
+                    android:id="@+id/plus_meal"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginEnd="0dp"
-
-                    android:background="@drawable/plus"/>
+                    android:background="@drawable/plus"
+                    />
+                <!-- <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:gravity="right"
+                     android:text="455"
+                     android:visibility="gone"
+                     android:layout_gravity="center_vertical"
+                     android:id="@+id/selected_food_amount"/>-->
             </LinearLayout>
 
-          <!--  <TextView
-                android:id="@+id/count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:paddingBottom="@dimen/songs_count_padding_bottom"
-                android:paddingLeft="@dimen/album_title_padding"
-                android:paddingRight="@dimen/album_title_padding"
-                android:textSize="@dimen/songs_count" />-->
-<!--
-            <ImageView
-                android:id="@+id/overflow"
-                android:layout_width="@dimen/ic_album_overflow_width"
-                android:layout_height="@dimen/ic_album_overflow_height"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/thumbnail"
-                android:layout_marginTop="@dimen/ic_album_overflow_margin_top"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_dots" />-->
+            <!--  <TextView
+                  android:id="@+id/count"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@id/title"
+                  android:paddingBottom="@dimen/songs_count_padding_bottom"
+                  android:paddingLeft="@dimen/album_title_padding"
+                  android:paddingRight="@dimen/album_title_padding"
+                  android:textSize="@dimen/songs_count" />-->
+            <!--
+                        <ImageView
+                            android:id="@+id/overflow"
+                            android:layout_width="@dimen/ic_album_overflow_width"
+                            android:layout_height="@dimen/ic_album_overflow_height"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@id/thumbnail"
+                            android:layout_marginTop="@dimen/ic_album_overflow_margin_top"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_dots" />-->
 
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
+
+    <!--
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="Rice Balls"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/selected_food_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/rectangle_border"
+            android:drawableLeft="@drawable/ic_add_24dp"
+            android:id="@+id/plus_meal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/rectangle_border"
+            android:drawableLeft="@drawable/ic_remove_black"
+            android:id="@+id/minus_meal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="x 1"
+
+            android:layout_gravity="center_vertical"
+            android:id="@+id/quantity"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            tools:text="455"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/selected_food_amount"/>
+
+       &lt;!&ndash; <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/rectangle_border"
+            android:drawableLeft="@drawable/ic_close"
+            android:id="@+id/delete_item"/>&ndash;&gt;
+    </LinearLayout>-->

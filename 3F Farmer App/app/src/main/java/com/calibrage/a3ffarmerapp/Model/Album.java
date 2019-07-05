@@ -1,41 +1,58 @@
 package com.calibrage.a3ffarmerapp.Model;
 
+
+        import java.io.Serializable;
+
 /**
- * Created by Lincoln on 18/05/16.
+ * Created by Ayo on 17/04/2017.
  */
-public class Album {
-    private String name;
-    private int numOfSongs;
+
+public class Album implements Serializable {
+
+    private  String mName;
+    private int mAmount;
+    private int mQuantity;
     private int thumbnail;
-    private String price;
     private String disc;
     private String size;
 
+    public void setmQuantity(int mQuantity) {
+        this.mQuantity = mQuantity;
+    }
 
-    public Album(String name, int thumbnail, String price, String disc, String size) {
-        this.name = name;
-        this.price = price;
+
+
+    public Album(String mName, int mAmount, int thumbnail, String disc, String size) {
+        this.mName = mName;
+        this.mAmount = mAmount;
+        this.thumbnail = thumbnail;
         this.disc = disc;
         this.size = size;
-        this.numOfSongs = numOfSongs;
-        this.thumbnail = thumbnail;
+        this.mQuantity = 1;
     }
 
-    public String getName() {
-        return name;
+    public String getmName() {
+        return mName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getmAmount() {
+        return mAmount;
     }
 
-    public int getNumOfSongs() {
-        return numOfSongs;
+    public int getmQuantity(){
+        return mQuantity;
     }
 
-    public void setNumOfSongs(int numOfSongs) {
-        this.numOfSongs = numOfSongs;
+    public void addToQuantity(){
+        this.mQuantity += 1;
     }
+
+    public void removeFromQuantity(){
+        if(this.mQuantity > 1){
+            this.mQuantity -= 1;
+        }
+    }
+
 
     public int getThumbnail() {
         return thumbnail;
@@ -43,14 +60,6 @@ public class Album {
 
     public void setThumbnail(int thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public String getDisc() {
@@ -69,3 +78,4 @@ public class Album {
         this.size = size;
     }
 }
+
