@@ -1,107 +1,89 @@
 package com.calibrage.a3ffarmerapp.Adapters;
 
-import android.graphics.Color;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.calibrage.a3ffarmerapp.Model.FertilizerModel;
 import com.calibrage.a3ffarmerapp.Model.RecommendationListModel;
+
 import com.calibrage.a3ffarmerapp.R;
 
-import java.util.List;
 
 
-public class RecommendationListAdapter extends RecyclerView.Adapter {
-    List<RecommendationListModel> movieList;
 
-    public RecommendationListAdapter(List<RecommendationListModel> movieList) {
-        this.movieList = movieList;
+public class RecommendationListAdapter extends RecyclerView.Adapter<RecommendationListAdapter.ViewHolder>{
+    private RecommendationListModel[] listdata;
+    public Context mContext;
+
+    // RecyclerView recyclerView;
+    public RecommendationListAdapter(Context ctx,RecommendationListModel[] listdata) {
+        this.listdata = listdata;
+        this.mContext=ctx;
     }
-
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.
-                from(parent.getContext()).
-                inflate(R.layout.recommended_list_item, parent, false);
-
-        return new RowViewHolder(itemView);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View listItem= layoutInflater.inflate(R.layout.recommended_list_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(listItem);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        RowViewHolder rowViewHolder = (RowViewHolder) holder;
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final RecommendationListModel myListData = listdata[position];
+        holder.txtPlotCode.setText(listdata[position].getPlotCode());
+        holder.txtRecommendedChemical.setText(listdata[position].getRecommendedChemical());
+        holder.txtDosage.setText(listdata[position].getDosage());
+        holder.txtComments.setText(listdata[position].getComments());
+        holder.txtIssue.setText(listdata[position].getIssue());
+        holder.txtRecommendedBy.setText(listdata[position].getRecommendedBy());
+        holder.txtRecommendedOn.setText(listdata[position].getRecommendedOn());
 
-        int rowPos = rowViewHolder.getAdapterPosition();
 
-        if (rowPos == 0) {
-            // Header Cells. Main Headings appear here
-            rowViewHolder.txtPlotCode.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtRecommendedChemical.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtDosage.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtComments.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtIssue.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtRecommendedBy.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtRecommendedOn.setBackgroundResource(R.drawable.table_header_cell_bg);
+    /*    holder.card_view.setOnClickListener(new View.OnClickListener() {
 
-            rowViewHolder.txtPlotCode.setText(R.string.plot_code);
-            rowViewHolder.txtPlotCode.setTextColor(Color.WHITE);
-            rowViewHolder.txtRecommendedChemical.setText(R.string.recommendedorfertilizer);
-            rowViewHolder.txtRecommendedChemical.setTextColor(Color.WHITE);
-            rowViewHolder.txtDosage.setText(R.string.dosage);
-            rowViewHolder.txtDosage.setTextColor(Color.WHITE);
-            rowViewHolder.txtComments.setText(R.string.comments);
-            rowViewHolder.txtComments.setTextColor(Color.WHITE);
-            rowViewHolder.txtIssue.setText(R.string.issue_identified);
-            rowViewHolder.txtIssue.setTextColor(Color.WHITE);
-            rowViewHolder.txtRecommendedBy.setText(R.string.recommended_by);
-            rowViewHolder.txtRecommendedBy.setTextColor(Color.WHITE);
-            rowViewHolder.txtRecommendedOn.setText(R.string.recommended_on);
-            rowViewHolder.txtRecommendedOn.setTextColor(Color.WHITE);
-        } else {
-            RecommendationListModel modal = movieList.get(rowPos-1);
+            @Override
+            public void onClick(View view) {
+               *//* Intent intent = new Intent(mContext, RecommendationListActivity.class);
 
-            // Content Cells. Content appear here
-            rowViewHolder.txtPlotCode.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtRecommendedChemical.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtDosage.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtComments.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtIssue.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtRecommendedBy.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtRecommendedOn.setBackgroundResource(R.drawable.table_content_cell_bg);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            rowViewHolder.txtPlotCode.setText(modal.getPlotCode()+"");
-            rowViewHolder.txtRecommendedChemical.setText(modal.getRecommendedChemical());
-            rowViewHolder.txtDosage.setText(modal.getDosage()+"");
-            rowViewHolder.txtComments.setText(modal.getComments()+"");
-            rowViewHolder.txtIssue.setText(modal.getIssue()+"");
-            rowViewHolder.txtRecommendedBy.setText(modal.getRecommendedBy()+"");
-            rowViewHolder.txtRecommendedOn.setText(modal.getRecommendedOn()+"");
-        }
+                mContext.startActivity(intent);*//*
+
+            }
+
+        });*/
     }
+
 
     @Override
     public int getItemCount() {
-        return movieList.size()+1; // one more to add header row
+        return listdata.length;
     }
 
-    public class RowViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtPlotCode;
-        protected TextView txtRecommendedChemical;
-        protected TextView txtDosage;
-        protected TextView txtComments;
-        protected TextView txtIssue;
-        protected TextView txtRecommendedBy;
-        protected TextView txtRecommendedOn;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public RowViewHolder(View itemView) {
+
+        public  CardView card_view;
+        public TextView txtPlotCode;
+        public TextView txtRecommendedChemical;
+        public TextView txtDosage;
+        public TextView txtComments;
+        public TextView txtIssue;
+        public TextView txtRecommendedBy;
+        public TextView txtRecommendedOn;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-
             txtPlotCode = itemView.findViewById(R.id.plotCode);
             txtRecommendedChemical = itemView.findViewById(R.id.recommendedChemical);
             txtComments = itemView.findViewById(R.id.comments);
@@ -109,7 +91,11 @@ public class RecommendationListAdapter extends RecyclerView.Adapter {
             txtIssue = itemView.findViewById(R.id.issue);
             txtRecommendedBy = itemView.findViewById(R.id.recommendedBy);
             txtRecommendedOn = itemView.findViewById(R.id.recommendedOn);
+      //      this.card_view =  (CardView) itemView.findViewById(R.id.card_view);
 
         }
+
+
     }
 }
+

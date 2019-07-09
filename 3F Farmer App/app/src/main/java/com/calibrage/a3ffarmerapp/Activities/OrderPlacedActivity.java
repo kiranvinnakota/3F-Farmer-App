@@ -62,7 +62,8 @@ public class OrderPlacedActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View view) {
                 //initiate scan with our custom scan activity
-                 finish();
+                OrderPlacedActivity.this.finish();
+                // finish();
             //    getSupportActionBar().hide();
            /*    Fragment fragment = new HomeFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();

@@ -54,8 +54,9 @@ public class QuickPayActivity extends AppCompatActivity {
         btnSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(getApplicationContext(),PaymentSummaryActivity.class);
-                startActivity(intent);
+
+                startActivity(new Intent(QuickPayActivity.this, PaymentSummaryActivity.class));
+                finish();
 
             }
         });

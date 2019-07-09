@@ -84,8 +84,12 @@ public class PoleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //initiate scan with our custom scan activity
-                Intent intent =new Intent(getApplicationContext(),OrderPlacedActivity.class);
+              /*  Intent intent =new Intent(getApplicationContext(),OrderPlacedActivity.class);
                 startActivity(intent);
+             */
+
+                startActivity(new Intent(PoleActivity.this, OrderPlacedActivity.class));
+                finish();
             }
         });
       //  prepareAlbums();
@@ -127,6 +131,7 @@ public class PoleActivity extends AppCompatActivity {
         //  adapter.registerDataSetObserver(observer);
 
     }
+
     public int calculateMealTotal(){
         int mealTotal = 0;
         for(Album order : orders){

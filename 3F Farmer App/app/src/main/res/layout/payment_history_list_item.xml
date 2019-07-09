@@ -193,7 +193,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
+        android:visibility="gone"
         android:id="@+id/content"
         android:gravity="top|center_horizontal"
         android:layout_below="@+id/linear">
@@ -203,8 +203,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="0dp"
-            android:visibility="gone"
-
+            android:background="@color/transparent_blue"
             >
 
             <TableRow
@@ -216,16 +215,16 @@
                     android:id="@+id/collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cell_shape_black"
+
                     android:padding="5dp"
-                    android:text="Collections by total Rate\n from 2nd march to 3rd june"
+                    android:text="Collections by total Rate\n from 2nd march to 3rd june:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/collectionAmt"
                     android:layout_width="wrap_content"
                     android:layout_height="57dp"
-                    android:background="@drawable/cell_shape_black"
+                   android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:text="29000"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -241,16 +240,16 @@
                     android:id="@+id/Labour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cell_shape_black"
+
                     android:padding="5dp"
-                    android:text="Labour Charges"
+                    android:text="Labour Charges:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/LabourCharge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cell_shape_black"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:text="-1500"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -267,16 +266,16 @@
                     android:id="@+id/rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cell_shape_black"
+
                     android:padding="5dp"
-                    android:text="Rate Adjustment"
+                    android:text="Rate Adjustment:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/rateAmt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cell_shape_black"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:text="-8732"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -293,16 +292,16 @@
                     android:id="@+id/Payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cell_shape_black"
+
                     android:padding="5dp"
-                    android:text="Transport Payment"
+                    android:text="Transport Payment:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/PaymentAmt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cell_shape_black"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:text="3000"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>

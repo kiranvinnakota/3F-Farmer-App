@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import com.calibrage.a3ffarmerapp.Adapters.MyReqAdapter;
 import com.calibrage.a3ffarmerapp.Adapters.MyReqListAdapter;
+import com.calibrage.a3ffarmerapp.Adapters.RecommendationAdapter;
 import com.calibrage.a3ffarmerapp.Model.MyReqListData;
 import com.calibrage.a3ffarmerapp.Model.MyReqModel;
+import com.calibrage.a3ffarmerapp.Model.RecommendationModel;
 import com.calibrage.a3ffarmerapp.R;
 
 import java.util.ArrayList;
@@ -28,23 +30,20 @@ public class MyReqDeatilsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_req_deatils);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewFertlizer);
+        MyReqModel[] myListData = new MyReqModel[] {
 
-        MyReqAdapter adapter = new MyReqAdapter(this,getMovieList());
+                new MyReqModel("CAM0003MING0", "20/06/2019", "10 AM", "comments","20/06/2019 10Am","20/06/2019","22/06/2019","Active","Mahesh","9014789675","50002"),
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        };
 
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        MyReqAdapter adapter = new MyReqAdapter(this,myListData);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         DisplayActionBar();
     }
-    private List<MyReqModel> getMovieList() {
-        List<MyReqModel> movieList = new ArrayList<>();
-        // src Wikipedia
-        movieList.add(new MyReqModel("CAM0003MING0", "20/06/2019", "10 AM", "comments","20/06/2019 10Am","20/06/2019","22/06/2019","Active","Mahesh","9014789675","50002"));
 
-
-        return movieList;
-    }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
         abar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2980B9")));

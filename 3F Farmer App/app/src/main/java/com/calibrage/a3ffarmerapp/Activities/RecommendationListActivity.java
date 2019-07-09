@@ -12,8 +12,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.calibrage.a3ffarmerapp.Adapters.RecommendationAdapter;
 import com.calibrage.a3ffarmerapp.Adapters.RecommendationListAdapter;
 import com.calibrage.a3ffarmerapp.Model.RecommendationListModel;
+import com.calibrage.a3ffarmerapp.Model.RecommendationModel;
 import com.calibrage.a3ffarmerapp.R;
 
 import java.util.ArrayList;
@@ -27,11 +29,19 @@ public class RecommendationListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recommendation_list);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewFertlizer);
 
-        RecommendationListAdapter adapter = new RecommendationListAdapter(getMovieList());
+        RecommendationListModel[] myListData = new RecommendationListModel[] {
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
 
+        // src Wikipedia
+         new RecommendationListModel("PLOT00030", "Urea", "20 kgs", "comments","Pest","Rancher","20/05/2019"),
+         new RecommendationListModel("PLOT0032", "Urea", "10 kgs", "comments","Disease","Roja","10/06/2019"),
+        new RecommendationListModel("PLOT00033", "Urea", "30 kgs", "comments","Pest","Lakshmi","15/06/2019"),
+        new RecommendationListModel("PLOT0034", "Urea", "25 kgs", "comments","Disease","Ramu","22/06/2019"),
+        };
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecommendationListAdapter adapter = new RecommendationListAdapter(this,myListData);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         DisplayActionBar();
     }
@@ -61,15 +71,5 @@ public class RecommendationListActivity extends AppCompatActivity {
         abar.show();
 
     }
-    private List<RecommendationListModel> getMovieList() {
-        List<RecommendationListModel> movieList = new ArrayList<>();
-        // src Wikipedia
-        movieList.add(new RecommendationListModel("PLOT00030", "Urea", "20 kgs", "comments","Pest","Rancher","20/05/2019"));
-        movieList.add(new RecommendationListModel("PLOT0032", "Urea", "10 kgs", "comments","Disease","Roja","10/06/2019"));
-        movieList.add(new RecommendationListModel("PLOT00033", "Urea", "30 kgs", "comments","Pest","Lakshmi","15/06/2019"));
-        movieList.add(new RecommendationListModel("PLOT0034", "Urea", "25 kgs", "comments","Disease","Ramu","22/06/2019"));
 
-
-        return movieList;
-    }
 }

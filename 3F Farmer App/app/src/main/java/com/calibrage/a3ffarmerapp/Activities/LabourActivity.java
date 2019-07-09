@@ -173,6 +173,7 @@ edittext.setOnTouchListener(new View.OnTouchListener() {
             public void onClick(View view) {
                 //initiate scan with our custom scan activity
               finish();
+
             }
         });
         DisplayActionBar();

@@ -34,7 +34,8 @@ public class PaymentSummaryActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                PaymentSummaryActivity.this.finish();
+              //  finish();
               /*  Fragment fragment = new HomeFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();*/

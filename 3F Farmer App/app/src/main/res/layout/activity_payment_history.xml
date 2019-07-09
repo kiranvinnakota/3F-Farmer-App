@@ -65,23 +65,36 @@
             android:ems="10"
             android:hint="To Date" />
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        android:layout_below="@+id/linear2"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/download"
-        android:id="@+id/confirm"
-        android:textColor="@color/white"
-        android:background="@color/green"/>
+        android:orientation="vertical"
+        android:layout_below="@+id/linear1">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_view"
+            android:paddingBottom="100dp">
+        </androidx.recyclerview.widget.RecyclerView>
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/download"
+            android:id="@+id/confirm"
+            android:textColor="@color/white"
+            android:background="@color/green"/>
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>
