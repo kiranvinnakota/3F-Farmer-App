@@ -22,14 +22,16 @@ import android.os.Bundle;
         import android.widget.TextView;
 
         import com.calibrage.a3ffarmerapp.Adapters.FertilizerAdapter;
-        import com.calibrage.a3ffarmerapp.Model.FertilizerModel;
-        import com.calibrage.a3ffarmerapp.R;
+import com.calibrage.a3ffarmerapp.Adapters.RecommendationAdapter;
+import com.calibrage.a3ffarmerapp.Model.FertilizerModel;
+import com.calibrage.a3ffarmerapp.Model.RecommendationModel;
+import com.calibrage.a3ffarmerapp.R;
 
         import java.util.ArrayList;
         import java.util.List;
 
 public class FertilizerRecomendations extends AppCompatActivity {
-
+    private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +43,25 @@ public class FertilizerRecomendations extends AppCompatActivity {
                 finish();
             }
         });*/
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewFertlizer);
+        FertilizerModel[] myListData = new FertilizerModel[] {
 
-        FertilizerAdapter adapter = new FertilizerAdapter(getMovieList());
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+                new FertilizerModel("CAM0003MING0", "20", "Adilabad", "1.4 hectors","Near shiavalyam","Fertilizer1","Fertilizer2","Fertilizer3"),
+        new FertilizerModel("CAM0003MING2", "25", "Jagtial","2 hectors","Near sbi bank" ,"Fertilizer1","Fertilizer2","Fertilizer3"),
+        new FertilizerModel("CAM0003MING3", "15", "Jangaon","3 hectors","opp:Market","Fertilizer1","Fertilizer2","Fertilizer3"),
+        new FertilizerModel("CAM0003MING4", "22", "Kamareddy", "4 hectors","x road","Fertilizer1","Fertilizer2","Fertilizer3"),
 
+
+        };
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        FertilizerAdapter adapter = new FertilizerAdapter(this,myListData);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-      //  DisplayActionBar();
+
+         DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
@@ -78,15 +89,5 @@ public class FertilizerRecomendations extends AppCompatActivity {
         abar.show();
 
     }
-    private List<FertilizerModel> getMovieList() {
-        List<FertilizerModel> movieList = new ArrayList<>();
-        // src Wikipedia
-        movieList.add(new FertilizerModel("CAM0003MING0", "20", "Adilabad", "1.4 hectors","Near shiavalyam","Fertilizer1","Fertilizer2","Fertilizer3"));
-        movieList.add(new FertilizerModel("CAM0003MING2", "25", "Jagtial","2 hectors","Near sbi bank" ,"Fertilizer1","Fertilizer2","Fertilizer3"));
-        movieList.add(new FertilizerModel("CAM0003MING3", "15", "Jangaon","3 hectors","opp:Market","Fertilizer1","Fertilizer2","Fertilizer3"));
-        movieList.add(new FertilizerModel("CAM0003MING4", "22", "Kamareddy", "4 hectors","x road","Fertilizer1","Fertilizer2","Fertilizer3"));
 
-
-        return movieList;
-    }
 }

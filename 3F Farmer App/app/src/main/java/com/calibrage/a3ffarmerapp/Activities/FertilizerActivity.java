@@ -4,12 +4,14 @@ package com.calibrage.a3ffarmerapp.Activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -41,6 +43,7 @@ public class FertilizerActivity extends AppCompatActivity {
     private List<Album> albumList;
     final Context context = this;
     Button button;
+    TextView mealTotalText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class FertilizerActivity extends AppCompatActivity {
             }
         });
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
+        mealTotalText = (TextView)findViewById(R.id.meal_total);
         albumList = new ArrayList<>();
         adapter = new AlbumsAdapter(this, albumList);
 
@@ -81,15 +84,23 @@ public class FertilizerActivity extends AppCompatActivity {
         prepareAlbums();
 
         button = (Button) findViewById(R.id.button);
-
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setMealTotal();
+            }
+        });
 
         // add button listener
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
+                Intent intent =new Intent(getApplicationContext(), FertilizerRecomendations.class);
+                startActivity(intent);
 
-                // get prompts.xml view
+             /*   // get prompts.xml view
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.custom, null);
 
@@ -106,9 +117,9 @@ public class FertilizerActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(linearLayoutManager);
 
                 recyclerView.setAdapter(adapter);
-/*
+*//*
                 final EditText userInput = (EditText) promptsView
-                        .findViewById(R.id.editTextDialogUserInput);*/
+                        .findViewById(R.id.editTextDialogUserInput);*//*
 
                 // set dialog message
                 alertDialogBuilder
@@ -118,7 +129,7 @@ public class FertilizerActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
                                         // edit text
-                                       // result.setText(userInput.getText());
+                                        // result.setText(userInput.getText());
 
                                     }
                                 })
@@ -133,10 +144,21 @@ public class FertilizerActivity extends AppCompatActivity {
                 AlertDialog alertDialog = alertDialogBuilder.create();
 
                 // show it
-                alertDialog.show();
-
+                alertDialog.show();*/
             }
         });
+    }
+    public int calculateMealTotal(){
+        int mealTotal = 0;
+        for(Album order : albumList){
+            mealTotal += order.getmAmount() * order.getmQuantity();
+            Log.e("mealTotal==", String.valueOf(order.getmAmount()));
+            Log.e("mealTotal==", String.valueOf(order.getmQuantity()));
+        }
+        return mealTotal;
+    }
+    public void setMealTotal(){
+        mealTotalText.setText("Rs"+" "+ calculateMealTotal());
     }
     private List<FertilizerModel> getMovieList() {
         List<FertilizerModel> movieList = new ArrayList<>();

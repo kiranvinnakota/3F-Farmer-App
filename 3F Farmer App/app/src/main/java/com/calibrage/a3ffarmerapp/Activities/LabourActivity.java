@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,14 +44,14 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 
-public class LabourActivity extends AppCompatActivity implements OnItemSelectedListener {
+public class LabourActivity extends AppCompatActivity implements OnItemSelectedListener, MultiSelectionSpinner.OnMultipleItemsSelectedListener {
    Calendar myCalendar;
     EditText edittext;
     EditText chooseTime,ageTxt,villageTxt;
     List<String> categories;
     TextInputEditText age,village;
     final String[] select_labour_type = {
-            "", "hired labor","farm labor "};
+             "hired labour","farm labour "};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +67,17 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       Spinner  spinner1 = (MaterialSpinner) findViewById(R.id.spinner);
         spinner1.setAdapter(adapter);*/
+        String[] array = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
+        MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner);
+        multiSelectionSpinner.setItems(select_labour_type);
+        multiSelectionSpinner.setSelection(new int[]{0, 0});
+        multiSelectionSpinner.setListener(this);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-
-        ArrayList<StateVO> listVOs = new ArrayList<>();
+    //    spinner.setAdapter(arrayAdapter);
+      /*  ArrayList<StateVO> listVOs = new ArrayList<>();
 
         for (int i = 0; i < select_labour_type.length; i++) {
+
             StateVO stateVO = new StateVO();
             stateVO.setTitle(select_labour_type[i]);
             stateVO.setSelected(false);
@@ -78,7 +85,7 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
         }
         SpinnerAdapter myAdapter = new SpinnerAdapter(LabourActivity.this, 0,
                 listVOs);
-        spinner.setAdapter(myAdapter);
+        spinner.setAdapter(myAdapter);*/
 
 
         Spinner frequencySpinner = (Spinner) findViewById(R.id.frequency);
@@ -111,10 +118,10 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
 
         // Spinner Drop down elements
         List<String> categories2 = new ArrayList<String>();
-        categories3.add("3 months");
-        categories3.add("6 months");
-        categories3.add("9 months");
-        categories3.add("12 months");
+        categories2.add("3 months");
+        categories2.add("6 months");
+        categories2.add("9 months");
+        categories2.add("12 months");
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories2);
@@ -141,13 +148,22 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
             }
 
         };
-edittext.setOnTouchListener(new View.OnTouchListener() {
+/*edittext.setOnTouchListener(new View.OnTouchListener() {
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         new DatePickerDialog(LabourActivity.this, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         return false;
+    }
+});*/
+edittext.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        new DatePickerDialog(LabourActivity.this, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+      //  return false;
     }
 });
 
@@ -172,7 +188,8 @@ edittext.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public void onClick(View view) {
                 //initiate scan with our custom scan activity
-              finish();
+           //   finish();
+                LabourActivity.this.finish();
 
             }
         });
@@ -228,6 +245,16 @@ edittext.setOnTouchListener(new View.OnTouchListener() {
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    @Override
+    public void selectedIndices(List<Integer> indices) {
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> strings) {
 
     }
 }

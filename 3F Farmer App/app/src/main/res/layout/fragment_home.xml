@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
         tools:context="com.calibrage.a3ffarmerapp.Fragments.HomeFragment">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Dashboard"
     tools:showIn="@layout/app_bar_dashboard"
@@ -534,7 +533,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/collection_center" />
+                        android:background="@drawable/warehouse" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -561,7 +560,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/fertilizer_center" />
+                        android:background="@drawable/warehouse" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -678,14 +677,36 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/learning_relative"
-        android:src="@drawable/call_center_banner"
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:gravity="bottom|end"
+            >
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:src="@drawable/hondaoffers"
+                android:id="@+id/offers"
+                android:layout_weight="1"
+                android:scaleType="fitXY"/>
+
+            <ImageButton
+                android:id="@+id/dail"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:onClick="Call"
+                android:background="@color/grey"
+                android:layout_marginTop="@dimen/margin_10"
+                app:srcCompat="@android:drawable/ic_menu_call" />
 
 
-        android:id="@+id/call_center_banner"/>
+        </LinearLayout>
+
    <!-- <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

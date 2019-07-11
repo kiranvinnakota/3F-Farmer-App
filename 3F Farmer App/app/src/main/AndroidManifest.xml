@@ -15,8 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Activities.FertilizerCenterActivity"></activity>
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.CollectionCenterActivity" />
         <activity android:name=".Activities.BasicPlayerActivity" />
         <activity
@@ -32,7 +34,9 @@
         <activity
             android:name=".Activities.RecommendationListActivity"
             android:parentActivityName=".Activities.PoleActivity" />
-        <activity android:name=".Activities.FertilizerRecomendations" />
+        <activity
+            android:name=".Activities.FertilizerRecomendations"
+            android:parentActivityName=".Activities.PoleActivity" />
         <activity
             android:name=".Activities.EncyclopediaActivity"
             android:parentActivityName=".Activities.PoleActivity" />

@@ -60,7 +60,25 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         });*/
         fromText=(EditText) findViewById(R.id.from_date);
         fromText.setInputType(InputType.TYPE_NULL);
-        fromText.setOnTouchListener(new View.OnTouchListener() {
+        fromText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(CollectionsActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                fromText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
+       /* fromText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 final Calendar cldr = Calendar.getInstance();
@@ -78,7 +96,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
                 picker.show();
                 return false;
             }
-        });
+        });*/
 
     /*    subBtn=(Button)findViewById(R.id.buttonScan);
         subBtn.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +107,25 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         });*/
         toText=(EditText) findViewById(R.id.to_date);
         toText.setInputType(InputType.TYPE_NULL);
-        toText.setOnTouchListener(new View.OnTouchListener() {
+        toText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(CollectionsActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                toText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
+       /* toText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 final Calendar cldr = Calendar.getInstance();
@@ -107,7 +143,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
                 picker.show();
                 return false;
             }
-        });
+        });*/
 
         MovieModal[] myListData = new MovieModal[] {
 

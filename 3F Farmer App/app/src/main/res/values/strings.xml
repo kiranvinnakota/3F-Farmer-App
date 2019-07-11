@@ -64,6 +64,8 @@
     <string name="knowledge_zone">Knowledge\n Zone</string>
     <string name="knowledge">Knowledge zone</string>
     <string name="collection_center">Collection \n Center</string>
+    <string name="collection_center_name">Collection  Center</string>
+    <string name="fertilizer_center_name">Fertilizer Center</string>
     <string name="fertilizer_center">Fertilizer \n Center</string>
     <string name="category1">Category1</string>
     <string name="category2">Category2</string>
@@ -117,6 +119,8 @@
     <string name="show">More Information</string>
     <string name="hide">Less information</string>
     <string name="profile_name">John Doe</string>
+    <string name="size">size</string>
+    <string name="landmark">landmark</string>
     <array name="menuOptions">
         <item>Home</item>
         <item>My Requests</item>
@@ -128,7 +132,7 @@
     <string name="long_content">Lorem ipsum dolor sit amet...</string>
     <string name="log_off">Log Off</string>
     <string name="tap_text">Select any language below:</string>
-    <string name="btn_en">Englisch</string>
+    <string name="btn_en">English</string>
     <string name="btn_te">Telugu</string>
     <string name="labour_request">Labour Request</string>
     <string name="fertilizer_request">Fertilizer Request</string>

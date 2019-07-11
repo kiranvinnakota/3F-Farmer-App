@@ -1,4 +1,5 @@
 package com.calibrage.a3ffarmerapp.Adapters;
+        import android.app.Activity;
         import android.content.Context;
         import android.content.Intent;
         import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ package com.calibrage.a3ffarmerapp.Adapters;
 
         import com.bumptech.glide.Glide;
         import com.calibrage.a3ffarmerapp.Activities.LabourActivity;
+        import com.calibrage.a3ffarmerapp.Activities.OrderPlacedActivity;
+        import com.calibrage.a3ffarmerapp.Activities.PoleActivity;
         import com.calibrage.a3ffarmerapp.Activities.RecommendationActivity;
         import com.calibrage.a3ffarmerapp.Activities.RecommendationListActivity;
         import com.calibrage.a3ffarmerapp.Model.Album;
@@ -50,11 +53,14 @@ public class LabourRecommendationAdapter extends RecyclerView.Adapter<LabourReco
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, LabourActivity.class);
+              /*  Intent intent = new Intent(mContext, LabourActivity.class);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                mContext.startActivity(intent);
+                mContext.startActivity(intent);*/
+
+                mContext.startActivity(new Intent(mContext, LabourActivity.class));
+                ((Activity)mContext).finish();
 
             }
 

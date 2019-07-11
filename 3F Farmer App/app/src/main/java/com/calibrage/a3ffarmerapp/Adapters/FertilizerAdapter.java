@@ -1,110 +1,90 @@
 package com.calibrage.a3ffarmerapp.Adapters;
 
-import android.graphics.Color;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.calibrage.a3ffarmerapp.Activities.RecommendationActivity;
+import com.calibrage.a3ffarmerapp.Activities.RecommendationListActivity;
+import com.calibrage.a3ffarmerapp.Model.Album;
 import com.calibrage.a3ffarmerapp.Model.FertilizerModel;
+import com.calibrage.a3ffarmerapp.Model.RecommendationModel;
 import com.calibrage.a3ffarmerapp.R;
 
+import java.util.HashMap;
 import java.util.List;
 
-public class FertilizerAdapter extends RecyclerView.Adapter {
-    List<FertilizerModel> movieList;
 
-    public FertilizerAdapter(List<FertilizerModel> movieList) {
-        this.movieList = movieList;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+public class FertilizerAdapter extends RecyclerView.Adapter<FertilizerAdapter.ViewHolder>{
+    private FertilizerModel[] listdata;
+    public Context mContext;
+
+    // RecyclerView recyclerView;
+    public FertilizerAdapter(Context ctx,FertilizerModel[] listdata) {
+        this.listdata = listdata;
+        this.mContext=ctx;
     }
-
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.
-                from(parent.getContext()).
-                inflate(R.layout.fertilizer_list_item, parent, false);
-
-        return new RowViewHolder(itemView);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View listItem= layoutInflater.inflate(R.layout.fertilizer_list_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(listItem);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        RowViewHolder rowViewHolder = (RowViewHolder) holder;
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final FertilizerModel myListData = listdata[position];
+        holder.txtPlotCode.setText(listdata[position].getPlotCode());
+        holder.txtAge.setText(listdata[position].getAge());
+        holder.txtSize.setText(listdata[position].getSize());
+        holder.txtVillage.setText(listdata[position].getVillage());
+        holder.txtLandmark.setText(listdata[position].getLandmark());
+        holder.txtFertilizer1.setText(listdata[position].getFertilizer1());
+        holder.txtFertilizer2.setText(listdata[position].getFertilizer2());
+        holder.txtFertilizer3.setText(listdata[position].getFertilizer3());
+        //      holder.imageView.setImageResource(listdata[position].getImgId());
 
-        int rowPos = rowViewHolder.getAdapterPosition();
-
-        if (rowPos == 0) {
-            // Header Cells. Main Headings appear here
-            rowViewHolder.txtPlotCode.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtAge.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtSize.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtVillage.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtLandmark.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtFertilizer1.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtFertilizer2.setBackgroundResource(R.drawable.table_header_cell_bg);
-            rowViewHolder.txtFertilizer3.setBackgroundResource(R.drawable.table_header_cell_bg);
-
-
-            rowViewHolder.txtPlotCode.setText("Plot Code");
-            rowViewHolder.txtPlotCode.setTextColor(Color.WHITE);
-            rowViewHolder.txtAge.setText("Age");
-            rowViewHolder.txtAge.setTextColor(Color.WHITE);
-            rowViewHolder.txtSize.setText("Size");
-            rowViewHolder.txtSize.setTextColor(Color.WHITE);
-            rowViewHolder.txtVillage.setText("Village");
-            rowViewHolder.txtVillage.setTextColor(Color.WHITE);
-            rowViewHolder.txtLandmark.setText("Land Mark");
-            rowViewHolder.txtLandmark.setTextColor(Color.WHITE);
-            rowViewHolder.txtFertilizer1.setText("Fertilizer1");
-            rowViewHolder.txtFertilizer1.setTextColor(Color.WHITE);
-            rowViewHolder.txtFertilizer2.setText("Fertilizer2");
-            rowViewHolder.txtFertilizer2.setTextColor(Color.WHITE);
-            rowViewHolder.txtFertilizer3.setText("Fertilizer3");
-            rowViewHolder.txtFertilizer3.setTextColor(Color.WHITE);
-        } else {
-            FertilizerModel modal = movieList.get(rowPos-1);
-
-            // Content Cells. Content appear here
-            rowViewHolder.txtPlotCode.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtAge.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtSize.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtFertilizer1.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtFertilizer2.setBackgroundResource(R.drawable.table_content_cell_bg);
-            rowViewHolder.txtFertilizer3.setBackgroundResource(R.drawable.table_content_cell_bg);
-
-            rowViewHolder.txtPlotCode.setText(modal.getPlotCode()+"");
-            rowViewHolder.txtAge.setText(modal.getAge());
-            rowViewHolder.txtSize.setText(modal.getSize()+"");
-            rowViewHolder.txtVillage.setText(modal.getVillage());
-            rowViewHolder.txtLandmark.setText(modal.getLandmark()+"");
-            rowViewHolder.txtFertilizer1.setText(modal.getFertilizer1()+"");
-            rowViewHolder.txtFertilizer2.setText(modal.getFertilizer2()+"");
-            rowViewHolder.txtFertilizer3.setText(modal.getFertilizer3()+"");
-        }
     }
+
 
     @Override
     public int getItemCount() {
-        return movieList.size()+1; // one more to add header row
+        return listdata.length;
     }
 
-    public class RowViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtPlotCode;
-        protected TextView txtAge;
-        protected TextView txtSize;
-        protected TextView txtVillage;
-        protected TextView txtLandmark;
-        protected TextView txtFertilizer1;
-        protected TextView txtFertilizer2;
-        protected TextView txtFertilizer3;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        public RowViewHolder(View itemView) {
+        public TextView txtPlotCode;
+        public TextView txtAge;
+        public TextView txtSize;
+        public TextView txtVillage;
+        public TextView txtLandmark;
+        public TextView txtFertilizer1;
+        public TextView txtFertilizer2;
+        public TextView txtFertilizer3;
+
+        public ViewHolder(View itemView) {
             super(itemView);
 
             txtPlotCode = itemView.findViewById(R.id.plot_code);
@@ -115,8 +95,12 @@ public class FertilizerAdapter extends RecyclerView.Adapter {
 
             txtFertilizer1 = itemView.findViewById(R.id.fertilizer1);
             txtFertilizer2 = itemView.findViewById(R.id.fertilizer2);
-            txtFertilizer3 = itemView.findViewById(R.id.fertilize3);
+            txtFertilizer3 = itemView.findViewById(R.id.fertilizer3);
 
         }
+
+
     }
 }
+
+

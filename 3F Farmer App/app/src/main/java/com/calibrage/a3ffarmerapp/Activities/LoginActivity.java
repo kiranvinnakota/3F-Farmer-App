@@ -133,6 +133,27 @@ private void Getstate() {
         @Override
         public void onErrorResponse(VolleyError error) {
             error.printStackTrace();
+            if (error instanceof NetworkError) {
+                Log.i("one:" + TAG, error.toString());
+                Toast.makeText(getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
+            } else if (error instanceof ServerError) {
+                Log.i("two:" + TAG, error.toString());
+                Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_SHORT).show();
+            } else if (error instanceof AuthFailureError) {
+                Log.i("three:" + TAG, error.toString());
+                Toast.makeText(getApplicationContext(),"AuthFailure Error",Toast.LENGTH_SHORT).show();
+            } else if (error instanceof ParseError) {
+                Log.i("four::" + TAG, error.toString());
+                Toast.makeText(getApplicationContext(),"Parse Error",Toast.LENGTH_SHORT).show();
+            } else if (error instanceof NoConnectionError) {
+                Log.i("five::" + TAG, error.toString());
+                Toast.makeText(getApplicationContext(),"NoConnection Error",Toast.LENGTH_SHORT).show();
+            } else if (error instanceof TimeoutError) {
+                Log.i("six::" + TAG, error.toString());
+                Toast.makeText(getApplicationContext(),"Timeout Error",Toast.LENGTH_SHORT).show();
+            } else {
+                System.out.println("Checking error in else");
+            }
         }
     });
     int socketTimeout = 30000;

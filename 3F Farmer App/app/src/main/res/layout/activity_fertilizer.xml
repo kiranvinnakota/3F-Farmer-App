@@ -16,10 +16,12 @@
              >
 
              <ImageView
-                 android:layout_width="25dp"
-                 android:layout_height="25dp"
+                 android:layout_width="20dp"
+                 android:layout_height="20dp"
                  android:src="@drawable/arrow_l"
-                 android:layout_margin="@dimen/margin_20"
+                 android:layout_marginTop="23dp"
+                 android:layout_marginStart="@dimen/margin_20"
+                 android:layout_marginEnd="@dimen/margin_20"
                  android:id="@+id/back"/>
 
              <TextView
@@ -42,12 +44,65 @@
                  android:background="@color/green"/>
 
          </LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/linear1">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:layout_below="@+id/linear1"
-            android:scrollbars="vertical"
-            />
+            android:id="@+id/recycler_view"
+            android:paddingBottom="100dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linear"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/linear"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total RS:"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:layout_weight="1"
+
+
+                android:padding="@dimen/activity_horizontal_margin"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/meal_total"
+                android:layout_weight="1"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textStyle="bold"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="Rs.100"
+                android:textColor="@color/colorPrimaryDark"
+                />
+        </LinearLayout>
+       <!-- <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selected_food_list"
+            android:text="@string/confirm"
+            android:id="@+id/confirm"
+            android:textColor="@color/white"
+            android:background="@color/green"/>-->
+    </LinearLayout>
     </RelativeLayout>

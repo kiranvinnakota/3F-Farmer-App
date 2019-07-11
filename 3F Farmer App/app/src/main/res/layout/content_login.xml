@@ -20,9 +20,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/farmerid"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/grey"
         android:textColorHighlight="@color/white"
         android:layout_marginTop="5dp"
+        android:clipChildren="false"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -34,6 +35,7 @@
             android:layout_centerHorizontal="true"
             android:drawablePadding="8dp"
             android:layout_margin="8dp"
+            android:translationY="8dp"
             android:id="@+id/farmer_id_edittxt"
             android:textColor="@color/white"
             android:textColorHint="@color/white"

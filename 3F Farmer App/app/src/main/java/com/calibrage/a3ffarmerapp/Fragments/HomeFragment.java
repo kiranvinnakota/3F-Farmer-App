@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +24,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.calibrage.a3ffarmerapp.Activities.CollectionCenterActivity;
 import com.calibrage.a3ffarmerapp.Activities.CollectionsActivity;
 import com.calibrage.a3ffarmerapp.Activities.EncyclopediaActivity;
 import com.calibrage.a3ffarmerapp.Activities.FertilizerActivity;
+import com.calibrage.a3ffarmerapp.Activities.FertilizerCenterActivity;
 import com.calibrage.a3ffarmerapp.Activities.LabourActivity;
 import com.calibrage.a3ffarmerapp.Activities.LabourRecommendationsActivity;
 import com.calibrage.a3ffarmerapp.Activities.LoanActivity;
@@ -43,7 +47,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
+    ImageButton dail;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -123,19 +127,54 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.collection_center).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getContext(), EncyclopediaActivity.class);
+                Intent intent =new Intent(getContext(), CollectionCenterActivity.class);
                 startActivity(intent);
             }
         });
         view.findViewById(R.id.fertilizer_center).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getContext(), EncyclopediaActivity.class);
+                Intent intent =new Intent(getContext(), FertilizerCenterActivity.class);
                 startActivity(intent);
+            }
+        });
+        dail = (ImageButton)view.findViewById(R.id.dail);
+
+        dail.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+
+
+                // show() method display the toast with message
+                // "clicked"
+            /*    Toast.makeText(getContext(), "clicked", Toast.LENGTH_LONG)
+                        .show();*/
+
+                // Use format with "tel:" and phoneNumber created is
+                // stored in u.
+                Uri u = Uri.parse("tel:" + "123456789");
+
+                // Create the intent and set the data for the
+                // intent as the phone number.
+                Intent i = new Intent(Intent.ACTION_DIAL, u);
+
+                try
+                {
+                    // Launch the Phone app's dialer with a phone
+                    // number to dial a call.
+                    startActivity(i);
+                }
+                catch (SecurityException s)
+                {
+                    // show() method display the toast with
+                    // exception message.
+                    Toast.makeText(getContext(), "SecurityException", Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         });
         return view;
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

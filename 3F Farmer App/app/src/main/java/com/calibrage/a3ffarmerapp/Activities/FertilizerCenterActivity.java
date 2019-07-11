@@ -21,7 +21,8 @@ import com.google.android.material.tabs.TabLayout;
 
 
 
-public class CollectionCenterActivity extends AppCompatActivity {
+
+public class FertilizerCenterActivity extends AppCompatActivity {
 
     //create class reference
     VideoView vid;
@@ -33,7 +34,7 @@ public class CollectionCenterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_collection_center);
+        setContentView(R.layout.activity_fertilizer_center);
 
         /*vid = (VideoView)findViewById(R.id.videoView);
         vid.setBackgroundResource(R.drawable.play_2);*/
@@ -62,7 +63,7 @@ public class CollectionCenterActivity extends AppCompatActivity {
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        textviewTitle.setText(R.string.collection_center_name);
+        textviewTitle.setText(R.string.fertilizer_center_name);
 /*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
 
         textviewTitle.setText(Html.fromHtml(header));*/
