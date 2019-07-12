@@ -143,4 +143,5 @@
      <string name="approve_date">తేదీని ఆమోదించండి</string>
      <string name="only_status">స్థితి</string>
      <string name="total_rs">మొత్తం RS:</string>
+     <string name="Rs">\u20B9</string>
  </resources>

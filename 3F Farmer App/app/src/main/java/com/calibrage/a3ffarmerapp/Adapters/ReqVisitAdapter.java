@@ -50,6 +50,7 @@ public class ReqVisitAdapter extends RecyclerView.Adapter<ReqVisitAdapter.ViewHo
 
                 mContext.startActivity(intent);
 
+
             }
 
         });

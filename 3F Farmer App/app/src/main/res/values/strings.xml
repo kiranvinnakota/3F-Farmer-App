@@ -143,5 +143,6 @@
     <string name="approve_date">Approve Date</string>
     <string name="only_status">Status</string>
     <string name="total_rs">Total RS:</string>
+    <string name="Rs">\u20B9</string>
 
 </resources>

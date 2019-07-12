@@ -63,7 +63,7 @@ public class PoleActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         storedOrders.setLayoutManager(mLayoutManager);
-        storedOrders.addItemDecoration(new GridSpacingItemDecoration(0, dpToPx(10), true));
+        storedOrders.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
         storedOrders.setItemAnimator(new DefaultItemAnimator());
         storedOrders.setAdapter(adapter);
         //  adapter.registerDataSetObserver(observer);

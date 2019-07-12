@@ -2,6 +2,7 @@ package com.calibrage.a3ffarmerapp.Adapters;
 
 import android.content.Context;
 
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +43,9 @@ public  class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHol
         TextView currentFoodName,
                 currentCost,
                 quantityText,
-                addMeal,
-                subtractMeal,
+        actual_amt,
                 removeMeal;
+        ImageView addMeal,subtractMeal;
         public ImageView thumbnail;
         public TextView disc,size;
 
@@ -54,10 +55,11 @@ public  class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHol
 
             currentFoodName = (TextView) view.findViewById(R.id.selected_food_name);
             currentCost = (TextView) view.findViewById(R.id.selected_food_amount);
-            subtractMeal = (TextView) view.findViewById(R.id.minus_meal);
+            subtractMeal = (ImageView) view.findViewById(R.id.minus_meal);
             quantityText = (TextView) view.findViewById(R.id.quantity);
-            addMeal = (TextView) view.findViewById(R.id.plus_meal);
+            addMeal = (ImageView) view.findViewById(R.id.plus_meal);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            actual_amt = (TextView) view.findViewById(R.id.actual_amt);
             disc = (TextView) view.findViewById(
                     R.id.desc);
             size = (TextView) view.findViewById(
@@ -85,12 +87,14 @@ public  class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHol
         final Album currentFood = orders.get(position);
 
         holder.currentFoodName.setText(currentFood.getmName());
-        holder.currentCost.setText("RS"+ (currentFood.getmAmount() * currentFood.getmQuantity()));
+        holder.currentCost.setText(mContext.getString(R.string.Rs)+ (currentFood.getmAmount() * currentFood.getmQuantity()));
         holder.quantityText.setText(""+ currentFood.getmQuantity());
 
         holder.disc.setText(currentFood.getDisc());
         holder.size.setText(currentFood.getSize());
         //   holder.count.setText(album.getNumOfSongs() + " songs");
+
+        holder.actual_amt.setPaintFlags(holder.actual_amt.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         // loading album cover using Glide library
         Glide.with(mContext).load(currentFood.getThumbnail()).into(holder.thumbnail);

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.calibrage.a3ffarmerapp.R;
@@ -69,6 +70,8 @@ public class RequestVisitDailogActivity extends AppCompatActivity {
                 finish();// Your custom code
             }
         });
+        alertDialog.setCancelable(false);
         alertDialog.show();
+
     }
 }

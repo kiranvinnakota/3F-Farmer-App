@@ -67,7 +67,7 @@ public class FertilizerActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(4), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         Button buttonBarCodeScan = findViewById(R.id.confirm);
@@ -166,6 +166,9 @@ public class FertilizerActivity extends AppCompatActivity {
         movieList.add(new FertilizerModel("CAM0003MING0", "20", "Adilabad", "1.4 hectors","Near shiavalyam","Fertilizer1","Fertilizer2","Fertilizer3"));
         movieList.add(new FertilizerModel("CAM0003MING2", "25", "Jagtial","2 hectors","Near sbi bank" ,"Fertilizer1","Fertilizer2","Fertilizer3"));
         movieList.add(new FertilizerModel("CAM0003MING3", "15", "Jangaon","3 hectors","opp:Market","Fertilizer1","Fertilizer2","Fertilizer3"));
+        movieList.add(new FertilizerModel("CAM0003MING4", "22", "Kamareddy", "4 hectors","x road","Fertilizer1","Fertilizer2","Fertilizer3"));        movieList.add(new FertilizerModel("CAM0003MING0", "20", "Adilabad", "1.4 hectors","Near shiavalyam","Fertilizer1","Fertilizer2","Fertilizer3"));
+        movieList.add(new FertilizerModel("CAM0003MING2", "25", "Jagtial","2 hectors","Near sbi bank" ,"Fertilizer1","Fertilizer2","Fertilizer3"));
+        movieList.add(new FertilizerModel("CAM0003MING3", "15", "Jangaon","3 hectors","opp:Market","Fertilizer1","Fertilizer2","Fertilizer3"));
         movieList.add(new FertilizerModel("CAM0003MING4", "22", "Kamareddy", "4 hectors","x road","Fertilizer1","Fertilizer2","Fertilizer3"));
 
 
@@ -255,6 +258,18 @@ public class FertilizerActivity extends AppCompatActivity {
         albumList.add(a);
 
         a = new Album("Rake",  500,covers[3], "a long-handled tool with a row of teeth at its head", "58 wagons");
+        albumList.add(a);
+
+         a = new Album("SICKLE" ,  100,covers[0], "The blade is heavier than that of a normal sickle", "450mm");
+        albumList.add(a);
+
+         a = new Album("Grub Hoe",  200, covers[1], "Digging and Tilling Using a grubbing hoe", "4.25'/1.3 lb");
+        albumList.add(a);
+
+         a = new Album("panga",  200, covers[2],"Convenient access to all your gear", " 5.2 pounds");
+        albumList.add(a);
+
+          a = new Album("Rake",  500,covers[3], "a long-handled tool with a row of teeth at its head", "58 wagons");
         albumList.add(a);
        /* a = new Album("Honeymoon",  covers[4]);
         albumList.add(a);
