@@ -158,6 +158,8 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
             View footer = mDuoMenuView.getFooterView();
             TextView logout = footer.findViewById(R.id.duo_view_footer_text);
             logout.setText(R.string.log_off);
+            logout.setBackgroundColor(getResources().getColor(R.color.light_red));
+            logout.setHeight(10);
         }
     }
 }

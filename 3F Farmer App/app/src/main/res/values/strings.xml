@@ -12,7 +12,8 @@
     <string name="scan_farmer_id">Click here for Scan Farmer QR Code</string>
     <string name="farmerid">Enter Farmer Id</string>
     <string name="cancel">Cancel</string>
-    <string name="plotid">Plot Id:Plot252019 </string>
+    <string name="plotidName">Plot Id:</string>
+    <string name="plotid">Plot252019 </string>
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="success">Success</string>
     <string name="agree">Agree</string>

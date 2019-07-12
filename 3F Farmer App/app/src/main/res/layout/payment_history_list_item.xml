@@ -193,29 +193,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="gone"
+       android:visibility="gone"
         android:id="@+id/content"
         android:gravity="top|center_horizontal"
         android:layout_below="@+id/linear">
 
         <TableLayout
             android:id="@+id/tabla_cuerpo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="0dp"
-            android:background="@color/transparent_blue"
+            android:gravity="center_horizontal"
+            android:background="@drawable/rectangle_shape_grey_border"
             >
 
             <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
 
                 <TextView
                     android:id="@+id/collection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:textSize="@dimen/album_title"
                     android:padding="5dp"
                     android:text="Collections by total Rate\n from 2nd march to 3rd june:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -227,6 +229,7 @@
                    android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:text="29000"
+                    android:textSize="@dimen/album_title"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
             </TableRow>
@@ -234,13 +237,14 @@
             <TableRow
                 android:id="@+id/tableRow2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
 
                 <TextView
                     android:id="@+id/Labour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:textSize="@dimen/album_title"
                     android:padding="5dp"
                     android:text="Labour Charges:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -252,6 +256,7 @@
                     android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:text="-1500"
+                    android:textSize="@dimen/album_title"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
 
@@ -260,13 +265,14 @@
             <TableRow
                 android:id="@+id/tableRow3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
 
                 <TextView
                     android:id="@+id/rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:textSize="@dimen/album_title"
                     android:padding="5dp"
                     android:text="Rate Adjustment:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -278,6 +284,7 @@
                     android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:text="-8732"
+                    android:textSize="@dimen/album_title"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
 
@@ -286,13 +293,14 @@
             <TableRow
                 android:id="@+id/tableRow4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
 
                 <TextView
                     android:id="@+id/Payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:textSize="@dimen/album_title"
                     android:padding="5dp"
                     android:text="Transport Payment:"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
@@ -303,6 +311,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
+                    android:textSize="@dimen/album_title"
                     android:text="3000"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 

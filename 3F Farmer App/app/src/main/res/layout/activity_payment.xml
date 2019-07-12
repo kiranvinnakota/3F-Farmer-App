@@ -45,7 +45,7 @@
             android:gravity="center"
             android:textColor="@color/yellow"
             android:text="@string/bank_details"
-            android:textSize="25sp" />
+            android:textSize="@dimen/text_size_20" />
 
 
     </RelativeLayout>
@@ -67,7 +67,7 @@
             android:layout_marginLeft="20dp"
             android:text="@string/bank_holder"
             android:textColor="#111"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
 
@@ -91,7 +91,7 @@
             android:text=""
             android:textColor="#111"
             android:layout_marginLeft="10sp"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"
             android:hint="Kiran vinnakota"/>
 
@@ -114,7 +114,7 @@
             android:layout_marginLeft="20dp"
             android:text="@string/account_no"
             android:textColor="#111"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
         <TextView
@@ -138,7 +138,7 @@
             android:hint="31213254698"
             android:textColor="#111"
             android:layout_marginLeft="10sp"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
     </RelativeLayout>
@@ -160,7 +160,7 @@
             android:layout_marginLeft="20dp"
             android:text="@string/bank_name"
             android:textColor="#111"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
         <TextView
@@ -184,7 +184,7 @@
             android:hint="SBI"
             android:textColor="#111"
             android:layout_marginLeft="10sp"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
     </RelativeLayout>
@@ -206,7 +206,7 @@
             android:layout_marginLeft="20dp"
             android:text="@string/branch_name"
             android:textColor="#111"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
         <TextView
@@ -230,7 +230,7 @@
             android:hint="JNTU"
             android:textColor="#111"
             android:layout_marginLeft="10sp"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
     </RelativeLayout>
@@ -252,7 +252,7 @@
             android:layout_marginLeft="20dp"
             android:text="@string/ifsc"
             android:textColor="#111"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
         <TextView
@@ -276,7 +276,7 @@
             android:hint="SBIN0021008"
             android:textColor="#111"
             android:layout_marginLeft="10sp"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
     </RelativeLayout>
@@ -286,9 +286,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next"
+        android:layout_margin="@dimen/text_size"
         android:layout_below="@+id/lin_six"
         android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/margin_20"
+        android:textSize="@dimen/text_size"
         android:textColor="@color/white"
         android:background="@color/green"/>
 

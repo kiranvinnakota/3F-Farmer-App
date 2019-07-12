@@ -12,7 +12,7 @@
         <string name = "scan_farmer_id">స్కాన్ ఫార్మర్ QR కోడ్ కోసం ఇక్కడ క్లిక్ చేయండి</string>
         <string name = "farmerid">రైతు ఐడిని నమోదు చేయండి</string>
         <string name = "cancel">రద్దు చేయండి</string>
-        <string name = "plotid"> ప్లాట్ ఐడి: ప్లాట్ 252019</string>
+
         <string name = "terms_conditions"> నిబంధనలు &amp; పరిస్థితులు</string>
     <string name = "success">విజయం</string>
         <string name = "agree">అంగీకరిస్తున్నారు</string>
@@ -82,7 +82,9 @@
         <string name = "terms">నిబంధనలు మరియు షరతులు</string>
         <string name = "req_loan">రుణం కోసం అభ్యర్థన</string>
         <string name = "loan_msg">అభ్యర్థన స్వీకరించబడింది మరియు ఎవరైనా మిమ్మల్ని త్వరలో సంప్రదిస్తారు</string>
-        <string name = "plot_id">ప్లాట్ ID</string>
+      
+     <string name="plotidName">ప్లాట్ ఐడి:</string>
+     <string name="plotid">Plot252019</string>
         <string name = "plot_size">ప్లాట్ పరిమాణం:</string>
         <string name = "confirm">నిర్ధారించండి</string>
         <string name = "spinner_title">వర్గాన్ని ఎంచుకోండి</string>
