@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <com.calibrage.a3ffarmerapp.Activities.CommonTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
-    <TextView
+    <com.calibrage.a3ffarmerapp.Activities.CommonTextView
         android:id="@+id/plotIdLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:textColor="@color/black"
         android:gravity="center"
        />
-        <TextView
+        <com.calibrage.a3ffarmerapp.Activities.CommonTextView
             android:id="@+id/plotId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
 
             />
     </LinearLayout>
-    <EditText
+    <com.calibrage.a3ffarmerapp.Activities.CommonEditText
         android:id="@+id/username"
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"

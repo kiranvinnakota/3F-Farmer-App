@@ -3,6 +3,7 @@ package com.calibrage.a3ffarmerapp.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import com.calibrage.a3ffarmerapp.Adapters.*;
 
@@ -107,7 +108,11 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
 
         transaction.add(R.id.container, fragment).commit();
     }
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        moveTaskToBack(true);
 
+    }
     @Override
     public void onOptionClicked(int position, Object objectClicked) {
         // Set the toolbar title
@@ -150,14 +155,18 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
             View header = mDuoMenuView.getHeaderView();
+            Typeface faceRegular = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
             TextView textUsername = header.findViewById(R.id.duo_view_header_text_title);
+            textUsername.setTypeface(faceRegular);
             textUsername.setText(R.string.name);
             TextView textrole = header.findViewById(R.id.duo_view_header_text_sub_title);
             textrole.setText("");
 
             View footer = mDuoMenuView.getFooterView();
             TextView logout = footer.findViewById(R.id.duo_view_footer_text);
+            logout.setTypeface(faceRegular);
             logout.setText(R.string.log_off);
+            logout.setTextColor(getResources().getColor(R.color.white));
             logout.setBackgroundColor(getResources().getColor(R.color.light_red));
             logout.setHeight(10);
         }

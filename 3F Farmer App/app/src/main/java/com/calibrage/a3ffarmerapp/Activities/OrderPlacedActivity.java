@@ -93,7 +93,7 @@ public class OrderPlacedActivity extends AppCompatActivity implements AdapterVie
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        textviewTitle.setText("Pole");
+        textviewTitle.setText(R.string.pole);
 /*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
 
         textviewTitle.setText(Html.fromHtml(header));*/

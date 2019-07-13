@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/selected_food_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/selected_food_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/actual_amt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 android:clickable="true"
                 android:src="@drawable/f1"
                 android:scaleType="fitXY" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/size"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
@@ -100,7 +100,7 @@
                 android:gravity="center"
                 android:layout_centerInParent="true"
                 >
-                <TextView
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
                     android:layout_marginEnd="5dp"
@@ -119,7 +119,7 @@
                     android:background="@drawable/button_circle_outline"
                     />
 
-                <TextView
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                     android:id="@+id/quantity"
                     android:layout_width="24dp"
                     android:layout_height="18dp"

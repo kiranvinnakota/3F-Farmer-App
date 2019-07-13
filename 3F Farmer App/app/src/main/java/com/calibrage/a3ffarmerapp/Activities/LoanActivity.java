@@ -19,11 +19,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.R;
 
 public class LoanActivity extends AppCompatActivity {
-
+    CheckBox checkbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,12 @@ public class LoanActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCustomDialog();
+                if(checkbox.isChecked()){
+                    showCustomDialog();
+                }else{
+                    Toast.makeText(getApplicationContext(),R.string.terms_agree,Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         DisplayActionBar();
@@ -69,7 +75,7 @@ public class LoanActivity extends AppCompatActivity {
 
         abar.show();
 
-        CheckBox checkbox = (CheckBox)findViewById(R.id.checkBox);
+        checkbox = (CheckBox)findViewById(R.id.checkBox);
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/margin_10">
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/ledgerItem_label"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                 android:text="@string/ledger_item"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/ledgerItem"
                 android:layout_marginStart="75dp"
                 android:layout_toRightOf="@+id/ledgerItem_label"
@@ -47,7 +47,7 @@
                 android:hint="@string/ledger_item"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/dateOfPaymentLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/dateOfPayment"
                 android:layout_marginStart="42dp"
                 android:layout_toRightOf="@+id/dateOfPaymentLabel"
@@ -72,7 +72,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/amountLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/amount"
                 android:layout_toRightOf="@+id/amountLabel"
                 android:layout_marginStart="100dp"
@@ -96,7 +96,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/bankAccountNumberLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/bankAccountNumber"
                 android:layout_toRightOf="@+id/bankAccountNumberLabel"
                 android:layout_marginStart="2dp"
@@ -120,7 +120,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/bankHolderNameLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/bankHolderName"
                 android:layout_marginStart="15dp"
                 android:layout_toRightOf="@+id/bankHolderNameLabel"
@@ -144,7 +144,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/bankNameLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/bankName"
                 android:layout_marginStart="77dp"
                 android:layout_toRightOf="@+id/bankNameLabel"
@@ -168,7 +168,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/show_more"
                 android:layout_toRightOf="@+id/bankName"
                 android:layout_width="wrap_content"
@@ -188,12 +188,148 @@
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content"
+        android:layout_marginTop="-12dp"
+        android:visibility="gone"
+        android:layout_below="@+id/linear">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin_10"
+            android:layout_margin="@dimen/card_margin"
+            android:elevation="3dp"
+
+            card_view:cardCornerRadius="@dimen/card_album_radius">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_10">
+
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/collection"
+                    android:text="@string/collections_total"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+
+                    android:textColor="@color/album_title"
+                    android:textSize="@dimen/album_title" />
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/collectionAmt"
+                    android:text="29000"
+                    android:layout_marginStart="5dp"
+                    android:layout_toRightOf="@+id/collection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:hint="@string/ledger_item"
+                    android:textSize="@dimen/album_title" />
+
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/Labour"
+                    android:text="@string/labour_charges"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/collection"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:textColor="@color/album_title"
+                    android:textSize="@dimen/album_title" />
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/LabourCharge"
+                    android:text="-1500"
+                    android:layout_marginStart="85dp"
+                    android:layout_toRightOf="@+id/Labour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dop"
+                    android:layout_below="@id/collection"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:textSize="@dimen/album_title" />
+
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/rate"
+                    android:text="@string/rate_adjustment"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Labour"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:textColor="@color/album_title"
+                    android:textSize="@dimen/album_title" />
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/rateAmt"
+                    android:text="-8732"
+                    android:layout_toRightOf="@+id/rate"
+                    android:layout_marginStart="80dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/amount"
+                    android:layout_below="@id/Labour"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:textSize="@dimen/album_title" />
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/Payment"
+                    android:text="Transport Payment:"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rate"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:textColor="@color/album_title"
+                    android:textSize="@dimen/album_title" />
+                <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+                    android:id="@+id/PaymentAmt"
+                    android:text="3000"
+                    android:layout_toRightOf="@+id/Payment"
+                    android:layout_marginStart="65dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/bank_ac_no"
+                    android:layout_below="@id/rate"
+                    android:paddingLeft="@dimen/album_title_padding"
+                    android:paddingRight="@dimen/album_title_padding"
+                    android:paddingTop="@dimen/album_title_padding"
+                    android:textSize="@dimen/album_title" />
+
+                    android:textSize="@dimen/album_title" />
+
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+   <!-- <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-       android:visibility="gone"
+
         android:id="@+id/content"
         android:gravity="top|center_horizontal"
         android:layout_below="@+id/linear">
@@ -215,20 +351,23 @@
 
                 <TextView
                     android:id="@+id/collection"
+                     android:text="Collections by total Rate\n from 2nd march to 3rd june:"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/album_title"
                     android:padding="5dp"
-                    android:text="Collections by total Rate\n from 2nd march to 3rd june:"
+
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/collectionAmt"
+                     android:text="29000"
                     android:layout_width="wrap_content"
                     android:layout_height="57dp"
                    android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
-                    android:text="29000"
+
                     android:textSize="@dimen/album_title"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
@@ -242,20 +381,22 @@
 
                 <TextView
                     android:id="@+id/Labour"
+                     android:text="Labour Charges:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/album_title"
                     android:padding="5dp"
-                    android:text="Labour Charges:"
+
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/LabourCharge"
+                        android:text="-1500"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
-                    android:text="-1500"
+
                     android:textSize="@dimen/album_title"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
@@ -270,20 +411,22 @@
 
                 <TextView
                     android:id="@+id/rate"
+                    android:text="Rate Adjustment:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/album_title"
                     android:padding="5dp"
-                    android:text="Rate Adjustment:"
+
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/rateAmt"
+                    android:text="-8732"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
-                    android:text="-8732"
+
                     android:textSize="@dimen/album_title"
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
@@ -298,21 +441,23 @@
 
                 <TextView
                     android:id="@+id/Payment"
+                    android:text="Transport Payment:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/album_title"
                     android:padding="5dp"
-                    android:text="Transport Payment:"
+
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
                 <TextView
                     android:id="@+id/PaymentAmt"
+                    android:text="3000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10"
                     android:padding="5dp"
                     android:textSize="@dimen/album_title"
-                    android:text="3000"
+
                     android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 
 
@@ -320,5 +465,5 @@
         </TableLayout>
 
 
-    </LinearLayout>
+    </LinearLayout>-->
 </RelativeLayout>

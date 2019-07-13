@@ -59,8 +59,8 @@ public class RequestVisitDailogActivity extends AppCompatActivity {
         /* When positive (yes/ok) is clicked */
         alertDialog.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-
-                finish(); // Your custom code
+                RequestVisitDailogActivity.this.finish();
+               // finish(); // Your custom code
             }
         });
 

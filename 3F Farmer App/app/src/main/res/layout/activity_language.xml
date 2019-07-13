@@ -7,7 +7,7 @@
     android:padding="10dp"
     >
 
-    <TextView
+    <com.calibrage.a3ffarmerapp.Activities.CommonTextView
         android:text="@string/tap_text"
         android:textColor="#ff0000"
         android:textSize="18sp"
@@ -18,7 +18,7 @@
         android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
+    <com.calibrage.a3ffarmerapp.Activities.CommonButton
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/english"
@@ -26,7 +26,7 @@
         android:textSize="14sp"
         android:layout_margin="3dp"
         android:background="#FAFAFA"/>
-    <Button
+    <com.calibrage.a3ffarmerapp.Activities.CommonButton
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/telugu"

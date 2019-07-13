@@ -15,6 +15,7 @@
     <string name="plotidName">Plot Id:</string>
     <string name="plotid">Plot252019 </string>
     <string name="terms_conditions">Terms &amp; Conditions</string>
+    <string name="terms_agree">Please agree terms&amp; conditions</string>
     <string name="success">Success</string>
     <string name="agree">Agree</string>
     <string name="otp_desc">Enter the 6 digits code sent your registered mobile number</string>
@@ -122,6 +123,7 @@
     <string name="profile_name">John Doe</string>
     <string name="size">size</string>
     <string name="landmark">landmark</string>
+    <string name="select_godown">Select Godown</string>
     <array name="menuOptions">
         <item>Home</item>
         <item>My Requests</item>
@@ -129,7 +131,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="i_have_agree_terms_conditions">I have agree terms &amp; Conditions></string>
+    <string name="i_have_agree_terms_conditions">I have agree terms &amp; Conditions</string>
     <string name="long_content">Lorem ipsum dolor sit amet...</string>
     <string name="log_off">Log Off</string>
     <string name="tap_text">Select any language below:</string>
@@ -145,5 +147,8 @@
     <string name="only_status">Status</string>
     <string name="total_rs">Total RS:</string>
     <string name="Rs">\u20B9</string>
+    <string name="collections_total">Collections by total Rate\n from 2nd march to 3rd june:</string>
+    <string name="rate_adjustment">Rate Adjustment:</string>
+    <string name="transport_payment">Transport Payment:</string>
 
 </resources>

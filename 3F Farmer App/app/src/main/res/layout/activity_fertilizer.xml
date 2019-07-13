@@ -24,7 +24,7 @@
                  android:layout_marginEnd="@dimen/margin_20"
                  android:id="@+id/back"/>
 
-             <TextView
+             <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                  android:layout_width="wrap_content"
                  android:layout_height="35dp"
                  android:layout_marginTop="10dp"
@@ -33,7 +33,7 @@
                  android:textColor="@color/white"
                  android:textSize="@dimen/text_size_20" />
 
-             <Button
+             <com.calibrage.a3ffarmerapp.Activities.CommonButton
                  android:id="@+id/button"
                  android:layout_width="50dp"
                  android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             android:layout_below="@+id/linear"
             android:layout_alignParentBottom="true">
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total RS:"
@@ -82,7 +82,7 @@
                 android:textStyle="bold"
                 />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

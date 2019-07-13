@@ -70,7 +70,7 @@
         >
 
 
-        <EditText
+        <com.calibrage.a3ffarmerapp.Activities.CommonEditText
             android:id="@+id/from_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             android:layout_width="@dimen/margin_15"
             android:layout_height="wrap_content"
             />
-        <EditText
+        <com.calibrage.a3ffarmerapp.Activities.CommonEditText
             android:id="@+id/to_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
                 android:layout_below="@+id/linear"
                 android:layout_alignParentBottom="true">
 
-                <Button
+                <com.calibrage.a3ffarmerapp.Activities.CommonButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

@@ -68,5 +68,9 @@ public class LanguageActivity extends AppCompatActivity {
 
     }
 
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        moveTaskToBack(true);
 
+    }
 }

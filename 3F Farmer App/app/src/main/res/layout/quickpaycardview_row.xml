@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/margin_10">
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvNameLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
                 android:text="@string/collection_id"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvName"
                 android:layout_marginStart="4dp"
                 android:layout_toRightOf="@+id/tvNameLabel"
@@ -42,7 +42,7 @@
                 android:hint="collection_id"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvNetWeightLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvNetWeight"
                 android:layout_toRightOf="@+id/tvNetWeightLabel"
                 android:layout_marginStart="14dp"
@@ -67,7 +67,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvDateLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -79,10 +79,10 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvDate"
                 android:layout_toRightOf="@+id/tvDateLabel"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="55dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Date"
@@ -91,7 +91,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvCcLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/tvCc"
                 android:layout_toRightOf="@+id/tvCcLabel"
                 android:layout_marginStart="70dp"

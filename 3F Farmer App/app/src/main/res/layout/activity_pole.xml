@@ -36,7 +36,7 @@
             android:layout_below="@+id/linear"
             android:layout_alignParentBottom="true">
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total RS:"
@@ -48,7 +48,7 @@
                 android:textStyle="bold"
                 />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -61,7 +61,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 />
         </LinearLayout>
-        <Button
+        <com.calibrage.a3ffarmerapp.Activities.CommonButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selected_food_list"

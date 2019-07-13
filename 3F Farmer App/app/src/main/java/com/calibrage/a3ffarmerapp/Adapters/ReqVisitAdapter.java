@@ -1,5 +1,6 @@
 package com.calibrage.a3ffarmerapp.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.calibrage.a3ffarmerapp.Activities.LabourActivity;
 import com.calibrage.a3ffarmerapp.Activities.RecommendationListActivity;
 import com.calibrage.a3ffarmerapp.Activities.RequestVisitDailogActivity;
 import com.calibrage.a3ffarmerapp.Model.RecommendationModel;
@@ -44,12 +46,14 @@ public class ReqVisitAdapter extends RecyclerView.Adapter<ReqVisitAdapter.ViewHo
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, RequestVisitDailogActivity.class);
+                /*Intent intent = new Intent(mContext, RequestVisitDailogActivity.class);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                mContext.startActivity(intent);
+                mContext.startActivity(intent);*/
 
+                mContext.startActivity(new Intent(mContext, RequestVisitDailogActivity.class));
+                ((Activity)mContext).finish();
 
             }
 

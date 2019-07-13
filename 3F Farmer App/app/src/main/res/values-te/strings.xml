@@ -12,7 +12,8 @@
         <string name = "scan_farmer_id">స్కాన్ ఫార్మర్ QR కోడ్ కోసం ఇక్కడ క్లిక్ చేయండి</string>
         <string name = "farmerid">రైతు ఐడిని నమోదు చేయండి</string>
         <string name = "cancel">రద్దు చేయండి</string>
-
+     <string name="plot_id">ప్లాట్ ఐడి</string>
+     <string name="terms_agree">దయచేసి నిబంధనలు మరియు షరతులను అంగీకరించండి</string>
         <string name = "terms_conditions"> నిబంధనలు &amp; పరిస్థితులు</string>
     <string name = "success">విజయం</string>
         <string name = "agree">అంగీకరిస్తున్నారు</string>
@@ -53,7 +54,7 @@
         <string name = "convenience_charge">సౌలభ్యం \n ఛార్జ్</string>
         <string name = "total_amt_pay">మొత్తం \n చెల్లించవలసిన</string>
         <string name = "confirm_req">అభ్యర్థనను నిర్ధారించండి</string>
-        <string name = "frquency">Frquency</string>
+        <string name = "frquency">తరచుదనం</string>
         <string name = "pole">పోల్</string>
         <string name = "fertilizer">ఎరువులు</string>
         <string name = "loan">లోన్</string>
@@ -122,6 +123,7 @@
          <string name = "hide">తక్కువ సమాచారం</string>
          <string name = "profile_name">జాన్ డో</string>
      <string name="size">పరిమాణం</string>
+     <string name="select_godown">గోడౌన్ ఎంచుకోండి</string>
      <string name="landmark">సరిహద్దు గుర్తు</string>
      <array name="menuOptions">
          <item>హోమ్</item>
@@ -130,7 +132,7 @@
       
          <!-- TODO: Remove or change this placeholder text -->
          <string name = "hello_blank_fragment">హలో ఖాళీ భాగం</string>
-         <string name = "i_have_agree_terms_conditions"> నేను నిబంధనలు &amp; షరతులను అంగీకరిస్తున్నాను> </string>
+         <string name = "i_have_agree_terms_conditions"> నేను నిబంధనలు &amp; షరతులను అంగీకరిస్తున్నాను</string>
          <string name = "long_content"> లోరెం ఇప్సమ్ డోలర్ సిట్ అమేట్ ... </string>
          <string name = "log_off">లాగ్ ఆఫ్</string>
      <string name="tap_text">దిగువ ఏదైనా భాషను ఎంచుకోండి:</string>
@@ -146,4 +148,7 @@
      <string name="only_status">స్థితి</string>
      <string name="total_rs">మొత్తం RS:</string>
      <string name="Rs">\u20B9</string>
+     <string name="collections_total">2 వ మార్చి నుండి 3 వ జూన్ వరకు \nమొత్తం రేటుద్వారా సేకరణలు:</string>
+     <string name="rate_adjustment">రేటు సర్దుబాటు:</string>
+     <string name="transport_payment">రవాణా చెల్లింపు:</string>
  </resources>

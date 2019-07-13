@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/margin_10">
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/plotIdLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:text="@string/plot_id"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/plotId"
                 android:layout_marginStart="122dp"
                 android:layout_toRightOf="@+id/plotIdLabel"
@@ -41,7 +41,7 @@
                 android:hint="@string/plot_id"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/dateLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/date"
                 android:layout_toRightOf="@+id/dateLabel"
                 android:layout_marginStart="134dp"
@@ -65,10 +65,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-
-
-
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/timeLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -80,7 +77,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/time"
                 android:layout_toRightOf="@+id/timeLabel"
                 android:layout_marginStart="131dp"
@@ -92,7 +89,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/commentsLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -116,7 +113,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/dateNTimeLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -128,7 +125,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/dateNTime"
                 android:layout_toRightOf="@+id/dateNTimeLabel"
                 android:layout_marginStart="63dp"
@@ -141,7 +138,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/reqDateLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -153,7 +150,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/reqDate"
                 android:layout_toRightOf="@+id/reqDateLabel"
                 android:layout_marginStart="58dp"
@@ -165,7 +162,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/approveDateLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -177,7 +174,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/approveDate"
                 android:layout_toRightOf="@+id/approveDateLabel"
                 android:layout_marginStart="75dp"
@@ -189,7 +186,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/statusLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -201,7 +198,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/status"
                 android:layout_toRightOf="@+id/statusLabel"
                 android:layout_marginStart="120dp"
@@ -213,7 +210,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/nameLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -225,7 +222,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/name"
                 android:layout_toRightOf="@+id/statusLabel"
                 android:layout_marginStart="120dp"
@@ -237,7 +234,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/mobileNoLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -249,7 +246,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/mobileNo"
                 android:layout_toRightOf="@+id/mobileNoLabel"
                 android:layout_marginStart="64dp"
@@ -261,7 +258,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/pinLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -273,7 +270,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/pin"
                 android:layout_toRightOf="@+id/pinLabel"
                 android:layout_marginStart="147dp"

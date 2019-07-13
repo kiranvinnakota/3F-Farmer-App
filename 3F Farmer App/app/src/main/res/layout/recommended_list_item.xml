@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/margin_10">
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/plotCodeLabel"
                 android:text="@string/plot_code"
                 android:layout_marginStart="@dimen/margin_20"
@@ -29,7 +29,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/plotCode"
                 android:layout_marginStart="78dp"
                 android:layout_toRightOf="@+id/plotCodeLabel"
@@ -41,7 +41,7 @@
                 android:hint="@string/plot_code"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/recommendedChemicalLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title"
                 android:paddingBottom="@dimen/margin_10"/>
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/recommendedChemical"
                 android:layout_toRightOf="@+id/recommendedChemicalLabel"
                 android:layout_marginStart="10dp"
@@ -68,7 +68,7 @@
                 android:textSize="@dimen/album_title"
                 android:paddingBottom="@dimen/margin_10"/>
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/dosageLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/dosage"
                 android:layout_toRightOf="@+id/dosageLabel"
                 android:layout_marginStart="45dp"
@@ -92,7 +92,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/commentsLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/comments"
                 android:layout_toRightOf="@+id/commentsLabel"
                 android:layout_marginStart="64dp"
@@ -116,7 +116,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/issueLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/issue"
                 android:layout_toRightOf="@+id/issueLabel"
                 android:layout_marginStart="35dp"
@@ -140,7 +140,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/recommendedByLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/recommendedBy"
                 android:layout_toRightOf="@+id/recommendedByLabel"
                 android:layout_marginStart="16dp"
@@ -164,7 +164,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/recommendedOnLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -176,7 +176,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/recommendedOn"
                 android:layout_toRightOf="@+id/recommendedOnLabel"
                 android:layout_marginStart="13dp"

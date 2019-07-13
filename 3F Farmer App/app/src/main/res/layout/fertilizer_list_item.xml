@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/margin_10">
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/plot_codeLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:text="@string/plot_code"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/plot_code"
                 android:layout_marginStart="15dp"
                 android:layout_toRightOf="@+id/plot_codeLabel"
@@ -41,7 +41,7 @@
                 android:hint="@string/plot_code"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/ageLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/age"
                 android:layout_toRightOf="@+id/ageLabel"
                 android:layout_marginStart="53dp"
@@ -66,7 +66,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
 
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/sizeLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/size"
                 android:layout_toRightOf="@+id/sizeLabel"
                 android:layout_marginStart="53dp"
@@ -90,7 +90,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/villageLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/village"
                 android:layout_toRightOf="@+id/villageLabel"
                 android:layout_marginStart="35dp"
@@ -114,7 +114,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/landmarkLabel"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/landmark"
                 android:layout_toRightOf="@+id/landmarkLabel"
                 android:layout_marginStart="17dp"
@@ -138,7 +138,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/fertilizer1Label"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -150,7 +150,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/fertilizer1"
                 android:layout_toRightOf="@+id/fertilizer1Label"
                 android:layout_marginStart="13dp"
@@ -162,7 +162,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/fertilizer2Label"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/fertilizer2"
                 android:layout_toRightOf="@+id/fertilizer2Label"
                 android:layout_marginStart="13dp"
@@ -186,7 +186,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/fertilizer3Label"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_width="wrap_content"
@@ -198,7 +198,7 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <TextView
+            <com.calibrage.a3ffarmerapp.Activities.CommonTextView
                 android:id="@+id/fertilizer3"
                 android:layout_toRightOf="@+id/fertilizer2Label"
                 android:layout_marginStart="13dp"
