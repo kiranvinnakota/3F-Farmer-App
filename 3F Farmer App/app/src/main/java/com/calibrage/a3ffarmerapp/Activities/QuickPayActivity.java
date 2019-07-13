@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.Adapters.QuickPayDataAdapter;
 import com.calibrage.a3ffarmerapp.Adapters.TableViewAdapter;
@@ -26,13 +27,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class QuickPayActivity extends AppCompatActivity {
+public class QuickPayActivity extends AppCompatActivity implements QuickPayDataAdapter.OnClickAck {
 
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private QuickPayDataAdapter adapter;
+    private  int checkedcount=0 ;
 
     private List<QuickPayModel> studentList;
 
@@ -55,8 +58,16 @@ public class QuickPayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(QuickPayActivity.this, PaymentSummaryActivity.class));
-                finish();
+                if(checkedcount!=0){
+                    startActivity(new Intent(QuickPayActivity.this, PaymentSummaryActivity.class));
+                    finish();
+
+                }else
+                {
+                    Toast.makeText(QuickPayActivity.this,"Please check at least one collection",Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
         });
@@ -84,7 +95,8 @@ public class QuickPayActivity extends AppCompatActivity {
         };
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        QuickPayDataAdapter adapter = new QuickPayDataAdapter(this, Arrays.asList(myListData));
+         adapter = new QuickPayDataAdapter(this, Arrays.asList(myListData));
+         adapter.setOnListener(QuickPayActivity.this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -160,6 +172,20 @@ public class QuickPayActivity extends AppCompatActivity {
         abar.setHomeButtonEnabled(true);
 
         abar.show();
+
+    }
+
+    @Override
+    public void setOnClickAckListener(String status, int position, Boolean ischecked) {
+
+        if(ischecked){
+
+
+            checkedcount+=1;
+        }else {
+
+            checkedcount-=1;
+        }
 
     }
 }

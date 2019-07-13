@@ -20,6 +20,7 @@ public class QuickPayDataAdapter extends
 		RecyclerView.Adapter<QuickPayDataAdapter.ViewHolder> {
 	public Context mContext;
 	private List<QuickPayModel> stList;
+	private OnClickAck onClickAck ;
 
 	public QuickPayDataAdapter(Context ctx,List<QuickPayModel> students) {
 		this.stList = students;
@@ -43,7 +44,7 @@ public class QuickPayDataAdapter extends
 	}
 
 	@Override
-	public void onBindViewHolder(ViewHolder viewHolder, int position) {
+	public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
 		final int pos = position;
 
@@ -67,6 +68,7 @@ public class QuickPayDataAdapter extends
 
 				contact.setSelected(cb.isChecked());
 				stList.get(pos).setSelected(cb.isChecked());
+				onClickAck.setOnClickAckListener("",pos,cb.isChecked());
 
 
 			}
@@ -108,6 +110,15 @@ public class QuickPayDataAdapter extends
 	// method to access in activity after updating selection
 	public List<QuickPayModel> getStudentist() {
 		return stList;
+	}
+
+
+	public void setOnListener(OnClickAck OListener) {
+		this.onClickAck = OListener;
+	}
+
+	public interface OnClickAck {
+		void setOnClickAckListener(String status, int position,Boolean ischecked);
 	}
 
 }
