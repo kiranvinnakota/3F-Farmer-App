@@ -32,4 +32,7 @@
     <dimen name="ic_album_overflow_margin_top">10dp</dimen>
 
     <dimen name="ic_clear_margin">56dp</dimen>
+    <dimen name="_16">16dp</dimen>
+    <dimen name="_24">24dp</dimen>
+    <dimen name="_8dp">8dp</dimen>
 </resources>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.calibrage.a3ffarmerapp"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 1
@@ -82,7 +82,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.google.android.material:material:1.0.0-beta01'
     implementation 'com.android.support:design:23.3.0'
-    implementation 'com.android.support:support-v4:23.3.0'
+    implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.github.PierfrancescoSoffritti:AndroidYouTubePlayer:7.0.1'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.3'
     // code generator for view
@@ -97,4 +97,10 @@ dependencies {
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.google.android.gms:play-services:6.5.87'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }
