@@ -8,9 +8,9 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/f1" />
+        android:layout_height="wrap_content" />
+
 </FrameLayout>

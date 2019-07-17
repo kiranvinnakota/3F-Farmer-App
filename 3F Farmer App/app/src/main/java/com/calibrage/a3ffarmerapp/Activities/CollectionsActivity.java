@@ -147,10 +147,10 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
 
         MovieModal[] myListData = new MovieModal[] {
 
-                new MovieModal("COL2019CCAM0003MILYNG0102-1702", "06/19/2019", "780.00", "Korumamidi","Paid"),
-        new MovieModal("COL2019CCAM0003MILYNG0102-1703", "08/19/2019", "1523.00", "Roja","UnPaid"),
-        new MovieModal("COL2019CCAM0003MILYNG0102-1702", "09/19/2019", "780.00", "Kiran","Paid"),
-        new MovieModal("COL2019CCAM0003MILYNG0102-1703", "10/19/2019", "1523.00", "Ramesh","UnPaid"),
+                new MovieModal("COL2019CCAM0003MILYNG0102-1702", "06/19/2019", "780.00 KG", "Korumamidi","Paid"),
+        new MovieModal("COL2019CCAM0003MILYNG0102-1703", "08/19/2019", "1523.00 KG", "Roja","Payment Pending"),
+        new MovieModal("COL2019CCAM0003MILYNG0102-1702", "09/19/2019", "780.00 KG", "Kiran","Paid"),
+        new MovieModal("COL2019CCAM0003MILYNG0102-1703", "10/19/2019", "1523.00 KG", "Ramesh","Payment Pending"),
 
 
 

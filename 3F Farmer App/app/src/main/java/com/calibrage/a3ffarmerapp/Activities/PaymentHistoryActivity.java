@@ -60,9 +60,9 @@ public class PaymentHistoryActivity extends AppCompatActivity implements Adapter
         PaymentHistoryModel[] myListData = new PaymentHistoryModel[] {
 
 
-                new     PaymentHistoryModel("Number 1", "15-Dec-18", "24768", "34587964258","Ravi teja","SBI"),
-                new   PaymentHistoryModel("Number 2", "5-Dec-18", "15463", "58967412568","Roja","Andhra Bank"),
-                new    PaymentHistoryModel("Number 3", "14-Nov-18", "17680", "48561245698","Chaitnya","SBI"),
+                new     PaymentHistoryModel( "15-Dec-18", "24768", "34587964258","Ravi teja","SBI"),
+                new   PaymentHistoryModel( "5-Dec-18", "15463", "58967412568","Roja","Andhra Bank"),
+                new    PaymentHistoryModel( "14-Nov-18", "17680", "48561245698","Chaitnya","SBI"),
 
 
         };

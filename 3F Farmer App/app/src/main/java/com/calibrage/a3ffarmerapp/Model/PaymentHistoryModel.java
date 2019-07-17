@@ -8,7 +8,7 @@ public class PaymentHistoryModel {
     private String bankHolderName;
     private String bankName;
 
-    public PaymentHistoryModel(String ledgerItem, String dateOfPayment, String amount, String bankAccountNumber, String bankHolderName, String bankName) {
+    public PaymentHistoryModel( String dateOfPayment, String amount, String bankAccountNumber, String bankHolderName, String bankName) {
         this.ledgerItem = ledgerItem;
         this.dateOfPayment = dateOfPayment;
         this.amount = amount;

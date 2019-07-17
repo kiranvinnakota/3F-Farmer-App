@@ -45,7 +45,7 @@ public class TableViewAdapter extends RecyclerView.Adapter<TableViewAdapter.View
         holder.txtWeight.setText(listdata[position].getWeight());
         holder.txtCc.setText(listdata[position].getCc());
         holder.txtStatus.setText(listdata[position].getStatus());
-        if(listdata[position].getStatus()=="UnPaid"){
+        if(listdata[position].getStatus()=="Payment Pending"){
             holder.txtStatus.setTextColor(mContext.getResources().getColor(R.color.red));
         }else{
             holder.txtStatus.setTextColor(mContext.getResources().getColor(R.color.green));

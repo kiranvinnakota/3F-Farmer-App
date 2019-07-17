@@ -3,6 +3,7 @@ package com.calibrage.a3ffarmerapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +32,8 @@ public class PlayerActivity extends AppCompatActivity implements CallBacks.playe
         mPlayerView.setPlayer(PlayerManager.getSharedInstance(PlayerActivity.this).getPlayerView().getPlayer());
         PlayerManager.getSharedInstance(PlayerActivity.this).playStream(mFilePath);
         PlayerManager.getSharedInstance(this).setPlayerListener(this);
+
+        Log.d("PlayerActivity","mFilePath"+mFilePath);
     }
 
 

@@ -2,6 +2,8 @@ package com.calibrage.a3ffarmerapp.Fragments;
 
 
 import android.Manifest;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -9,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,15 +52,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class VideoFragment extends Fragment {
     private RecyclerView recyclerView;
     public static  String TAG="VideoFragment";
-    private String embedUrl,idString,category,fileUrl;
+    private String embedUrl,idString,category,fileUrl,fileName;
     String[] strArray,categoryArray,fileUrlArray;
-
     private static final int REQUEST_PERMISSIONS = 101;
     ArrayList<VideoModel> mVideoList;
     VideoRecyclerAdapter mAdapter;
@@ -101,12 +105,15 @@ public class VideoFragment extends Fragment {
                          embedUrl = leagueData.getString("embedUrl");
                         category=leagueData.getString("category");
                         fileUrl=leagueData.getString("fileUrl");
+                        fileName=leagueData.getString("fileName");
                         if (fileType.equals("Video")){
 
                                 Log.v("kiran", embedUrl);
                              if (embedUrl.equals("null")) {
                                  Log.v("TAG --fileUrl ", fileUrl);
                                  checkPermission(fileUrl);
+                                 file_download(fileUrl);
+
                             }else {
                                  idString=embedUrl.substring(32);
                                  strArray=new String[] {idString};
@@ -170,6 +177,30 @@ public class VideoFragment extends Fragment {
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
+    }
+    public void file_download(String fileUrl) {
+        File direct = new File(Environment.getExternalStorageDirectory()
+                + "/3f_form");
+
+        if (!direct.exists()) {
+            direct.mkdirs();
+        }
+
+        DownloadManager mgr = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+
+        Uri downloadUri = Uri.parse(fileUrl);
+        DownloadManager.Request request = new DownloadManager.Request(
+                downloadUri);
+
+        request.setAllowedNetworkTypes(
+                DownloadManager.Request.NETWORK_WIFI
+                        | DownloadManager.Request.NETWORK_MOBILE)
+                .setAllowedOverRoaming(false).setTitle("Demo")
+             //   .setDescription("Something useful. No, really.")
+                .setDestinationInExternalPublicDir("/3f_form", "video");
+
+        mgr.enqueue(request);
+
     }
     private void setUpRecyclerView() {
 
@@ -265,15 +296,15 @@ public class VideoFragment extends Fragment {
         COLUMN_THUMB = mCursor.getColumnIndexOrThrow(MediaStore.Video.Thumbnails.DATA);
 
         while (mCursor.moveToNext()) {
-            absolutePathOfFile =fileUrl;
-            Log.e("Column", fileUrl);
+            absolutePathOfFile = mCursor.getString(COLUMN_INDEX_DATA);
+            Log.e("Column", absolutePathOfFile);
             Log.e("Folder", mCursor.getString(COLUMN_INDEX_NAME));
             Log.e("column_id", mCursor.getString(COLUMN_ID));
-            Log.e("thum", fileUrl);
+            Log.e("thum", mCursor.getString(COLUMN_THUMB));
             VideoModel mVideo = new VideoModel();
             mVideo.setSelected(false);
             mVideo.setFilePath(absolutePathOfFile);
-            mVideo.setVideoThumb(fileUrl);
+            mVideo.setVideoThumb(mCursor.getString(COLUMN_THUMB));
             mVideoList.add(mVideo);
 
         }

@@ -45,7 +45,7 @@ public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final PaymentHistoryModel myListData = listdata[position];
-        holder.txtLedgerItem.setText(listdata[position].getLedgerItem());
+   //     holder.txtLedgerItem.setText(listdata[position].getLedgerItem());
         holder.txtDateOfPayment.setText(listdata[position].getDateOfPayment());
         holder.txtAmount.setText(listdata[position].getAmount());
         holder.txtBankAccountNumber.setText(listdata[position].getBankAccountNumber());
@@ -104,7 +104,7 @@ public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAd
         public ViewHolder(View itemView) {
             super(itemView);
 
-            txtLedgerItem = itemView.findViewById(R.id.ledgerItem);
+         //   txtLedgerItem = itemView.findViewById(R.id.ledgerItem);
             txtDateOfPayment = itemView.findViewById(R.id.dateOfPayment);
             txtAmount = itemView.findViewById(R.id.amount);
             txtBankAccountNumber = itemView.findViewById(R.id.bankAccountNumber);
