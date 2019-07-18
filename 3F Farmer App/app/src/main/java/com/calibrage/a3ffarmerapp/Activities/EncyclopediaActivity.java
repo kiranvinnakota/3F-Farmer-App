@@ -51,13 +51,15 @@ public class EncyclopediaActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFrag(new VideoFragment(),getString(R.string.videos));
-     //   pagerAdapter.addFrag(new AudioFragment(), "Audios");
+    //   pagerAdapter.addFrag(new AudioFragment(), "Audios");
         pagerAdapter.addFrag(new PhotoFragment(),getString(R.string.doc));
         viewPager.setAdapter(pagerAdapter);
+
         tabLayout.setupWithViewPager(viewPager);
         DisplayActionBar();
 
     }
+
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
         abar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2980B9")));

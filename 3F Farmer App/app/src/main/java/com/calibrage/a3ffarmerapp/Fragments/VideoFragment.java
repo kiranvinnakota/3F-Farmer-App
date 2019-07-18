@@ -111,8 +111,8 @@ public class VideoFragment extends Fragment {
                                 Log.v("kiran", embedUrl);
                              if (embedUrl.equals("null")) {
                                  Log.v("TAG --fileUrl ", fileUrl);
-                                 checkPermission(fileUrl);
-                                 file_download(fileUrl);
+                             /*    checkPermission(fileUrl);
+                                 file_download(fileUrl);*/
 
                             }else {
                                  idString=embedUrl.substring(32);

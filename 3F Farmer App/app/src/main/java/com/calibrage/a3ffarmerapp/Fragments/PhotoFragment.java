@@ -3,10 +3,12 @@ package com.calibrage.a3ffarmerapp.Fragments;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +42,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.calibrage.a3ffarmerapp.Activities.Downloader;
 import com.calibrage.a3ffarmerapp.Activities.PdfViewerActivity;
 import com.calibrage.a3ffarmerapp.Adapters.FileAdapter;
 import com.calibrage.a3ffarmerapp.Model.FileBean;
@@ -49,7 +53,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,10 +70,11 @@ public class PhotoFragment extends Fragment {
     String path;
     ArrayList<FileBean> list;
     FileAdapter adapter;
-    public static  String TAG="PhotoFragment";
-    private String embedUrl,idString,category,fileUrl,fileName;
-    String[] strArray,categoryArray,fileUrlArray;
+    public static String TAG = "PhotoFragment";
+    private String embedUrl, idString, category, fileUrl, fileName;
+    String[] strArray, categoryArray, fileUrlArray;
     private static final int REQUEST_PERMISSIONS = 101;
+    File folder;
     public PhotoFragment() {
         // Required empty public constructor
     }
@@ -71,21 +82,21 @@ public class PhotoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_photo, container, false);
-       // setTitle("Pdf Reader");
-        //Check if permission is granted(for Marshmallow and higher versions)
-        if (Build.VERSION.SDK_INT >= 23)
-            checkPermission();
-        else
-            initViews();
         listView = (ListView)view.findViewById(R.id.listView);
         list = new ArrayList<>();
+        // setTitle("Pdf Reader");
+        //Check if permission is granted(for Marshmallow and higher versions)
 
+            checkPermission();
+
+
+    //    folder = new File( Environment.getExternalStorageDirectory(), "KnowledgeZonePDF");
+    //    String folderPath = Environment.getExternalStorageDirectory()+"/pathTo/folder";
         //get the absolute path of phone storage
-       /* path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        path = Environment.getExternalStorageDirectory()+"/KnowledgeZonePDF";
 
         //calling the initList that will initialize the list to be given to Adapter for binding data
-        initList(path);*/
-
+        initList(path);
 
         adapter = new FileAdapter(getContext(), R.layout.list_item, list);
 
@@ -104,23 +115,27 @@ public class PhotoFragment extends Fragment {
             }
         });
         getEncyclopedia();
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
         return view;
     }
+
     private void getEncyclopedia() {
         //  String id="APWGBDAB00010001";
 
-        String Id="1004";
+        String Id = "1004";
 
-        String url ="http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/"+Id;
+        String url = "http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/" + Id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(TAG,"RESPONSE======"+ response);
+                Log.d(TAG, "RESPONSE======" + response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    Log.d(TAG,"RESPONSE Encyclopedia======"+ jsonObject);
+                    Log.d(TAG, "RESPONSE Encyclopedia======" + jsonObject);
 
                     JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
                     for (int i = 0; i < alsoKnownAsArray.length(); i++) {
@@ -128,10 +143,10 @@ public class PhotoFragment extends Fragment {
                         JSONObject leagueData = alsoKnownAsArray.getJSONObject(i);
                         String fileType = leagueData.getString("fileType");
                         embedUrl = leagueData.getString("embedUrl");
-                        category=leagueData.getString("category");
-                        fileUrl=leagueData.getString("fileUrl");
-                        fileName=leagueData.getString("fileName");
-                       // Log.v("TAG --fileName ", fileName);
+                        category = leagueData.getString("category");
+                        fileUrl = leagueData.getString("fileUrl");
+                        fileName = leagueData.getString("name");
+                        // Log.v("TAG --fileName ", fileName);
 
                         /*if (fileType.equals("Video")){
 
@@ -149,15 +164,31 @@ public class PhotoFragment extends Fragment {
 
 
                         }*/
-                        if (fileType.equals("PDF")){
+                        if (fileType.equals("PDF")) {
                             if (embedUrl.equals("null")) {
                                 Log.v("TAG --fileUrl ", fileType);
                                 Log.v("TAG --fileUrl ", fileUrl);
                                 Log.v("TAG --fileName ", fileName);
-                           //     path = Environment.getExternalStorageDirectory().getAbsolutePath();
-
+                                //     path = Environment.getExternalStorageDirectory().getAbsolutePath();
+                             new    DownloadImageFile(getContext(),fileUrl,fileName,".pdf").execute();
+                                list.add(new FileBean(fileName, fileUrl));
                                 //calling the initList that will initialize the list to be given to Adapter for binding data
-                                initList(fileName,fileUrl);
+                                //   initList(fileName,fileUrl);
+                                String extStorageDirectory = Environment.getExternalStorageDirectory()
+                                        .toString();
+                                File folder = new File(extStorageDirectory, "pdf");
+
+                                folder.mkdir();
+                                File file = new File(folder, "Read.pdf");
+                                try {
+                                    file.createNewFile();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+
+                                //Downloader.DownloadFile(fileUrl, file);
+
+                                //showPdf();
                             }
                         }
 
@@ -165,15 +196,15 @@ public class PhotoFragment extends Fragment {
                     //   Log.d(TAG,"RESPONSE Encyclopedia jsonArray======"+ jsonArray);
 
 
-                    String success=jsonObject.getString("isSuccess");
-                    Log.d(TAG,"success Encyclopedia======"+ success);
-                    if (success.equals("true")){
+                    String success = jsonObject.getString("isSuccess");
+                    Log.d(TAG, "success Encyclopedia======" + success);
+                    if (success.equals("true")) {
                        /* Intent intent =new Intent(getContext(), OtpActivity.class);
                         intent.putExtra ( "Farmer id", farmerId.getText().toString() );
                         startActivity(intent);*/
                         //   Toast.makeText(getApplicationContext(),success,Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(getContext(),"Invalid User",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Invalid User", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -187,22 +218,22 @@ public class PhotoFragment extends Fragment {
                 error.printStackTrace();
                 if (error instanceof NetworkError) {
                     Log.i("one:" + TAG, error.toString());
-                    Toast.makeText(getContext(),"Network Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {
                     Log.i("two:" + TAG, error.toString());
-                    Toast.makeText(getContext(),"Server Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof AuthFailureError) {
                     Log.i("three:" + TAG, error.toString());
-                    Toast.makeText(getContext(),"AuthFailure Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "AuthFailure Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ParseError) {
                     Log.i("four::" + TAG, error.toString());
-                    Toast.makeText(getContext(),"Parse Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Parse Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof NoConnectionError) {
                     Log.i("five::" + TAG, error.toString());
-                    Toast.makeText(getContext(),"NoConnection Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "NoConnection Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Log.i("six::" + TAG, error.toString());
-                    Toast.makeText(getContext(),"Timeout Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Timeout Error", Toast.LENGTH_SHORT).show();
                 } else {
                     System.out.println("Checking error in else");
                 }
@@ -213,40 +244,48 @@ public class PhotoFragment extends Fragment {
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
     }
-    void initViews(){
-        //views initialization
 
-
+    public void showPdf( File path) {
+       // File file = new File(Environment.getExternalStorageDirectory() + path);
+        PackageManager packageManager = getActivity().getPackageManager();
+        Intent testIntent = new Intent(Intent.ACTION_VIEW);
+        testIntent.setType("application/pdf");
+        List list = packageManager.queryIntentActivities(testIntent, PackageManager.MATCH_DEFAULT_ONLY);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.fromFile(path);
+        intent.setDataAndType(uri, "application/pdf");
+        startActivity(intent);
     }
 
     //initializing the ArrayList
-    void initList(String fileName,String fileUrl){
+    void initList(String path){
         try{
             File file = new File(path);
             File[] fileArr = file.listFiles();
-
-
-            list.add(new FileBean(fileName, fileUrl));
-         /*   for(File file1 : fileArr){
+            String fileName;
+            for(File file1 : fileArr){
                 if(file1.isDirectory()){
-                   // initList(file1.getAbsolutePath());
+                    initList(file1.getAbsolutePath());
                 }else{
                     fileName = file1.getName();
                     //choose only the pdf files
                     if(fileName.endsWith(".pdf")){
-                        list.add(new FileBean(fileName, fileUrl));
+                        list.add(new FileBean(fileName, file1.getAbsolutePath()));
                     }
                 }
 
-            }*/
+            }
         }catch(Exception e){
             Log.i("show","Something went wrong. "+e.toString());
         }
     }
+
+    //Handling permissions for Android Marshmallow and above
     void checkPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             //if permission granted, initialize the views
-            initViews();
+          //  initViews();
         } else {
             //show the dialog requesting to grant permission
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -259,7 +298,7 @@ public class PhotoFragment extends Fragment {
         switch (requestCode) {
             case 1:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    initViews();
+                   // initViews();
                 } else {
                     //permission is denied (this is the first time, when "never ask again" is not checked)
                     if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -291,6 +330,104 @@ public class PhotoFragment extends Fragment {
                     }
                 }
         }
+    }
+
+
+    private class DownloadImageFile extends AsyncTask<String, Void, Void> {
+
+        private Context context;
+        private String path;
+        private String fileName;
+        private String extension;
+        File pdfFile;
+        private DownloadImageFile(Context context, String path, String fileName, String extension) {
+            this.context = context;
+            this.path = path;
+            this.fileName = fileName;
+            this.extension = extension;
+
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            //showDialogAsk(getActivity(), "Downloading File");
+            String fileUrl = path;   // -> http://maven.apache.org/maven-1.x/maven.pdf
+            String fileName = this.fileName;  // -> maven.pdf
+            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+             folder = new File(extStorageDirectory, "KnowledgeZonePDF");
+
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+
+             pdfFile = new File(folder, fileName + extension);
+
+
+            if (!pdfFile.exists()) {
+                try {
+                    pdfFile.createNewFile();
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                DownloadFile(fileUrl, pdfFile);
+            } else {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+
+                            //Toast.makeText(context, "File exists in Folder", Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+       //     showPdf(pdfFile);
+
+
+        }
+    }
+
+    public static void DownloadFile(String fileURL, File directory) {
+        try {
+
+            String file_test=fileURL;
+            String  a = "\'";
+
+            String replaceString=file_test.replaceAll("\\\\", "/");
+            FileOutputStream f = new FileOutputStream(directory);
+            URL u = new URL(replaceString);
+            HttpURLConnection c = (HttpURLConnection) u.openConnection();
+          //  c.setRequestMethod("GET");
+           // c.setDoOutput(true);
+            c.connect();
+
+            InputStream in = c.getInputStream();
+
+            byte[] buffer = new byte[1024];
+            int len1 = 0;
+            while ((len1 = in.read(buffer)) > 0) {
+                f.write(buffer, 0, len1);
+            }
+            f.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
