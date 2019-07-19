@@ -77,6 +77,7 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_btn);
         ab.setDisplayHomeAsUpEnabled(true);
 
+
     }
 
     @SuppressLint("RestrictedApi")
