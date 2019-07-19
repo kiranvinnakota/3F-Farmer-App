@@ -127,8 +127,10 @@
     <array name="menuOptions">
         <item>Home</item>
         <item>My Requests</item>
+        <item>Choose Language</item>
     </array>
-
+    <string name="choose_language">Choose Language</string>
+    <string name="language_notification">Language Setup Completed</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="i_have_agree_terms_conditions">I have agree terms &amp; Conditions</string>

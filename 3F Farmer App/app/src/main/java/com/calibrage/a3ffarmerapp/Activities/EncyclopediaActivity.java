@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import android.net.Uri;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.MediaController;
@@ -57,7 +59,22 @@ public class EncyclopediaActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
         DisplayActionBar();
+     /*   Intent intent=getIntent();
+        int loadsPosition = intent.getIntExtra("loadsPosition", -1);
+        Log.d("EncyclopediaActivity", "loadsPosition======" + loadsPosition);
+*/
+      /*  Intent intent=getIntent();
+        String loadsPosition = intent.getStringExtra("loadsPosition");
+        Log.d("EncyclopediaActivity", "loadsPosition======" + loadsPosition);
+*/
+        try {
 
+            Intent intent = getIntent();
+            String name = intent.getStringExtra("loadsPosition");
+            Log.d("EncyclopediaActivity", "loadsPosition======" + name);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void DisplayActionBar() {

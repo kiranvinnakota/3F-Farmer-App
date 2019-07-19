@@ -34,7 +34,9 @@ public class Album implements Serializable {
     public String getmName() {
         return mName;
     }
-
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
     public int getmAmount() {
         return mAmount;
     }

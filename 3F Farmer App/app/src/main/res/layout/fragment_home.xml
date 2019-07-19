@@ -1168,6 +1168,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/top"
+                android:padding="4dp"
                 android:layout_marginBottom="70dp">
 
                 <!--<androidx.recyclerview.widget.RecyclerView-->
@@ -1182,17 +1183,12 @@
 
                 <!--</androidx.recyclerview.widget.RecyclerView>-->
 
-                <GridView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gridview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:columnWidth="100dp"
-                    android:numColumns="3"
-                    android:verticalSpacing="8dp"
-                    android:horizontalSpacing="8dp"
-                    android:layout_margin="4dp"
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginEnd="10dp"
                     />
 
             </RelativeLayout>

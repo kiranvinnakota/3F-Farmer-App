@@ -128,8 +128,10 @@
      <array name="menuOptions">
          <item>హోమ్</item>
          <item>నా అభ్యర్థనలు</item>
+         <item>భాషను ఎంచుకోండి</item>
      </array>
-      
+      <string name="choose_language">భాషను ఎంచుకోండి</string>
+     <string name="language_notification">భాషా సెటప్ పూర్తయింది</string>
          <!-- TODO: Remove or change this placeholder text -->
          <string name = "hello_blank_fragment">హలో ఖాళీ భాగం</string>
          <string name = "i_have_agree_terms_conditions"> నేను నిబంధనలు &amp; షరతులను అంగీకరిస్తున్నాను</string>

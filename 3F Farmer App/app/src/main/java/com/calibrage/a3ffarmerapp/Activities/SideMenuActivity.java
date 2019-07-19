@@ -77,7 +77,6 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_btn);
         ab.setDisplayHomeAsUpEnabled(true);
 
-
     }
 
     @SuppressLint("RestrictedApi")
@@ -134,7 +133,11 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
 
                     goToFragment(new MyRequestsFragment(), false);
                     break;
+            case 2:
 
+              Intent intent =new Intent(getApplicationContext(),InsideLanguageActivity.class);
+              startActivity(intent);
+                break;
                 default:
               //  goToFragment(new HomeFragment(), false);
 
