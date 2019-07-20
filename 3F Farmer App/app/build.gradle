@@ -18,6 +18,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            buildConfigField "String", "SERVER_URL", '" "'
+            buildConfigField "String", "AZURE_URL", '""'
+            /* buildConfigField "String", "LOCAL_URL", '" "'*/
+            buildConfigField "String", "LOCAL_URL", '"http://183.82.111.111/3FFarmerAPI/api/"'
+        }
+    }
 }
 allprojects {
     repositories {
@@ -103,4 +112,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.1.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 }

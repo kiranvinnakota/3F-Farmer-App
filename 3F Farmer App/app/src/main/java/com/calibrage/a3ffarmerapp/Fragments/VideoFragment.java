@@ -2,6 +2,7 @@ package com.calibrage.a3ffarmerapp.Fragments;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
@@ -40,9 +41,11 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.calibrage.a3ffarmerapp.Activities.EncyclopediaActivity;
 import com.calibrage.a3ffarmerapp.Activities.YoutubePlayerActivity;
 import com.calibrage.a3ffarmerapp.Adapters.VideoRecyclerAdapter;
 import com.calibrage.a3ffarmerapp.Adapters.YoutubeVideoAdapter;
+import com.calibrage.a3ffarmerapp.Model.GetLookUpModel;
 import com.calibrage.a3ffarmerapp.Model.VideoModel;
 import com.calibrage.a3ffarmerapp.Model.YoutubeVideoModel;
 import com.calibrage.a3ffarmerapp.R;
@@ -57,7 +60,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class VideoFragment extends Fragment {
+public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAboutDataReceivedListener {
     private RecyclerView recyclerView;
     public static  String TAG="VideoFragment";
     private String embedUrl,idString,category,fileUrl,fileName;
@@ -76,10 +79,27 @@ public class VideoFragment extends Fragment {
         recyclerViewLayoutManager = new GridLayoutManager(getContext(), 1);
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
         mVideoList = new ArrayList<>();
+
+
         getEncyclopedia();
         setUpRecyclerView();
        // checkPermission(fileUrl);
         return view;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        Activity a;
+
+        if (context instanceof Activity){
+            a=(Activity) context;
+            EncyclopediaActivity mActivity = (EncyclopediaActivity) getActivity();
+            mActivity.setAboutDataListener(this);
+        }
+
     }
     private void getEncyclopedia() {
         //  String id="APWGBDAB00010001";
@@ -329,5 +349,10 @@ public class VideoFragment extends Fragment {
                 }
             }
         }
+    }
+
+    @Override
+    public void onDataReceived(String model) {
+Toast.makeText(getActivity(),model,Toast.LENGTH_SHORT).show();
     }
 }

@@ -13,6 +13,7 @@ package com.calibrage.a3ffarmerapp.Adapters;
         import android.widget.TextView;
 
         import com.calibrage.a3ffarmerapp.Model.Album;
+        import com.calibrage.a3ffarmerapp.Model.GetLookUpModel;
         import com.calibrage.a3ffarmerapp.R;
 
         import java.util.List;
@@ -20,10 +21,10 @@ package com.calibrage.a3ffarmerapp.Adapters;
 public class KnowledgeZoneBaseAdapter extends BaseAdapter {
 
     private  Context mContext;
-    private List<Album> books;
+    private List<GetLookUpModel.ListResult> books;
 
     // 1
-    public KnowledgeZoneBaseAdapter(Context context, List<Album> books) {
+    public KnowledgeZoneBaseAdapter(Context context, List<GetLookUpModel.ListResult> books) {
         this.mContext = context;
         this.books = books;
     }
@@ -50,7 +51,7 @@ public class KnowledgeZoneBaseAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // 1
-        final Album book = books.get(position);
+        final GetLookUpModel.ListResult book = books.get(position);
 
         // 2
         if (convertView == null) {
@@ -64,8 +65,8 @@ public class KnowledgeZoneBaseAdapter extends BaseAdapter {
 
 
         // 4
-        imageView.setImageResource(book.getThumbnail());
-        textView.setText(mContext.getString(book.getmAmount()));
+        imageView.setImageResource(R.drawable.encylopedia);
+        textView.setText(book.getName());
 
         return convertView;
     }

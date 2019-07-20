@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,19 +56,30 @@ import com.calibrage.a3ffarmerapp.Activities.RecommendationActivity;
 import com.calibrage.a3ffarmerapp.Activities.RecyclerTouchListener;
 import com.calibrage.a3ffarmerapp.Activities.RequestVisitActivity;
 import com.calibrage.a3ffarmerapp.Adapters.CardAdapter;
+import com.calibrage.a3ffarmerapp.Adapters.KnowledgeZoneBaseAdapter;
 import com.calibrage.a3ffarmerapp.Model.Album;
+import com.calibrage.a3ffarmerapp.Model.GetLookUpModel;
 import com.calibrage.a3ffarmerapp.Model.SuperHeroes;
+import com.calibrage.a3ffarmerapp.NetworkService.APIConstants;
+import com.calibrage.a3ffarmerapp.NetworkService.MyServices;
+import com.calibrage.a3ffarmerapp.NetworkService.ServiceFactory;
 import com.calibrage.a3ffarmerapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -84,6 +97,11 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     public static  String TAG="HomeFragment";
     ImageView offersImg;
+    private Subscription mRegisterSubscription;
+    private GridView gridView;
+    private  KnowledgeZoneBaseAdapter knowledgeZoneBaseAdapter;
+    private List<GetLookUpModel.ListResult> getCategoryList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -176,7 +194,7 @@ public class HomeFragment extends Fragment {
 //        });
         offersImg=(ImageView)view.findViewById(R.id.offers);
         albumList = new ArrayList<>();
-       // prepareAlbums();
+        prepareAlbums();
 //         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 //        KnowledgeZoneCategoryAdapter adapter = new KnowledgeZoneCategoryAdapter(getActivity(),albumList);
 //        recyclerView.setHasFixedSize(true);
@@ -186,28 +204,32 @@ public class HomeFragment extends Fragment {
 //       recyclerView.setItemAnimator(new DefaultItemAnimator());
 //        recyclerView.setAdapter(adapter);
 
-     /*   GridView gridView = (GridView)view.findViewById(R.id.gridview);
-        final KnowledgeZoneBaseAdapter booksAdapter = new KnowledgeZoneBaseAdapter(getActivity(), albumList);
-        gridView.setAdapter(booksAdapter);
+        gridView = (GridView)view.findViewById(R.id.gridview);
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                Album book = albumList.get(position);
+
+                Intent intent =new Intent(getContext(), EncyclopediaActivity.class);
+                intent.putExtra("Id", getCategoryList.get(position).getId());
+                startActivity(intent);
+
+           //     Album book = albumList.get(position);
                // book.toggleFavorite();
 
                 // This tells the GridView to redraw itself
                 // in turn calling your BooksAdapter's getView method again for each cell
-                booksAdapter.notifyDataSetChanged();
+//                knowledgeZoneBaseAdapter.notifyDataSetChanged();
             }
         });
-*/
-        recyclerView = (RecyclerView)view.findViewById(R.id.gridview);
-        //  recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        //Initializing our superheroes list
+
+//        recyclerView = (RecyclerView)view.findViewById(R.id.gridview);
+//        //  recyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(getContext());
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+//        //Initializing our superheroes list
         listSuperHeroes = new ArrayList<>();
         dail = (ImageButton)view.findViewById(R.id.dail);
 
@@ -245,43 +267,83 @@ public class HomeFragment extends Fragment {
         });
         Getstate();
 
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        // TODO Handle item click
-
-                        if(position==0){
-                            int pos = new ArrayList<String>(Arrays.asList(strArray)).indexOf("1004");
-                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
-                            intent.putExtra("loadsPosition",strArray[0]);
-                            startActivity(intent);
-                        }else  if(position==1){
-                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
-                            intent.putExtra("loadsPosition",id);
-                            startActivity(intent);
-                        } else  if(position==2){
-                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
-                            intent.putExtra("loadsPosition",id);
-                            startActivity(intent);
-                        }
-                        else  if(position==3){
-                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
-                            intent.putExtra("loadsPosition",id);
-                            startActivity(intent);
-                        }
-                        else  if(position==4){
-                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
-                            intent.putExtra("loadsPosition",id);
-                            startActivity(intent);
-                        } else   if(position==5){
-                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
-                            intent.putExtra("loadsPosition",id);
-                            startActivity(intent);
-                        }
-                    }
-                }));
+//        recyclerView.addOnItemTouchListener(
+//                new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override public void onItemClick(View view, int position) {
+//                        // TODO Handle item click
+//
+//                        if(position==0){
+//                            int pos = new ArrayList<String>(Arrays.asList(strArray)).indexOf("1004");
+//                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
+//                            intent.putExtra("loadsPosition",strArray[0]);
+//                            startActivity(intent);
+//                        }else  if(position==1){
+//                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
+//                            intent.putExtra("loadsPosition",id);
+//                            startActivity(intent);
+//                        } else  if(position==2){
+//                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
+//                            intent.putExtra("loadsPosition",id);
+//                            startActivity(intent);
+//                        }
+//                        else  if(position==3){
+//                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
+//                            intent.putExtra("loadsPosition",id);
+//                            startActivity(intent);
+//                        }
+//                        else  if(position==4){
+//                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
+//                            intent.putExtra("loadsPosition",id);
+//                            startActivity(intent);
+//                        } else   if(position==5){
+//                            Intent intent = new Intent(getActivity(), EncyclopediaActivity.class);
+//                            intent.putExtra("loadsPosition",id);
+//                            startActivity(intent);
+//                        }
+//                    }
+//                }));
         GetBanner();
+        getCategory();
         return view;
+    }
+    private void getCategory() {
+        MyServices service = ServiceFactory.createRetrofitService(getActivity(), MyServices.class);
+        mRegisterSubscription = service.GetActiveLookUp(APIConstants.LookUpCategory)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GetLookUpModel>() {
+                    @Override
+                    public void onCompleted() {
+                        // Toast.makeText(getActivity(), "check", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        if (e instanceof HttpException) {
+                            ((HttpException) e).code();
+                            ((HttpException) e).message();
+                            ((HttpException) e).response().errorBody();
+                            try {
+                                ((HttpException) e).response().errorBody().string();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(GetLookUpModel getLookUpModel) {
+                        Log.d(TAG, "onNext: "+getLookUpModel);
+                        getCategoryList = getLookUpModel.getListResult();
+                        final KnowledgeZoneBaseAdapter knowledgeZoneBaseAdapter = new KnowledgeZoneBaseAdapter(getActivity(), getLookUpModel.getListResult());
+                        gridView.setAdapter(knowledgeZoneBaseAdapter);
+
+                    }
+                });
+
     }
     private void Getstate() {
         //  String id="APWGBDAB00010001";
@@ -490,7 +552,7 @@ public class HomeFragment extends Fragment {
         adapter = new CardAdapter(listSuperHeroes, getContext());
 
         //Adding adapter to recyclerview
-        recyclerView.setAdapter(adapter);
+//        recyclerView.setAdapter(adapter);
     }
     private void prepareAlbums() {
         int[] covers = new int[]{

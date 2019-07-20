@@ -16,6 +16,7 @@ import com.calibrage.a3ffarmerapp.Adapters.PagerAdapter;
 import com.calibrage.a3ffarmerapp.Fragments.AudioFragment;
 import com.calibrage.a3ffarmerapp.Fragments.PhotoFragment;
 import com.calibrage.a3ffarmerapp.Fragments.VideoFragment;
+import com.calibrage.a3ffarmerapp.Model.GetLookUpModel;
 import com.calibrage.a3ffarmerapp.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -36,12 +37,16 @@ public class EncyclopediaActivity extends AppCompatActivity {
     //  Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    private OnAboutDataReceivedListener mAboutDataListener;
     PagerAdapter pagerAdapter;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encyclopedia);
+
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("Id");
 
         /*vid = (VideoView)findViewById(R.id.videoView);
         vid.setBackgroundResource(R.drawable.play_2);*/
@@ -58,6 +63,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
+
         DisplayActionBar();
      /*   Intent intent=getIntent();
         int loadsPosition = intent.getIntExtra("loadsPosition", -1);
@@ -69,12 +75,18 @@ public class EncyclopediaActivity extends AppCompatActivity {
 */
         try {
 
-            Intent intent = getIntent();
+
             String name = intent.getStringExtra("loadsPosition");
             Log.d("EncyclopediaActivity", "loadsPosition======" + name);
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     private void DisplayActionBar() {
@@ -88,6 +100,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
         textviewTitle.setText(R.string.knowledge);
+
 /*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
 
         textviewTitle.setText(Html.fromHtml(header));*/
@@ -120,4 +133,17 @@ public class EncyclopediaActivity extends AppCompatActivity {
 
 
     }*/
+
+    public interface OnAboutDataReceivedListener {
+        void onDataReceived(String model);
+    }
+
+
+    public void setAboutDataListener(OnAboutDataReceivedListener listener) {
+        this.mAboutDataListener = listener;
+    }
+
 }
+
+
+
