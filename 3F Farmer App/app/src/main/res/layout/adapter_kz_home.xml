@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="120dp"
-        android:layout_height="80dp"
+        android:layout_height="85dp"
         android:layout_gravity="center"
         app:cardCornerRadius="6dp"
         app:cardElevation="2dp"
@@ -37,6 +37,7 @@
                 android:maxLines="2"
                 android:textAlignment="center"
                 android:text="@string/labour"
+
                 android:textColor="@color/black"
                 android:id="@+id/text"
                 android:textSize="14dp" />

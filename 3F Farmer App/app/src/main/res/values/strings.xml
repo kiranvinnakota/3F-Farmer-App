@@ -155,6 +155,10 @@
 
     <string name="thumbnail_image_view_desc">Youtube Video thumbnail image view</string>
     <string name="close_player_activity">Close Player activity</string>
+  <!--  <string name="harvest">Harvest</string>-->
+    <string name="pest_n_disease">Pest and Disease</string>
+    <string name="general_info">General Information</string>
+    <string name="harvest">Harvest</string>
 
     <!--  we need to use video ids instead of video link  -->
     <string-array name="video_id_array">

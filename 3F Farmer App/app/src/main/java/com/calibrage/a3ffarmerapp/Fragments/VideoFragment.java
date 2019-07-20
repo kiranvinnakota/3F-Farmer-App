@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +61,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAboutDataReceivedListener {
     private RecyclerView recyclerView;
@@ -70,7 +74,9 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     VideoRecyclerAdapter mAdapter;
     RecyclerView mRecyclerView;
     GridLayoutManager recyclerViewLayoutManager;
-
+    String dateTxt;
+    String id;
+    private Bundle bundle;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_video, container, false);
@@ -78,9 +84,9 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
         mRecyclerView = view.findViewById(R.id.recyclerViewGallery);
         recyclerViewLayoutManager = new GridLayoutManager(getContext(), 1);
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
-        mVideoList = new ArrayList<>();
-
-
+        SharedPreferences pref = getContext().getSharedPreferences("DATA2", MODE_PRIVATE);
+         id=pref.getString("EDITEXT1", "");       // Saving string data of your editext
+        Log.d("VideoFragment", "id======" + id);
         getEncyclopedia();
         setUpRecyclerView();
        // checkPermission(fileUrl);
@@ -104,9 +110,9 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     private void getEncyclopedia() {
         //  String id="APWGBDAB00010001";
 
-        String Id="1004";
+      //  String Id="1004";
 
-        String url ="http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/"+Id;
+        String url ="http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/"+id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -260,7 +266,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
         //get the video id array, title array and duration array from strings.xml
        // String[] videoIDArray = (String[]) getResources().getStringArray(Integer.parseInt(idString));
         String[] videoIDArray = strArray;
-        String[] videoTitleArray = categoryArray;
+       // String[] videoTitleArray = categoryArray;
        // String[] videoDurationArray = getResources().getStringArray(R.array.video_duration_array);
 
         //loop through all items and add them to arraylist
@@ -268,7 +274,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
 
             YoutubeVideoModel youtubeVideoModel = new YoutubeVideoModel();
             youtubeVideoModel.setVideoId(videoIDArray[i]);
-             youtubeVideoModel.setTitle(videoTitleArray[i]);
+       //      youtubeVideoModel.setTitle(videoTitleArray[i]);
          //   youtubeVideoModel.setDuration(videoDurationArray[i]);
             youtubeVideoModel.setVideoId(videoIDArray[i]);
             youtubeVideoModelArrayList.add(youtubeVideoModel);

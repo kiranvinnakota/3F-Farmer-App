@@ -27,11 +27,9 @@
         <activity android:name=".Activities.InsideLanguageActivity"
             android:parentActivityName=".Activities.PoleActivity"></activity>
         <activity android:name=".Activities.YoutubePlayerActivity" />
-        <activity android:name=".Activities.FertilizerCenterActivity" />
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.CollectionCenterActivity" />
         <activity android:name=".Activities.BasicPlayerActivity" />
         <activity
             android:name=".Activities.LabourRecommendationsActivity"

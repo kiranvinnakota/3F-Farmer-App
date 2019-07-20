@@ -47,7 +47,7 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeViewHolder>
 
         final YoutubeVideoModel youtubeVideoModel = youtubeVideoModelArrayList.get(position);
 
-        holder.videoTitle.setText(youtubeVideoModel.getTitle());
+       // holder.videoTitle.setText(youtubeVideoModel.getTitle());
 //        holder.videoDuration.setText(youtubeVideoModel.getDuration());
 
 

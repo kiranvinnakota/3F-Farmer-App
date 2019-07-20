@@ -18,12 +18,12 @@
         <!-- youtube thumbnail view to show the thumbnail of videos -->
         <com.google.android.youtube.player.YouTubeThumbnailView
             android:id="@+id/video_thumbnail_image_view"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="@android:color/darker_gray"
             android:contentDescription="@string/thumbnail_image_view_desc"
             android:scaleType="centerCrop" />
-
+<!--
         <TextView
             android:id="@+id/video_title"
             android:layout_width="match_parent"
@@ -47,8 +47,8 @@
             android:text="Title of Video"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
-       <!-- <TextView
-            android:id="@+id/video_duration_label"
+       &lt;!&ndash; <TextView-->
+           <!-- android:id="@+id/video_duration_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -60,7 +60,7 @@
             android:gravity="center_vertical|end"
             android:text="24.33min"
             android:textColor="@android:color/primary_text_light"
-            android:textSize="14sp" />-->
+            android:textSize="14sp" />&ndash;&gt;-->
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

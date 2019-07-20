@@ -65,7 +65,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     //    holder.imageView.setImageDrawable(superHero.getImageId(), imageLoader);
 
         holder.imageView.setImageResource(superHero.getImageId());
-
         holder.textViewName.setText(superHero.getName());
         //   holder.textViewRank.setText(String.valueOf(superHero.getRank()));
    //     holder.textViewRealName.setText(superHero.getRealName());

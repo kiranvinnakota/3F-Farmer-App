@@ -22,7 +22,20 @@ public class KnowledgeZoneBaseAdapter extends BaseAdapter {
 
     private  Context mContext;
     private List<GetLookUpModel.ListResult> books;
-
+    int[] covers = new int[]{
+            R.drawable.encylopedia,
+            R.drawable.warehouse,
+            R.drawable.warehouse,
+            R.drawable.category1,
+            R.drawable.category2,
+            R.drawable.category3,
+            /*  R.drawable.album5,
+              R.drawable.album6,
+              R.drawable.album7,
+              R.drawable.album8,
+              R.drawable.album9,
+              R.drawable.album10,
+              R.drawable.album11*/};
     // 1
     public KnowledgeZoneBaseAdapter(Context context, List<GetLookUpModel.ListResult> books) {
         this.mContext = context;
@@ -65,9 +78,9 @@ public class KnowledgeZoneBaseAdapter extends BaseAdapter {
 
 
         // 4
-        imageView.setImageResource(R.drawable.encylopedia);
+      //  imageView.setImageResource(R.drawable.encylopedia);
         textView.setText(book.getName());
-
+        imageView.setImageResource(covers[position]);
         return convertView;
     }
 

@@ -156,7 +156,11 @@
 
      <string name="thumbnail_image_view_desc">Youtube Video thumbnail image view</string>
      <string name="close_player_activity">Close Player activity</string>
+     <!--<string name="harvest">హార్వెస్ట్</string>-->
 
+     <string name="pest_n_disease">తెగులు మరియు వ్యాధి</string>
+     <string name="general_info">సాధారణ సమాచారం</string>
+     <string name="harvest">హార్వెస్ట్</string>
      <!--  we need to use video ids instead of video link  -->
      <string-array name="video_id_array">
          <item>CqhpNxI8qYw</item>

@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,6 +24,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import android.net.Uri;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -37,17 +39,19 @@ public class EncyclopediaActivity extends AppCompatActivity {
     //  Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    String   receivingString;
     private OnAboutDataReceivedListener mAboutDataListener;
     PagerAdapter pagerAdapter;
+    String Id;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encyclopedia);
 
-        Intent intent = getIntent();
-        String str = intent.getStringExtra("Id");
-
+        SharedPreferences pref1 = getApplicationContext().getSharedPreferences("DATA", MODE_PRIVATE);
+         Id=pref1.getString("Id", "");       // Saving string data of your editext
+        Log.d("Id", "Id ki======" + Id);
         /*vid = (VideoView)findViewById(R.id.videoView);
         vid.setBackgroundResource(R.drawable.play_2);*/
       /*  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -55,6 +59,14 @@ public class EncyclopediaActivity extends AppCompatActivity {
        /* toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);*/
         tabLayout = (TabLayout) findViewById(R.id.tab);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            receivingString = extras.getString("Id");
+            Log.d("Id ", "Id kiran======" + receivingString);
+        } else {
+            // handle case
+        }
+
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFrag(new VideoFragment(),getString(R.string.videos));
@@ -62,7 +74,13 @@ public class EncyclopediaActivity extends AppCompatActivity {
         pagerAdapter.addFrag(new PhotoFragment(),getString(R.string.doc));
         viewPager.setAdapter(pagerAdapter);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DATA2", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("EDITEXT1", Id);  // Saving string data of your editext
+        editor.commit(); // commit and
         tabLayout.setupWithViewPager(viewPager);
+
+
 
         DisplayActionBar();
      /*   Intent intent=getIntent();
@@ -73,14 +91,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
         String loadsPosition = intent.getStringExtra("loadsPosition");
         Log.d("EncyclopediaActivity", "loadsPosition======" + loadsPosition);
 */
-        try {
 
-
-            String name = intent.getStringExtra("loadsPosition");
-            Log.d("EncyclopediaActivity", "loadsPosition======" + name);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -99,7 +110,18 @@ public class EncyclopediaActivity extends AppCompatActivity {
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        textviewTitle.setText(R.string.knowledge);
+        if (Id.equals("1004")) {
+            textviewTitle.setText(R.string.harvest);
+        } else if (Id.equals("1005")) {
+            textviewTitle.setText(R.string.fertilizer);
+        } else if (Id.equals("1006")) {
+            textviewTitle.setText(R.string.pest_n_disease);
+        }else if (Id.equals("1007")) {
+            textviewTitle.setText(R.string.general_info);
+        }else if (Id.equals("1008")) {
+            textviewTitle.setText(R.string.collection_center);
+        }
+
 
 /*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
 

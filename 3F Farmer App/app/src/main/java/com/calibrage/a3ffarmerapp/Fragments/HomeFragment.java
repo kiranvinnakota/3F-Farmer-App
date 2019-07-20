@@ -2,6 +2,7 @@ package com.calibrage.a3ffarmerapp.Fragments;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,6 +45,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.load.HttpException;
 import com.calibrage.a3ffarmerapp.Activities.CollectionsActivity;
 import com.calibrage.a3ffarmerapp.Activities.EncyclopediaActivity;
 import com.calibrage.a3ffarmerapp.Activities.FertilizerActivity;
@@ -75,11 +77,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -213,8 +216,12 @@ public class HomeFragment extends Fragment {
 
                 Intent intent =new Intent(getContext(), EncyclopediaActivity.class);
                 intent.putExtra("Id", getCategoryList.get(position).getId());
+                Log.d(TAG, "Id kiran: "+ getCategoryList.get(position).getId());
                 startActivity(intent);
-
+                SharedPreferences pref1 = getContext().getSharedPreferences("DATA", MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = pref1.edit();
+                editor1.putString("Id", String.valueOf(getCategoryList.get(position).getId()));  // Saving string data of your editext
+                editor1.commit(); // commit and
            //     Album book = albumList.get(position);
                // book.toggleFavorite();
 
@@ -321,15 +328,15 @@ public class HomeFragment extends Fragment {
                     public void onError(Throwable e) {
 
                         if (e instanceof HttpException) {
-                            ((HttpException) e).code();
-                            ((HttpException) e).message();
-                            ((HttpException) e).response().errorBody();
-                            try {
-                                ((HttpException) e).response().errorBody().string();
+                            ((HttpException) e).getStatusCode();
+                            ((HttpException) e).getMessage();
+                         //   ((HttpException) e).get.response().errorBody();
+                            /*try {
+                              //  ((HttpException) e).getStackTrace();response().errorBody().string();
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
-                            e.printStackTrace();
+                            e.printStackTrace();*/
                         }
                         Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                     }
@@ -346,7 +353,7 @@ public class HomeFragment extends Fragment {
 
     }
     private void Getstate() {
-        //  String id="APWGBDAB00010001";
+        //  String id="APWGBDAB00010001";Id kiran
 
         String Id = "9";
 
@@ -473,7 +480,7 @@ public class HomeFragment extends Fragment {
 
         public DownloadImageFromInternet(ImageView imageView) {
             this.imageView = imageView;
-            Toast.makeText(getContext(), "Please wait, it may take a few minute...", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(), "Please wait, it may take a few minute...", Toast.LENGTH_SHORT).show();
         }
 
         protected Bitmap doInBackground(String... urls) {

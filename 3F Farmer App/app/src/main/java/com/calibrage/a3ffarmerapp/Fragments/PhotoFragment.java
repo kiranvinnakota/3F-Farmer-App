@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -61,6 +62,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -75,9 +78,7 @@ public class PhotoFragment extends Fragment {
     String[] strArray, categoryArray, fileUrlArray;
     private static final int REQUEST_PERMISSIONS = 101;
     File folder;
-    public PhotoFragment() {
-        // Required empty public constructor
-    }
+    String id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,9 +89,10 @@ public class PhotoFragment extends Fragment {
         //Check if permission is granted(for Marshmallow and higher versions)
 
             checkPermission();
-
-
-    //    folder = new File( Environment.getExternalStorageDirectory(), "KnowledgeZonePDF");
+        SharedPreferences pref = getContext().getSharedPreferences("DATA", MODE_PRIVATE);
+        id=pref.getString("EDITEXT1", "");       // Saving string data of your editext
+        Log.d("PhotoFragment", "id2======" + id);
+        //    folder = new File( Environment.getExternalStorageDirectory(), "KnowledgeZonePDF");
     //    String folderPath = Environment.getExternalStorageDirectory()+"/pathTo/folder";
         //get the absolute path of phone storage
         path = Environment.getExternalStorageDirectory()+"/KnowledgeZonePDF";
@@ -124,9 +126,9 @@ public class PhotoFragment extends Fragment {
     private void getEncyclopedia() {
         //  String id="APWGBDAB00010001";
 
-        String Id = "1004";
+    //    String Id = "1004";
 
-        String url = "http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/" + Id;
+        String url = "http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/" + id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
