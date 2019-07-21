@@ -102,7 +102,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
 
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2980B9")));
+        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !

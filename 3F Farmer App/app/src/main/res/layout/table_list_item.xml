@@ -37,8 +37,9 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:text="@string/collection_id"
-                android:textColor="@android:color/holo_orange_dark"
-                android:textSize="@dimen/album_title" />
+                android:textColor="@color/orange"
+                android:textSize="@dimen/album_title"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/dateLabel"
@@ -105,11 +106,11 @@
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/cc"
-                android:layout_toRightOf="@+id/ccLabel"
+                android:layout_toRightOf="@+id/dateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/cc"
-                android:layout_below="@id/weight"
+                android:layout_below="@id/dateLabel"
                 android:paddingLeft="4dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
@@ -130,7 +131,7 @@
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/status"
-                android:layout_toRightOf="@+id/statusLabel"
+                android:layout_toRightOf="@+id/weightLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/status"

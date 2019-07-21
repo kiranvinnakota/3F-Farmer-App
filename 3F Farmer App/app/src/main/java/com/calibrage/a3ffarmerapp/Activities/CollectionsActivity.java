@@ -41,7 +41,7 @@ import java.util.List;
 public class CollectionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     DatePickerDialog picker;
     EditText fromText,toText;
-    String[] country = { "Last 15days", "Last 30 days", "Full Financial year", "Since April 2017", "Custom Time Period"};
+    String[] country = { "Last 15 days", "Last 30 days", "Full Financial year", "Since April 2017", "Custom Time Period"};
     LinearLayout timePeroidLinear;
     Spinner spin;
   //  Button subBtn;
@@ -177,7 +177,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
 
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2980B9")));
+        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !

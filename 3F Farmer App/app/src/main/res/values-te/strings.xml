@@ -31,9 +31,9 @@
          <string name = "recommended_on">సిఫార్సు చేయబడింది</string>
         <string name = "payments">చెల్లింపులు</string>
         <string name = "view_pay">చెల్లింపులను వీక్షించండి </string>
-        <string name = "bank_details">ప్రస్తుత బ్యాంక్ వివరాలు</string>
+        <string name = "bank_details">బ్యాంక్ వివరాలు</string>
         <string name = "bank_holder">ఖాతా హోల్డర్\n పేరు</string>
-        <string name = "bank_name">బ్యాంక్ పేరు:</string>
+        <string name = "bank_name">బ్యాంక్ పేరు</string>
         <string name = "bank_ac_no">బ్యాంక్ ఖాతా సంఖ్య:</string>
         <string name = "bank_ac_holder">బ్యాంక్ హోల్డర్ సంఖ్య:</string>
         <string name = "account_no">ఖాతా సంఖ్య</string>

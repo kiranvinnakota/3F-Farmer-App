@@ -43,7 +43,7 @@ import java.util.List;
 public class PaymentHistoryActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Animation animationUp, animationDown;
     private RecyclerView recyclerView;
-    String[] country = { "Last 15days", "Last 30 days", "Full Financial year", "Since April 2017", "Custom Time Period"};
+    String[] country = { "Last 15 days", "Last 30 days", "Full Financial year", "Since April 2017", "Custom Time Period"};
     Spinner spin;
     EditText fromText,toText;
     DatePickerDialog picker;

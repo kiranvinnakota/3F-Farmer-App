@@ -9,7 +9,7 @@
 
     <com.calibrage.a3ffarmerapp.Activities.CommonTextView
         android:text="@string/tap_text"
-        android:textColor="#ff0000"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:id="@+id/choose_text"
         android:layout_gravity="center_horizontal"
@@ -25,7 +25,9 @@
         android:text="@string/btn_en"
         android:textSize="14sp"
         android:layout_margin="3dp"
-        android:background="#FAFAFA"/>
+        android:textColor="@color/whitepure"
+        android:background="@color/green"
+        />
     <com.calibrage.a3ffarmerapp.Activities.CommonButton
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -33,7 +35,8 @@
         android:text="@string/btn_te"
         android:textSize="14sp"
         android:layout_margin="3dp"
-        android:background="#FAFAFA"/>
+        android:textColor="@color/whitepure"
+        android:background="@color/green"/>
 
 
 </LinearLayout>

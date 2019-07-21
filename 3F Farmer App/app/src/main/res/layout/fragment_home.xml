@@ -934,6 +934,7 @@
                     android:layout_weight="0.3"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_alignParentEnd="true"
+                    android:id="@+id/more_text"
                     />
 
             </RelativeLayout>

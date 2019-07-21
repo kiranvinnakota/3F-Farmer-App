@@ -1,6 +1,7 @@
 package com.calibrage.a3ffarmerapp.Fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -104,12 +105,14 @@ public class HomeFragment extends Fragment {
     private GridView gridView;
     private  KnowledgeZoneBaseAdapter knowledgeZoneBaseAdapter;
     private List<GetLookUpModel.ListResult> getCategoryList;
+    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
        // setHasOptionsMenu(true);
+        dialog = new ProgressDialog(getActivity());
 
         view.findViewById(R.id.collections_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +175,12 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent =new Intent(getContext(), QuickPayActivity.class);
                 startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.more_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Coming Soon",Toast.LENGTH_SHORT).show();
             }
         });
 //        view.findViewById(R.id.knowledge_zone).setOnClickListener(new View.OnClickListener() {
@@ -314,6 +323,8 @@ public class HomeFragment extends Fragment {
         return view;
     }
     private void getCategory() {
+        dialog.setMessage("Loading, please wait.");
+        dialog.show();
         MyServices service = ServiceFactory.createRetrofitService(getActivity(), MyServices.class);
         mRegisterSubscription = service.GetActiveLookUp(APIConstants.LookUpCategory)
                 .subscribeOn(Schedulers.newThread())
@@ -322,10 +333,16 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onCompleted() {
                         // Toast.makeText(getActivity(), "check", Toast.LENGTH_SHORT).show();
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
 
                         if (e instanceof HttpException) {
                             ((HttpException) e).getStatusCode();
@@ -343,6 +360,9 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onNext(GetLookUpModel getLookUpModel) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
                         Log.d(TAG, "onNext: "+getLookUpModel);
                         getCategoryList = getLookUpModel.getListResult();
                         final KnowledgeZoneBaseAdapter knowledgeZoneBaseAdapter = new KnowledgeZoneBaseAdapter(getActivity(), getLookUpModel.getListResult());
