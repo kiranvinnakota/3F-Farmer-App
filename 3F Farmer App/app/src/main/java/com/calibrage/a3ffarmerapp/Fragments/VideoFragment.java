@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -78,6 +79,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     GridLayoutManager recyclerViewLayoutManager;
     String dateTxt;
     String id;
+    TextView textNoVideos;
     private Bundle bundle;
     private ProgressDialog dialog;
 
@@ -85,6 +87,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_video, container, false);
         dialog = new ProgressDialog(getActivity());
+        textNoVideos=view.findViewById(R.id.text);
         recyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView = view.findViewById(R.id.recyclerViewGallery);
         recyclerViewLayoutManager = new GridLayoutManager(getContext(), 1);
@@ -150,13 +153,19 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
                                 Log.v("kiran", embedUrl);
                                 if (embedUrl.equals("null")) {
                                     Log.v("TAG --fileUrl ", fileUrl);
+
+
+                                   /* textNoVideos.setVisibility(View.VISIBLE);
+                                    textNoVideos.setText(R.string.no_videos);*/
                              /*    checkPermission(fileUrl);
                                  file_download(fileUrl);*/
 
                                 }else {
+                                  //  recyclerView.setVisibility(View.VISIBLE);
                                     idString=embedUrl.substring(32);
                                     strArray=new String[] {idString};
                                     //
+
                                     categoryArray=new String[]{category};
                                     populateRecyclerView(strArray,categoryArray);
                                     Log.v("TAG --govindha ", embedUrl);}
@@ -302,11 +311,18 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
                 //   youtubeVideoModel.setDuration(videoDurationArray[i]);
                 youtubeVideoModel.setVideoId(videoIDArray[i]);
                 youtubeVideoModelArrayList.add(youtubeVideoModel);
-
+                recyclerView.setVisibility(View.VISIBLE);
+                textNoVideos.setVisibility(View.GONE);
             }
 
         }else {
+            recyclerView.setVisibility(View.GONE);
+             textNoVideos.setVisibility(View.VISIBLE);
+                                    textNoVideos.setText(R.string.no_videos);
 
+           /*recyclerView.setVisibility(View.INVISIBLE);
+            textNoVideos.setVisibility(View.VISIBLE);
+            textNoVideos.setText(R.string.no_videos);*/
 
         }
 
