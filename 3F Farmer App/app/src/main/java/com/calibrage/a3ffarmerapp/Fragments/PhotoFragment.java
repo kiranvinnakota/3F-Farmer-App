@@ -3,6 +3,7 @@ package com.calibrage.a3ffarmerapp.Fragments;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -63,6 +64,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.learing_videos_pdfs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,6 +81,7 @@ public class PhotoFragment extends Fragment {
     private static final int REQUEST_PERMISSIONS = 101;
     File folder;
     String id;
+    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,6 +89,7 @@ public class PhotoFragment extends Fragment {
         listView = (ListView)view.findViewById(R.id.listView);
         list = new ArrayList<>();
         // setTitle("Pdf Reader");
+        dialog = new ProgressDialog(getActivity());
         //Check if permission is granted(for Marshmallow and higher versions)
 
             checkPermission();
@@ -127,14 +131,20 @@ public class PhotoFragment extends Fragment {
         //  String id="APWGBDAB00010001";
 
     //    String Id = "1004";
+        dialog.setMessage("Loading, please wait.....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
 
-        String url = "http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/" + id;
+        String url =learing_videos_pdfs+id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "RESPONSE======" + response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d(TAG, "RESPONSE Encyclopedia======" + jsonObject);
@@ -218,6 +228,9 @@ public class PhotoFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 if (error instanceof NetworkError) {
                     Log.i("one:" + TAG, error.toString());
                     Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();

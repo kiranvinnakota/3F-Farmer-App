@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -42,12 +43,14 @@ public class EncyclopediaActivity extends AppCompatActivity {
     String   receivingString;
     private OnAboutDataReceivedListener mAboutDataListener;
     PagerAdapter pagerAdapter;
+    private ProgressDialog dialog;
     String Id;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encyclopedia);
+        dialog = new ProgressDialog(EncyclopediaActivity.this);
 
         SharedPreferences pref1 = getApplicationContext().getSharedPreferences("DATA", MODE_PRIVATE);
          Id=pref1.getString("Id", "");       // Saving string data of your editext

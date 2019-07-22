@@ -4,6 +4,7 @@ package com.calibrage.a3ffarmerapp.Fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -62,6 +63,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.learing_videos_pdfs;
 
 
 public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAboutDataReceivedListener {
@@ -77,9 +79,12 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     String dateTxt;
     String id;
     private Bundle bundle;
+    private ProgressDialog dialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_video, container, false);
+        dialog = new ProgressDialog(getActivity());
         recyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView = view.findViewById(R.id.recyclerViewGallery);
         recyclerViewLayoutManager = new GridLayoutManager(getContext(), 1);
@@ -112,47 +117,60 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
 
       //  String Id="1004";
 
-        String url ="http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/"+id;
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+
+        String url =learing_videos_pdfs+id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG,"RESPONSE======"+ response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d(TAG,"RESPONSE Encyclopedia======"+ jsonObject);
 
                     JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
-                    for (int i = 0; i < alsoKnownAsArray.length(); i++) {
-                        String alsoKnown = alsoKnownAsArray.getString(i);
-                        JSONObject leagueData = alsoKnownAsArray.getJSONObject(i);
-                        String fileType = leagueData.getString("fileType");
-                         embedUrl = leagueData.getString("embedUrl");
-                        category=leagueData.getString("category");
-                        fileUrl=leagueData.getString("fileUrl");
-                        fileName=leagueData.getString("fileName");
-                        if (fileType.equals("Video")){
+                    if(alsoKnownAsArray!=null && alsoKnownAsArray.length()>0){
+                        for (int i = 0; i < alsoKnownAsArray.length(); i++) {
+                            String alsoKnown = alsoKnownAsArray.getString(i);
+                            JSONObject leagueData = alsoKnownAsArray.getJSONObject(i);
+                            String fileType = leagueData.getString("fileType");
+                            embedUrl = leagueData.getString("embedUrl");
+                            category=leagueData.getString("category");
+                            fileUrl=leagueData.getString("fileUrl");
+                            fileName=leagueData.getString("fileName");
+                            if (fileType.equals("Video")){
 
                                 Log.v("kiran", embedUrl);
-                             if (embedUrl.equals("null")) {
-                                 Log.v("TAG --fileUrl ", fileUrl);
+                                if (embedUrl.equals("null")) {
+                                    Log.v("TAG --fileUrl ", fileUrl);
                              /*    checkPermission(fileUrl);
                                  file_download(fileUrl);*/
 
-                            }else {
-                                 idString=embedUrl.substring(32);
-                                 strArray=new String[] {idString};
-                              //
-                                 categoryArray=new String[]{category};
-                                 populateRecyclerView(strArray,categoryArray);
-                                 Log.v("TAG --govindha ", embedUrl);}
+                                }else {
+                                    idString=embedUrl.substring(32);
+                                    strArray=new String[] {idString};
+                                    //
+                                    categoryArray=new String[]{category};
+                                    populateRecyclerView(strArray,categoryArray);
+                                    Log.v("TAG --govindha ", embedUrl);}
 
 
+                            }
+                            Log.v("TAG --fileType", fileType);
+                            Log.v("TAG --embedUrl", embedUrl);
                         }
-                        Log.v("TAG --fileType", fileType);
-                        Log.v("TAG --embedUrl", embedUrl);
+
+                    }else {
+
                     }
+
                  //   Log.d(TAG,"RESPONSE Encyclopedia jsonArray======"+ jsonArray);
 
 
@@ -176,6 +194,9 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 if (error instanceof NetworkError) {
                     Log.i("one:" + TAG, error.toString());
                     Toast.makeText(getContext(),"Network Error",Toast.LENGTH_SHORT).show();
@@ -270,16 +291,25 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
        // String[] videoDurationArray = getResources().getStringArray(R.array.video_duration_array);
 
         //loop through all items and add them to arraylist
-        for (int i = 0; i < videoIDArray.length; i++) {
 
-            YoutubeVideoModel youtubeVideoModel = new YoutubeVideoModel();
-            youtubeVideoModel.setVideoId(videoIDArray[i]);
-       //      youtubeVideoModel.setTitle(videoTitleArray[i]);
-         //   youtubeVideoModel.setDuration(videoDurationArray[i]);
-            youtubeVideoModel.setVideoId(videoIDArray[i]);
-            youtubeVideoModelArrayList.add(youtubeVideoModel);
+        if(videoIDArray!=null && videoIDArray.length>0)
+        {
+            for (int i = 0; i < videoIDArray.length; i++) {
+
+                YoutubeVideoModel youtubeVideoModel = new YoutubeVideoModel();
+                youtubeVideoModel.setVideoId(videoIDArray[i]);
+                //      youtubeVideoModel.setTitle(videoTitleArray[i]);
+                //   youtubeVideoModel.setDuration(videoDurationArray[i]);
+                youtubeVideoModel.setVideoId(videoIDArray[i]);
+                youtubeVideoModelArrayList.add(youtubeVideoModel);
+
+            }
+
+        }else {
+
 
         }
+
 
         return youtubeVideoModelArrayList;
     }

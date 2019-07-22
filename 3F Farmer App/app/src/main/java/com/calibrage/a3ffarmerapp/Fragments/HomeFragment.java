@@ -223,14 +223,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
+
+                SharedPreferences pref1 = getContext().getSharedPreferences("DATA", MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = pref1.edit();
+                editor1.putString("Id", String.valueOf(getCategoryList.get(position).getId()));  // Saving string data of your editext
+                editor1.commit();// commit and
+
                 Intent intent =new Intent(getContext(), EncyclopediaActivity.class);
                 intent.putExtra("Id", getCategoryList.get(position).getId());
                 Log.d(TAG, "Id kiran: "+ getCategoryList.get(position).getId());
                 startActivity(intent);
-                SharedPreferences pref1 = getContext().getSharedPreferences("DATA", MODE_PRIVATE);
-                SharedPreferences.Editor editor1 = pref1.edit();
-                editor1.putString("Id", String.valueOf(getCategoryList.get(position).getId()));  // Saving string data of your editext
-                editor1.commit(); // commit and
            //     Album book = albumList.get(position);
                // book.toggleFavorite();
 
@@ -323,8 +325,9 @@ public class HomeFragment extends Fragment {
         return view;
     }
     private void getCategory() {
-        dialog.setMessage("Loading, please wait.");
+        dialog.setMessage("Loading, please wait....");
         dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         MyServices service = ServiceFactory.createRetrofitService(getActivity(), MyServices.class);
         mRegisterSubscription = service.GetActiveLookUp(APIConstants.LookUpCategory)
                 .subscribeOn(Schedulers.newThread())
