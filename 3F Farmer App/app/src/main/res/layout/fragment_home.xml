@@ -926,7 +926,7 @@
                     android:layout_centerInParent="true"
                     android:layout_weight="0.7"/>
 
-                <Button
+                <!--<Button
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     style="?android:attr/borderlessButtonStyle"
@@ -936,7 +936,7 @@
                     android:layout_alignParentEnd="true"
                     android:id="@+id/more_text"
                     />
-
+-->
             </RelativeLayout>
 
 

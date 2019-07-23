@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -31,13 +32,15 @@ public class OrderPlacedActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_placed);
-      /*  ImageView backImg=(ImageView)findViewById(R.id.back);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent =new Intent(getApplicationContext(),PoleActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
+
         Godownspin = (Spinner) findViewById(R.id.goDownspinner);
         Godownspin.setOnItemSelectedListener(this);
 
@@ -81,11 +84,11 @@ public class OrderPlacedActivity extends AppCompatActivity implements AdapterVie
 
             }
         });
-       DisplayActionBar();
+      // DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2980B9")));
+        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !

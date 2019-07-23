@@ -18,23 +18,42 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.Fragments.HomeFragment;
 import com.calibrage.a3ffarmerapp.R;
 
 public class PaymentSummaryActivity extends AppCompatActivity {
      Boolean aBoolean =false;
+    CheckBox checkbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_summary);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getApplicationContext(),QuickPayActivity.class);
+                startActivity(intent);
+            }
+        });
         Button confirmBtn=(Button)findViewById(R.id.buttonConfirm);
+        checkbox = (CheckBox)findViewById(R.id.checkBox);
      //   loginBtn.setTypeface(faceBold);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PaymentSummaryActivity.this.finish();
+
+                if(checkbox.isChecked()){
+
+                    PaymentSummaryActivity.this.finish();
+                }else{
+                    Toast.makeText(getApplicationContext(),R.string.terms_agree,Toast.LENGTH_SHORT).show();
+                }
+
               //  finish();
               /*  Fragment fragment = new HomeFragment();
                 getSupportFragmentManager().beginTransaction()
@@ -95,11 +114,11 @@ public class PaymentSummaryActivity extends AppCompatActivity {
 
 
        });*/
-        DisplayActionBar();
+       // DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2980B9")));
+        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !

@@ -41,7 +41,7 @@ import java.util.List;
 public class CollectionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     DatePickerDialog picker;
     EditText fromText,toText;
-    String[] country = { "Last 15 days", "Last 30 days", "Full Financial year", "Since April 2017", "Custom Time Period"};
+    String[] country = { "Last 15 Days", "Last 30 Days", "Full Financial year", "Since April 2017", "Custom Time Period"};
     LinearLayout timePeroidLinear;
     Spinner spin;
   //  Button subBtn;
@@ -205,10 +205,10 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         List<MovieModal> movieList = new ArrayList<>();
         // src Wikipedia
 
-        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1702", "06/19/2019", "780.00", "Korumamidi","Paid"));
-        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1703", "08/19/2019", "1523.00", "Roja","UnPaid"));
-        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1702", "09/19/2019", "780.00", "Kiran","Paid"));
-        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1703", "10/19/2019", "1523.00", "Ramesh","UnPaid"));
+        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1702", "14/04/2019", "780.00", "Korumamidi","Paid"));
+        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1703", "15/03/2019", "1523.00", "Roja","UnPaid"));
+        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1702", "17/02/2019", "780.00", "Kiran","Paid"));
+        movieList.add(new MovieModal("COL2019CCAM0003MILYNG0102-1703", "18/01/2019", "1523.00", "Ramesh","UnPaid"));
        /* movieList.add(new MovieModal(, "", "", "",""));
         movieList.add(new MovieModal(, "", "", "",""));*/
         /*movieList.add(new MovieModal(10, "Tangled", 2010, 260));

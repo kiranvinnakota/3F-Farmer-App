@@ -3,6 +3,7 @@ package com.calibrage.a3ffarmerapp.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import com.calibrage.a3ffarmerapp.Adapters.*;
@@ -34,7 +35,7 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
     private ViewHolder mViewHolder;
 
     private ArrayList<String> mTitles = new ArrayList<>();
-
+    public  boolean status =true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,9 +90,15 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
 
     @Override
     public void onFooterClicked() {
-       // Toast.makeText(this, "onFooterClicked", Toast.LENGTH_SHORT).show();
-        Intent intent= new Intent(getApplicationContext(),LanguageActivity.class);
-        startActivity(intent);
+        SharedPreferences sp = getSharedPreferences("checkbox", 0);
+        boolean cb1 = sp.getBoolean("isLogin", true);
+        if (cb1 == true) {
+            // Toast.makeText(this, "onFooterClicked", Toast.LENGTH_SHORT).show();
+            Intent intent= new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
     @Override
@@ -134,9 +141,8 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
                     goToFragment(new MyRequestsFragment(), false);
                     break;
             case 2:
-
-              Intent intent =new Intent(getApplicationContext(),InsideLanguageActivity.class);
-              startActivity(intent);
+                Intent intent =new Intent(getApplicationContext(),InsideLanguageActivity.class);
+                startActivity(intent);
                 break;
                 default:
               //  goToFragment(new HomeFragment(), false);

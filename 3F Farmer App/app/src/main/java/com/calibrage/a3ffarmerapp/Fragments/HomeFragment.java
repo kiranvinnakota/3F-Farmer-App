@@ -78,12 +78,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.learing_videos_pdfs;
 
 
 /**
@@ -177,12 +180,12 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        view.findViewById(R.id.more_text).setOnClickListener(new View.OnClickListener() {
+     /*   view.findViewById(R.id.more_text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Coming Soon",Toast.LENGTH_SHORT).show();
+                Toasty.success(getActivity(),"Coming Soon",Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 //        view.findViewById(R.id.knowledge_zone).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -278,7 +281,7 @@ public class HomeFragment extends Fragment {
                 {
                     // show() method display the toast with
                     // exception message.
-                    Toast.makeText(getContext(), "SecurityException", Toast.LENGTH_LONG)
+                    Toasty.error(getContext(), "SecurityException", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -358,7 +361,7 @@ public class HomeFragment extends Fragment {
                             }
                             e.printStackTrace();*/
                         }
-                        Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+                        Toasty.error(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -380,7 +383,7 @@ public class HomeFragment extends Fragment {
 
         String Id = "9";
 
-        String url = "http://183.82.111.111/3FFarmerAPI/api/GetActiveLookUp/" + Id;
+        String url = BASE_URL+"GetActiveLookUp/" + Id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -407,22 +410,22 @@ public class HomeFragment extends Fragment {
                 error.printStackTrace();
                 if (error instanceof NetworkError) {
                     Log.i("one:" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {
                     Log.i("two:" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof AuthFailureError) {
                     Log.i("three:" + TAG, error.toString());
-                    Toast.makeText(getContext(), "AuthFailure Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "AuthFailure Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ParseError) {
                     Log.i("four::" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Parse Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Parse Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof NoConnectionError) {
                     Log.i("five::" + TAG, error.toString());
-                    Toast.makeText(getContext(), "NoConnection Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "NoConnection Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Log.i("six::" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Timeout Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Timeout Error", Toast.LENGTH_SHORT).show();
                 } else {
                     System.out.println("Checking error in else");
                 }
@@ -438,7 +441,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        String url = "http://183.82.111.111/3FFarmerAPI/api/Banner";
+        String url = BASE_URL+"Banner";
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -464,6 +467,7 @@ public class HomeFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -472,22 +476,22 @@ public class HomeFragment extends Fragment {
                 error.printStackTrace();
                 if (error instanceof NetworkError) {
                     Log.i("one:" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Network Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {
                     Log.i("two:" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof AuthFailureError) {
                     Log.i("three:" + TAG, error.toString());
-                    Toast.makeText(getContext(), "AuthFailure Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "AuthFailure Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ParseError) {
                     Log.i("four::" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Parse Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Parse Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof NoConnectionError) {
                     Log.i("five::" + TAG, error.toString());
-                    Toast.makeText(getContext(), "NoConnection Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "NoConnection Error", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Log.i("six::" + TAG, error.toString());
-                    Toast.makeText(getContext(), "Timeout Error", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getContext(), "Timeout Error", Toast.LENGTH_SHORT).show();
                 } else {
                     System.out.println("Checking error in else");
                 }

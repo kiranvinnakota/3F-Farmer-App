@@ -121,7 +121,7 @@ dependencies {
     implementation 'io.reactivex:rxjava:1.1.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
-
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
 
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 }

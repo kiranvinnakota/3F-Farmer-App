@@ -47,6 +47,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import es.dmoral.toasty.Toasty;
+
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
+
 public class LoginActivity extends AppCompatActivity {
     public String mJSONURLString = "http://183.82.111.111/3FFarmerAPI/api/Farmer/";
     TextInputEditText farmerId;
@@ -100,10 +104,11 @@ private void Getstate() {
 
     String Id=farmerId.getText().toString();
     if (Id.matches("")) {
-        Toast.makeText(getApplicationContext(), "Please enter Farmer Id", Toast.LENGTH_SHORT).show();
+        Toasty.error(getApplicationContext(), "Please enter Farmer Id", Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getApplicationContext(), "Please enter Farmer Id", Toast.LENGTH_SHORT).show();
         return;
     }
-    String url ="http://183.82.111.111/3FFarmerAPI/api/Farmer/"+Id;
+    String url =BASE_URL+"Farmer/"+Id;
 
     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
     StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -119,9 +124,12 @@ private void Getstate() {
                   Intent intent =new Intent(getApplicationContext(),OtpActivity.class);
                   intent.putExtra ( "Farmer id", farmerId.getText().toString() );
                   startActivity(intent);
+                  Toasty.success(getApplicationContext(), "Otp sent successfully", Toast.LENGTH_LONG).show();
                //   Toast.makeText(getApplicationContext(),success,Toast.LENGTH_SHORT).show();
               }else{
-                  Toast.makeText(getApplicationContext(),"Invalid User",Toast.LENGTH_SHORT).show();
+
+                  Toasty.error(getApplicationContext(), "Invalid Farmer id", Toast.LENGTH_LONG).show();
+                  //Toast.makeText(getApplicationContext(),"Invalid User",Toast.LENGTH_SHORT).show();
               }
 
 
@@ -135,22 +143,22 @@ private void Getstate() {
             error.printStackTrace();
             if (error instanceof NetworkError) {
                 Log.i("one:" + TAG, error.toString());
-                Toast.makeText(getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
             } else if (error instanceof ServerError) {
                 Log.i("two:" + TAG, error.toString());
-                Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(),"Server Error",Toast.LENGTH_SHORT).show();
             } else if (error instanceof AuthFailureError) {
                 Log.i("three:" + TAG, error.toString());
-                Toast.makeText(getApplicationContext(),"AuthFailure Error",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(),"AuthFailure Error",Toast.LENGTH_SHORT).show();
             } else if (error instanceof ParseError) {
                 Log.i("four::" + TAG, error.toString());
-                Toast.makeText(getApplicationContext(),"Parse Error",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(),"Parse Error",Toast.LENGTH_SHORT).show();
             } else if (error instanceof NoConnectionError) {
                 Log.i("five::" + TAG, error.toString());
-                Toast.makeText(getApplicationContext(),"NoConnection Error",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(),"NoConnection Error",Toast.LENGTH_SHORT).show();
             } else if (error instanceof TimeoutError) {
                 Log.i("six::" + TAG, error.toString());
-                Toast.makeText(getApplicationContext(),"Timeout Error",Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(),"Timeout Error",Toast.LENGTH_SHORT).show();
             } else {
                 System.out.println("Checking error in else");
             }

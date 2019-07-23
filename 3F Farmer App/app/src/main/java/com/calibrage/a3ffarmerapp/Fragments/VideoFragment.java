@@ -54,6 +54,7 @@ import com.calibrage.a3ffarmerapp.Model.VideoModel;
 import com.calibrage.a3ffarmerapp.Model.YoutubeVideoModel;
 import com.calibrage.a3ffarmerapp.R;
 import com.calibrage.a3ffarmerapp.util.RecyclerViewOnClickListener;
+import com.google.zxing.common.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +83,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     TextView textNoVideos;
     private Bundle bundle;
     private ProgressDialog dialog;
+    String[] videoIDArray =new String[10];
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
         mRecyclerView.setLayoutManager(recyclerViewLayoutManager);
         SharedPreferences pref = getContext().getSharedPreferences("DATA2", MODE_PRIVATE);
          id=pref.getString("EDITEXT1", "");       // Saving string data of your editext
-        Log.d("VideoFragment", "id======" + id);
+         Log.d("VideoFragment", "id======" + id);
         getEncyclopedia();
         setUpRecyclerView();
        // checkPermission(fileUrl);
@@ -144,10 +146,24 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
                             String alsoKnown = alsoKnownAsArray.getString(i);
                             JSONObject leagueData = alsoKnownAsArray.getJSONObject(i);
                             String fileType = leagueData.getString("fileType");
-                            embedUrl = leagueData.getString("embedUrl");
-                            category=leagueData.getString("category");
+                       //     embedUrl = leagueData.getString("embedUrl");
+                            category=leagueData.getString("name");
                             fileUrl=leagueData.getString("fileUrl");
                             fileName=leagueData.getString("fileName");
+
+                          //  JSONArray jsonArray = jsonObject.getJSONArray("ListResult");
+                            Log.d(TAG,"jsonArray===="+ alsoKnownAsArray);
+
+                            for (int k = 0; k < alsoKnownAsArray.length(); k++) {
+                                Log.d(TAG,"leanth===="+ alsoKnown.length());
+
+                                leagueData = alsoKnownAsArray.getJSONObject(i);
+                                Log.d(TAG,"leanth===="+ alsoKnownAsArray.length());
+                                embedUrl = leagueData.getString("embedUrl");
+
+                                Log.d(TAG,"id============="+ id);
+
+                            }
                             if (fileType.equals("Video")){
 
                                 Log.v("kiran", embedUrl);
@@ -162,9 +178,24 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
 
                                 }else {
                                   //  recyclerView.setVisibility(View.VISIBLE);
-                                    idString=embedUrl.substring(32);
-                                    strArray=new String[] {idString};
+
+                                     idString = embedUrl.replace("https://www.youtube.com/watch?v=","");
+                                    Log.v("TAG --idString ", idString);
+                                 /*   String strArray[] = idString.split(" ");
+
+                                    System.out.println("String converted to String array");
+
+                                    //print elements of String array
+                                    for(int y=0; y < strArray.length; y++){
+                                        Log.v("TAG --String converted to String array length ", strArray[i]);
+                                      //  System.out.println(strArray[i]);
+                                    }*/
+                                    videoIDArray=new String[] {idString};
+
+
+                                    Log.v("TAG --videoIDArray length ", String.valueOf(videoIDArray.length));
                                     //
+
 
                                     categoryArray=new String[]{category};
                                     populateRecyclerView(strArray,categoryArray);
@@ -295,8 +326,8 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
 
         //get the video id array, title array and duration array from strings.xml
        // String[] videoIDArray = (String[]) getResources().getStringArray(Integer.parseInt(idString));
-        String[] videoIDArray = strArray;
-       // String[] videoTitleArray = categoryArray;
+    //    String[] videoIDArray = strArray;
+        String[] videoTitleArray = categoryArray;
        // String[] videoDurationArray = getResources().getStringArray(R.array.video_duration_array);
 
         //loop through all items and add them to arraylist
@@ -307,12 +338,14 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
 
                 YoutubeVideoModel youtubeVideoModel = new YoutubeVideoModel();
                 youtubeVideoModel.setVideoId(videoIDArray[i]);
-                //      youtubeVideoModel.setTitle(videoTitleArray[i]);
+                Log.d(TAG,"success videoIDArray======"+videoIDArray.length);
+                youtubeVideoModel.setTitle(videoTitleArray[i]);
                 //   youtubeVideoModel.setDuration(videoDurationArray[i]);
-                youtubeVideoModel.setVideoId(videoIDArray[i]);
+           //     youtubeVideoModel.setVideoId(videoIDArray[i]);
                 youtubeVideoModelArrayList.add(youtubeVideoModel);
                 recyclerView.setVisibility(View.VISIBLE);
                 textNoVideos.setVisibility(View.GONE);
+
             }
 
         }else {

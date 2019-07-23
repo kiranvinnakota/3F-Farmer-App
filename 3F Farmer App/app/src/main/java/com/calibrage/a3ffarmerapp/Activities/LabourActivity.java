@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -56,6 +57,14 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              Intent intent =new Intent(getApplicationContext(),LabourRecommendationsActivity.class);
+              startActivity(intent);
+            }
+        });
         myCalendar = Calendar.getInstance();
       /*  String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
         categories = new ArrayList<String>();
@@ -70,7 +79,7 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
         String[] array = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
         MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner);
         multiSelectionSpinner.setItems(select_labour_type);
-        multiSelectionSpinner.setSelection(new int[]{0, 0});
+     //   multiSelectionSpinner.setSelection(new int[]{0, 0});
         multiSelectionSpinner.setListener(this);
 
     //    spinner.setAdapter(arrayAdapter);
@@ -193,11 +202,11 @@ edittext.setOnClickListener(new View.OnClickListener() {
 
             }
         });
-        DisplayActionBar();
+     //   DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2980B9")));
+        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
         View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !

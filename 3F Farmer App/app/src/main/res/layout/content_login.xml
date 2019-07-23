@@ -24,6 +24,7 @@
         android:textColorHighlight="@color/white"
         android:layout_marginTop="5dp"
         android:clipChildren="false"
+        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
         >
 
         <com.google.android.material.textfield.TextInputEditText

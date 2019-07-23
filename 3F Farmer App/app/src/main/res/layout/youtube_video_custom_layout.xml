@@ -19,23 +19,30 @@
         <com.google.android.youtube.player.YouTubeThumbnailView
             android:id="@+id/video_thumbnail_image_view"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
             android:background="@android:color/darker_gray"
             android:contentDescription="@string/thumbnail_image_view_desc"
             android:scaleType="centerCrop" />
-<!--
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="55dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/play_button" />
         <TextView
             android:id="@+id/video_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/video_thumbnail_image_view"
-            android:layout_toRightOf="@+id/video_thumbnail_image_view"
             android:text="Category:"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:padding="@dimen/margin_5"
+            android:layout_below="@+id/video_thumbnail_image_view"/>
 
-        <TextView
+        <!--<TextView
             android:id="@+id/video_title_label"
             android:layout_below="@+id/video_title"
             android:layout_width="match_parent"
@@ -47,7 +54,7 @@
             android:text="Title of Video"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
-       &lt;!&ndash; <TextView-->
+       &lt;!&ndash; <TextView&ndash;&gt;-->
            <!-- android:id="@+id/video_duration_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

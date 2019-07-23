@@ -37,13 +37,44 @@
             android:text="Quik Pay"
             android:textSize="@dimen/text_size_20" />
     </LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linear1"
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/arrow_l"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:id="@+id/back"/>
+
+        <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/quickPay"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20" />
+
+
+
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/lin_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="0sp"
-        android:padding="@dimen/margin_10">
+        android:padding="@dimen/margin_10"
+        android:layout_below="@+id/linear1">
 
 
         <com.calibrage.a3ffarmerapp.Activities.CommonTextView

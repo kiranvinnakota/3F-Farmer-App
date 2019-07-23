@@ -16,13 +16,24 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:padding="10dp" />
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/recycler_view"
+    android:id="@+id/text"
+    android:visibility="gone"
+    android:text="@string/no_videos"
+    android:textAlignment="center"
+    android:textSize="@dimen/text_size_20"
+    android:textColor="@color/colorAccent"
+   />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewGallery"
-        android:layout_below="@+id/recycler_view"
+        android:layout_below="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+
         />
 
 </RelativeLayout>

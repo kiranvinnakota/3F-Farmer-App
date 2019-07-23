@@ -20,6 +20,8 @@ import com.google.android.youtube.player.YouTubeThumbnailView;
 
 import java.util.ArrayList;
 
+import static com.calibrage.a3ffarmerapp.util.Constants.DEVELOPER_KEY;
+
 /**
  * Created by sonu on 10/11/17.
  */
@@ -46,13 +48,38 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeViewHolder>
     public void onBindViewHolder(YoutubeViewHolder holder, final int position) {
 
         final YoutubeVideoModel youtubeVideoModel = youtubeVideoModelArrayList.get(position);
-
+        holder.videoTitle.setText(youtubeVideoModel.getTitle());
        // holder.videoTitle.setText(youtubeVideoModel.getTitle());
 //        holder.videoDuration.setText(youtubeVideoModel.getDuration());
 
+        holder.videoThumbnailImageView.initialize(DEVELOPER_KEY, new YouTubeThumbnailView.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
 
+                youTubeThumbnailLoader.setVideo(youtubeVideoModel.getVideoId());
+                //here is the magic to solve the logcat error
+                youTubeThumbnailLoader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
+                    @Override
+                    public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
+                        youTubeThumbnailView.setVisibility(View.VISIBLE);
+                      //  holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
+                        youTubeThumbnailLoader.release();
+                    }
+
+                    @Override
+                    public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
+                        Log.e(TAG, "Youtube Thumbnail Error");
+                    }
+                });
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
+                //write something for failure
+            }
+        });
         /*  initialize the thumbnail image view , we need to pass Developer Key */
-        holder.videoThumbnailImageView.initialize(Constants.DEVELOPER_KEY, new YouTubeThumbnailView.OnInitializedListener() {
+      /*  holder.videoThumbnailImageView.initialize(DEVELOPER_KEY, new YouTubeThumbnailView.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
                 //when initialization is sucess, set the video id to thumbnail to load
@@ -79,7 +106,7 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeViewHolder>
                 Log.e(TAG, "Youtube Initialization Failure");
 
             }
-        });
+        });*/
 
     }
 

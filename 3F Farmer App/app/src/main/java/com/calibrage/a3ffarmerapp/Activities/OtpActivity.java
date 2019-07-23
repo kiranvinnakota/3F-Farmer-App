@@ -29,6 +29,10 @@ import com.calibrage.a3ffarmerapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import es.dmoral.toasty.Toasty;
+
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
+
 public class OtpActivity extends AppCompatActivity {
     String farmerId;
     public static  String TAG="OtpActivity";
@@ -99,11 +103,12 @@ public class OtpActivity extends AppCompatActivity {
         //  String id="APWGBDAB00010001";
           String otpText=pinEntry.getText().toString();
         if (otpText.matches("")) {
-            Toast.makeText(getApplicationContext(), "Please enter Otp", Toast.LENGTH_SHORT).show();
+            Toasty.error(getApplicationContext(), "Please enter Otp", Toast.LENGTH_SHORT).show();
             return;
         }
         Log.d(TAG,"RESPONSE======"+ otpText);
-        String url ="http://183.82.111.111/3FFarmerAPI/api/Farmer/"+farmerId+"/"+otpText;
+        String url =BASE_URL+"Farmer/"+farmerId+"/"+otpText;
+     //   String url ="http://183.82.111.111/3FFarmerAPI/api/Farmer/"+farmerId+"/"+otpText;
         Log.d("Otp","url======"+ url);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -119,9 +124,11 @@ public class OtpActivity extends AppCompatActivity {
                     if (success.equals("true")){
                         Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
                         startActivity(intent);
+                        Toasty.success(getApplicationContext(), "OTP Valided Successfully", Toast.LENGTH_LONG).show();
                         //  Toast.makeText(getApplicationContext(),success,Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(getApplicationContext(),"OTP Invalid",Toast.LENGTH_SHORT).show();
+                        Toasty.error(getApplicationContext(), "OTP Invalid", Toast.LENGTH_LONG).show();
+
                     }
 
 

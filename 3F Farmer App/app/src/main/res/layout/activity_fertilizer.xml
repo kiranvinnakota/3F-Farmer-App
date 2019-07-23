@@ -41,7 +41,7 @@
                  android:layout_margin="10dp"
                  android:text="@string/view_recommendations"
                  android:textColor="@color/white"
-                 android:background="@color/green"/>
+                 android:background="@drawable/shapescanbtn"/>
 
          </LinearLayout>-->
     <RelativeLayout

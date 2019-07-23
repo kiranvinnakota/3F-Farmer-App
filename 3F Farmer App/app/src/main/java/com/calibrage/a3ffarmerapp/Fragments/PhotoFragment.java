@@ -94,7 +94,7 @@ public class PhotoFragment extends Fragment {
 
             checkPermission();
         SharedPreferences pref = getContext().getSharedPreferences("DATA", MODE_PRIVATE);
-        id=pref.getString("EDITEXT1", "");       // Saving string data of your editext
+        id=pref.getString("Id", "");       // Saving string data of your editext
         Log.d("PhotoFragment", "id2======" + id);
         //    folder = new File( Environment.getExternalStorageDirectory(), "KnowledgeZonePDF");
     //    String folderPath = Environment.getExternalStorageDirectory()+"/pathTo/folder";
@@ -134,8 +134,11 @@ public class PhotoFragment extends Fragment {
         dialog.setMessage("Loading, please wait.....");
         dialog.show();
         dialog.setCanceledOnTouchOutside(false);
+        String Id = "1004";
 
-        String url =learing_videos_pdfs+id;
+        String url = "http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/" + id;
+
+    //    String url =learing_videos_pdfs+id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
