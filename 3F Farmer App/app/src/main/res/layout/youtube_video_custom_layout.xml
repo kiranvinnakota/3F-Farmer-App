@@ -20,7 +20,7 @@
             android:id="@+id/video_thumbnail_image_view"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/black"
             android:contentDescription="@string/thumbnail_image_view_desc"
             android:scaleType="centerCrop" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:text="Category:"
+
             android:textSize="16sp"
             android:padding="@dimen/margin_5"
             android:layout_below="@+id/video_thumbnail_image_view"/>

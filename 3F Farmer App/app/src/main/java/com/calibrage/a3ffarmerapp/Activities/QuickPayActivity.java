@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,13 +46,14 @@ public class QuickPayActivity extends AppCompatActivity implements QuickPayDataA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_pay);
-       /* ImageView backImg=(ImageView)findViewById(R.id.back);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
          btnSelection=(Button)findViewById(R.id.btn_submit);
      //   submitBtn.setTypeface(faceBold);
         btnSelection.setOnClickListener(new View.OnClickListener() {

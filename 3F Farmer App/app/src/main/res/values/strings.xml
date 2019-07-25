@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">3F Farmer App</string>
     <string name="turn_off_flashlight">FlashLight on</string>
     <string name="turn_on_flashlight">flashLight off</string>

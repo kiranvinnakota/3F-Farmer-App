@@ -26,9 +26,10 @@
         <com.calibrage.a3ffarmerapp.Activities.CommonTextView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="@string/labour"
             android:textStyle="bold"
+            android:layout_marginStart="-10dp"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_20" />
 
@@ -167,7 +168,7 @@
            android:layout_height="wrap_content"
            android:text="@string/select_labour_type"
            android:textSize="@dimen/text_size_16"
-           android:layout_marginStart="8dp"
+           android:layout_marginStart="6dp"
           />
        <com.calibrage.a3ffarmerapp.Activities.MultiSelectionSpinner
            android:id="@+id/spinner"

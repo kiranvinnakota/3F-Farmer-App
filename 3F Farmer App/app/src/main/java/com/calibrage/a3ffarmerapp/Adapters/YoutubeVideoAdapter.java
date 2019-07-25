@@ -2,13 +2,16 @@ package com.calibrage.a3ffarmerapp.Adapters;
 
 import android.content.Context;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.calibrage.a3ffarmerapp.Activities.YoutubePlayerActivity;
 import com.calibrage.a3ffarmerapp.Model.YoutubeVideoModel;
 import com.calibrage.a3ffarmerapp.R;
 import com.calibrage.a3ffarmerapp.holder.YoutubeViewHolder;
@@ -19,8 +22,6 @@ import com.google.android.youtube.player.YouTubeThumbnailView;
 
 
 import java.util.ArrayList;
-
-import static com.calibrage.a3ffarmerapp.util.Constants.DEVELOPER_KEY;
 
 /**
  * Created by sonu on 10/11/17.
@@ -49,37 +50,22 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeViewHolder>
 
         final YoutubeVideoModel youtubeVideoModel = youtubeVideoModelArrayList.get(position);
         holder.videoTitle.setText(youtubeVideoModel.getTitle());
-       // holder.videoTitle.setText(youtubeVideoModel.getTitle());
+        // holder.videoTitle.setText(youtubeVideoModel.getTitle());
 //        holder.videoDuration.setText(youtubeVideoModel.getDuration());
 
-        holder.videoThumbnailImageView.initialize(DEVELOPER_KEY, new YouTubeThumbnailView.OnInitializedListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
+            public void onClick(View view) {
 
-                youTubeThumbnailLoader.setVideo(youtubeVideoModel.getVideoId());
-                //here is the magic to solve the logcat error
-                youTubeThumbnailLoader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
-                    @Override
-                    public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-                        youTubeThumbnailView.setVisibility(View.VISIBLE);
-                      //  holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
-                        youTubeThumbnailLoader.release();
-                    }
-
-                    @Override
-                    public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-                        Log.e(TAG, "Youtube Thumbnail Error");
-                    }
-                });
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
-                //write something for failure
+                //Toast.makeText(context," testing",Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, YoutubePlayerActivity.class)
+                        .putExtra("video_id", youtubeVideoModelArrayList.get(position).getVideoId()));
             }
         });
+
+
         /*  initialize the thumbnail image view , we need to pass Developer Key */
-      /*  holder.videoThumbnailImageView.initialize(DEVELOPER_KEY, new YouTubeThumbnailView.OnInitializedListener() {
+        holder.videoThumbnailImageView.initialize(Constants.DEVELOPER_KEY, new YouTubeThumbnailView.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
                 //when initialization is sucess, set the video id to thumbnail to load
@@ -106,12 +92,14 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeViewHolder>
                 Log.e(TAG, "Youtube Initialization Failure");
 
             }
-        });*/
+        });
 
     }
 
     @Override
     public int getItemCount() {
         return youtubeVideoModelArrayList != null ? youtubeVideoModelArrayList.size() : 0;
+
     }
+
 }

@@ -136,9 +136,9 @@ public class PhotoFragment extends Fragment {
         dialog.setCanceledOnTouchOutside(false);
         String Id = "1004";
 
-        String url = "http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/" + id;
+     //   String url = "http://183.82.111.111/3FFarmerAPI/api/Encyclopedia/GetFilesByCategory/" + id;
 
-    //    String url =learing_videos_pdfs+id;
+       String url =learing_videos_pdfs+id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -186,20 +186,20 @@ public class PhotoFragment extends Fragment {
                                 Log.v("TAG --fileName ", fileName);
                                 //     path = Environment.getExternalStorageDirectory().getAbsolutePath();
                              new    DownloadImageFile(getContext(),fileUrl,fileName,".pdf").execute();
-                                list.add(new FileBean(fileName, fileUrl));
+                              //  list.add(new FileBean(fileName, fileUrl));
                                 //calling the initList that will initialize the list to be given to Adapter for binding data
                                 //   initList(fileName,fileUrl);
-                                String extStorageDirectory = Environment.getExternalStorageDirectory()
-                                        .toString();
-                                File folder = new File(extStorageDirectory, "pdf");
-
-                                folder.mkdir();
-                                File file = new File(folder, "Read.pdf");
-                                try {
-                                    file.createNewFile();
-                                } catch (IOException e1) {
-                                    e1.printStackTrace();
-                                }
+//                                String extStorageDirectory = Environment.getExternalStorageDirectory()
+//                                        .toString();
+//                                File folder = new File(extStorageDirectory, "pdf");
+//
+//                                folder.mkdir();
+//                                File file = new File(folder, "Read.pdf");
+//                                try {
+//                                    file.createNewFile();
+//                                } catch (IOException e1) {
+//                                    e1.printStackTrace();
+//                                }
 
                                 //Downloader.DownloadFile(fileUrl, file);
 

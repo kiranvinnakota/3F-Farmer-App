@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -42,17 +43,14 @@ public class PoleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pole);
-       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        initCollapsingToolbar();*/
-      /*  ImageView backImg=(ImageView)findViewById(R.id.back);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
         storedOrders=(RecyclerView)findViewById(R.id.selected_food_list);
 
 
@@ -99,7 +97,7 @@ public class PoleActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-        DisplayActionBar();
+      //  DisplayActionBar();
     }
     private void getListItemData() {
         orders.clear();

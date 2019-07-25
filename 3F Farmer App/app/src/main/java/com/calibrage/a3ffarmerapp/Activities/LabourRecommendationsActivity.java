@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.calibrage.a3ffarmerapp.Adapters.LabourRecommendationAdapter;
@@ -23,6 +25,14 @@ public class LabourRecommendationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour_recommendations);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
+                startActivity(intent);
+            }
+        });
         RecommendationModel[] myListData = new RecommendationModel[] {
                 new RecommendationModel("Plot252019","2 hec ","Chinnakoduru","Near Shiavalayam"),
                 new RecommendationModel("Plot242019","1 hec  ","Dundigal","Opposite govt school"),
@@ -37,7 +47,7 @@ public class LabourRecommendationsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        DisplayActionBar();
+      //  DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();
