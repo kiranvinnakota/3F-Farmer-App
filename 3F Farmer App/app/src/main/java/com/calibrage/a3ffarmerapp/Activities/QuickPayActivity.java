@@ -148,7 +148,7 @@ public class QuickPayActivity extends AppCompatActivity implements QuickPayDataA
                         .show();*//*
             }
         });*/
-        DisplayActionBar();
+   //     DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();

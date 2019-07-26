@@ -45,6 +45,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
     PagerAdapter pagerAdapter;
     private ProgressDialog dialog;
     String Id;
+    String  titleName;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class EncyclopediaActivity extends AppCompatActivity {
         SharedPreferences pref1 = getApplicationContext().getSharedPreferences("DATA", MODE_PRIVATE);
          Id=pref1.getString("Id", "");       // Saving string data of your editext
         Log.d("Id", "Id ki======" + Id);
+        titleName=pref1.getString("name", "");       // Saving string data of your editext
+        Log.d("name", "name ki======" + titleName);
         /*vid = (VideoView)findViewById(R.id.videoView);
         vid.setBackgroundResource(R.drawable.play_2);*/
       /*  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -65,12 +68,14 @@ public class EncyclopediaActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             receivingString = extras.getString("Id");
+
             Log.d("Id ", "Id kiran======" + receivingString);
         } else {
             // handle case
         }
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setOffscreenPageLimit(3);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFrag(new VideoFragment(),getString(R.string.videos));
     //   pagerAdapter.addFrag(new AudioFragment(), "Audios");
@@ -113,17 +118,8 @@ public class EncyclopediaActivity extends AppCompatActivity {
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        if (Id.equals("1004")) {
-            textviewTitle.setText(R.string.harvest);
-        } else if (Id.equals("1005")) {
-            textviewTitle.setText(R.string.fertilizer);
-        } else if (Id.equals("1006")) {
-            textviewTitle.setText(R.string.pest_n_disease);
-        }else if (Id.equals("1007")) {
-            textviewTitle.setText(R.string.general_info);
-        }else if (Id.equals("1008")) {
-            textviewTitle.setText(R.string.collection_center);
-        }
+        textviewTitle.setText(titleName);
+
 
 
 /*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";

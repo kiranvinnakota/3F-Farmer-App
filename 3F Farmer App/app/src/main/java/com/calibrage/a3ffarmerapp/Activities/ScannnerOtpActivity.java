@@ -1,7 +1,6 @@
 package com.calibrage.a3ffarmerapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,14 +31,49 @@ import es.dmoral.toasty.Toasty;
 
 import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
 
-public class OtpActivity extends AppCompatActivity {
+
+
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.core.content.res.ResourcesCompat;
+
+        import android.content.Intent;
+        import android.graphics.Typeface;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.View;
+        import android.view.WindowManager;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ImageView;
+        import android.widget.TextView;
+        import android.widget.Toast;
+
+        import com.alimuzaffar.lib.pin.PinEntryEditText;
+        import com.android.volley.DefaultRetryPolicy;
+        import com.android.volley.Request;
+        import com.android.volley.RequestQueue;
+        import com.android.volley.Response;
+        import com.android.volley.RetryPolicy;
+        import com.android.volley.VolleyError;
+        import com.android.volley.toolbox.StringRequest;
+        import com.android.volley.toolbox.Volley;
+        import com.calibrage.a3ffarmerapp.R;
+
+        import org.json.JSONException;
+        import org.json.JSONObject;
+
+        import es.dmoral.toasty.Toasty;
+
+        import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
+
+public class ScannnerOtpActivity extends AppCompatActivity {
     String farmerId;
     public static  String TAG="OtpActivity";
     public PinEntryEditText pinEntry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp);
+        setContentView(R.layout.activity_scannner_otp);
         Typeface faceBold = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Bold.ttf");
         Typeface faceRegular = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
         TextView otpDesc=(TextView)findViewById(R.id.otp_desc);
@@ -69,7 +102,7 @@ public class OtpActivity extends AppCompatActivity {
 
         Intent in = getIntent();
         farmerId= in.getExtras().getString("Farmer id");
-        Log.d("Otp","Farmer id======"+ farmerId);
+        Log.d("Otp","Farmer id scannner======"+ farmerId);
 /*
 if(farmerId==null){
 
@@ -78,7 +111,7 @@ if(farmerId==null){
         pinEntry.requestFocus();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         if (pinEntry != null) {
-          //  pinEntry.setTypeface(ResourcesCompat.getFont(this, R.font.charmonman_regular));
+            //  pinEntry.setTypeface(ResourcesCompat.getFont(this, R.font.charmonman_regular));
             pinEntry.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
                 @Override
                 public void onPinEntered(CharSequence str) {
@@ -104,14 +137,14 @@ if(farmerId==null){
     }
     private void GetOtp() {
         //  String id="APWGBDAB00010001";
-          String otpText=pinEntry.getText().toString();
+        String otpText=pinEntry.getText().toString();
         if (otpText.matches("")) {
             Toasty.error(getApplicationContext(), "Please enter Otp", Toast.LENGTH_SHORT).show();
             return;
         }
         Log.d(TAG,"RESPONSE======"+ otpText);
         String url =BASE_URL+"Farmer/"+farmerId+"/"+otpText;
-     //   String url ="http://183.82.111.111/3FFarmerAPI/api/Farmer/"+farmerId+"/"+otpText;
+        //   String url ="http://183.82.111.111/3FFarmerAPI/api/Farmer/"+farmerId+"/"+otpText;
         Log.d("Otp","url======"+ url);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());

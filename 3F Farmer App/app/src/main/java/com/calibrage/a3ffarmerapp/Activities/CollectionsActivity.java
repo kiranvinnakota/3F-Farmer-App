@@ -51,13 +51,14 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections);
-       /* ImageView backImg=(ImageView)findViewById(R.id.back);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
         fromText=(EditText) findViewById(R.id.from_date);
         fromText.setInputType(InputType.TYPE_NULL);
         fromText.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +173,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);
-        DisplayActionBar();
+       // DisplayActionBar();
     }
 
     private void DisplayActionBar() {
@@ -194,7 +195,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         abar.setDisplayShowCustomEnabled(true);
         abar.setDisplayShowTitleEnabled(false);
 
-        abar.setDisplayHomeAsUpEnabled(true);
+        //abar.setDisplayHomeAsUpEnabled(true);
 
         abar.setHomeButtonEnabled(true);
 

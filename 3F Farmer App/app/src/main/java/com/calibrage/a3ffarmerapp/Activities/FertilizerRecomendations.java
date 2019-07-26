@@ -36,13 +36,14 @@ public class FertilizerRecomendations extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fertilizer_recomendations);
-      /*  ImageView backImg=(ImageView)findViewById(R.id.back);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent =new Intent(getApplicationContext(),FertilizerActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
         FertilizerModel[] myListData = new FertilizerModel[] {
 
 
@@ -61,7 +62,7 @@ public class FertilizerRecomendations extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-         DisplayActionBar();
+      //   DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();

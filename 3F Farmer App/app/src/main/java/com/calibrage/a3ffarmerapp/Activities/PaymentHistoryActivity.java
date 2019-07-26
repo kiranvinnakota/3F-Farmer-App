@@ -53,6 +53,14 @@ public class PaymentHistoryActivity extends AppCompatActivity implements Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_history);
 
+        ImageView backImg=(ImageView)findViewById(R.id.back);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getApplicationContext(),PaymentActivity.class);
+                startActivity(intent);
+            }
+        });
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -135,7 +143,7 @@ public class PaymentHistoryActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        DisplayActionBar();
+       // DisplayActionBar();
 
     }
     private void DisplayActionBar() {

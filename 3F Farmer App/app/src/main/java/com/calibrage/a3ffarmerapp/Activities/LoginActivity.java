@@ -201,11 +201,75 @@ private void Getstate() {
                 .setPositiveButton("Continue..", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
-                        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                       /* ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                         ClipData clip = ClipData.newPlainText("Scan Result", result);
                         clipboard.setPrimaryClip(clip);
                         Toast.makeText(LoginActivity.this, "Result copied to clipboard", Toast.LENGTH_SHORT).show();
 
+
+*/
+                      //  String Id=farmerId.getText().toString();
+
+                        String url =BASE_URL+"Farmer/"+result;
+
+                        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d(TAG,"RESPONSE======"+ response);
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    Log.d(TAG,"RESPONSE======"+ jsonObject);
+                                    String success=jsonObject.getString("isSuccess");
+                                    Log.d(TAG,"success======"+ success);
+                                    if (success.equals("true")){
+                                        Intent intent =new Intent(getApplicationContext(),ScannnerOtpActivity.class);
+                                        intent.putExtra ( "Farmer id", result );
+                                        startActivity(intent);
+                                        Toasty.success(getApplicationContext(), "Otp sent successfully", Toast.LENGTH_LONG).show();
+                                        //   Toast.makeText(getApplicationContext(),success,Toast.LENGTH_SHORT).show();
+                                    }else{
+
+                                        Toasty.error(getApplicationContext(), "Invalid Farmer id", Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(getApplicationContext(),"Invalid User",Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                                if (error instanceof NetworkError) {
+                                    Log.i("one:" + TAG, error.toString());
+                                    Toasty.error(getApplicationContext(),"Network Error",Toast.LENGTH_SHORT).show();
+                                } else if (error instanceof ServerError) {
+                                    Log.i("two:" + TAG, error.toString());
+                                    Toasty.error(getApplicationContext(),"Server Error",Toast.LENGTH_SHORT).show();
+                                } else if (error instanceof AuthFailureError) {
+                                    Log.i("three:" + TAG, error.toString());
+                                    Toasty.error(getApplicationContext(),"AuthFailure Error",Toast.LENGTH_SHORT).show();
+                                } else if (error instanceof ParseError) {
+                                    Log.i("four::" + TAG, error.toString());
+                                    Toasty.error(getApplicationContext(),"Parse Error",Toast.LENGTH_SHORT).show();
+                                } else if (error instanceof NoConnectionError) {
+                                    Log.i("five::" + TAG, error.toString());
+                                    Toasty.error(getApplicationContext(),"NoConnection Error",Toast.LENGTH_SHORT).show();
+                                } else if (error instanceof TimeoutError) {
+                                    Log.i("six::" + TAG, error.toString());
+                                    Toasty.error(getApplicationContext(),"Timeout Error",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    System.out.println("Checking error in else");
+                                }
+                            }
+                        });
+                        int socketTimeout = 30000;
+                        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                        stringRequest.setRetryPolicy(policy);
+                        requestQueue.add(stringRequest);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

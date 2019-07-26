@@ -57,7 +57,8 @@ public class FertilizerActivity extends AppCompatActivity {
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
+                startActivity(intent);
             }
         });
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);

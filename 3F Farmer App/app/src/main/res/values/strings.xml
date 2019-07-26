@@ -16,7 +16,7 @@
     <string name="plotidName">Plot Id:</string>
     <string name="plotid">Plot252019 </string>
     <string name="terms_conditions">Terms &amp; Conditions</string>
-    <string name="terms_agree">Please agree terms&amp; conditions</string>
+    <string name="terms_agree">Please agree terms&amp;\n conditions</string>
     <string name="success">Success</string>
     <string name="agree">Agree</string>
     <string name="otp_desc">Enter the 6 digits code sent your registered mobile number</string>
@@ -118,7 +118,7 @@
     <string name="pin">Pin</string>
     <string name="collection">Collection</string>
     <string name="land_mark">Landmark:</string>
-    <string name="select_collection">Select Collections for which farmer need payment</string>
+    <string name="select_collection">Select for which Collections need payment</string>
     <string name="show">More Information</string>
     <string name="hide">Less information</string>
     <string name="profile_name">John Doe</string>
@@ -153,10 +153,11 @@
     <string name="collections_total">Collections by total Rate\n from 2nd march to 3rd june:</string>
     <string name="rate_adjustment">Rate Adjustment:</string>
     <string name="transport_payment">Transport Payment:</string>
-<string name="no_videos">No Videos</string>
+    <string name="no_videos">No Videos</string>
+
     <string name="thumbnail_image_view_desc">Youtube Video thumbnail image view</string>
     <string name="close_player_activity">Close Player activity</string>
-  <!--  <string name="harvest">Harvest</string>-->
+    <!--  <string name="harvest">Harvest</string>-->
     <string name="pest_n_disease">Pest and Disease</string>
     <string name="general_info">General Information</string>
     <string name="harvest">Harvest</string>

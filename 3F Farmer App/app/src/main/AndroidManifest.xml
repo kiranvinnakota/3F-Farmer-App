@@ -25,8 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.InsideLanguageActivity"
-            android:parentActivityName=".Activities.PoleActivity"></activity>
+        <activity android:name=".Activities.ScannnerOtpActivity"></activity>
+        <activity
+            android:name=".Activities.InsideLanguageActivity"
+            android:parentActivityName=".Activities.PoleActivity" />
         <activity android:name=".Activities.YoutubePlayerActivity" />
         <activity
             android:name=".Activities.LoginActivity"
@@ -44,10 +46,10 @@
             android:parentActivityName=".Activities.PoleActivity" />
         <activity
             android:name=".Activities.RecommendationListActivity"
-            android:parentActivityName=".Activities.PoleActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.FertilizerRecomendations"
-            android:parentActivityName=".Activities.PoleActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.EncyclopediaActivity"
             android:configChanges="orientation|screenSize"
@@ -57,14 +59,14 @@
             android:parentActivityName=".Activities.PoleActivity" />
         <activity
             android:name=".Activities.PaymentSummaryActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.PdfViewerActivity" />
         <activity
             android:name=".Activities.PaymentHistoryActivity"
-            android:parentActivityName=".Activities.PoleActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.PaymentActivity"
-            android:parentActivityName=".Activities.PoleActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.QuickPayActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -77,7 +79,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.PoleActivity"
-            android:theme="@style/AppTheme.NoActionBar"  />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.LabourActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -89,15 +91,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.RecommendationActivity"
-            android:parentActivityName=".Activities.PoleActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.CollectionsActivity"
-            android:parentActivityName=".Activities.PoleActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.SideMenuActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activities.LanguageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -110,18 +110,15 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".Activities.Splash"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".Activities.Splash">
-
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

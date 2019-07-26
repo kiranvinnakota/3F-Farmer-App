@@ -25,6 +25,8 @@ import android.widget.Toast;
 import com.calibrage.a3ffarmerapp.Fragments.HomeFragment;
 import com.calibrage.a3ffarmerapp.R;
 
+import es.dmoral.toasty.Toasty;
+
 public class PaymentSummaryActivity extends AppCompatActivity {
      Boolean aBoolean =false;
     CheckBox checkbox;
@@ -48,7 +50,7 @@ public class PaymentSummaryActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(checkbox.isChecked()){
-
+                    Toasty.success(getApplicationContext(), "Payment Request Submitted Successfully", Toast.LENGTH_LONG).show();
                     PaymentSummaryActivity.this.finish();
                 }else{
                     Toast.makeText(getApplicationContext(),R.string.terms_agree,Toast.LENGTH_SHORT).show();

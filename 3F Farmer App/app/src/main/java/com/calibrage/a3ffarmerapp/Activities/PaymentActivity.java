@@ -20,13 +20,14 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-       /* ImageView backImg=(ImageView)findViewById(R.id.back);
+        ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
         Button submitBtn=(Button)findViewById(R.id.nextButton);
        // submitBtn.setTypeface(faceBold);
         submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +38,7 @@ public class PaymentActivity extends AppCompatActivity {
 
             }
         });
-        DisplayActionBar();
+      //  DisplayActionBar();
     }
     private void DisplayActionBar() {
         final ActionBar abar = getSupportActionBar();

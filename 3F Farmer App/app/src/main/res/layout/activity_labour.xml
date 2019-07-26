@@ -170,41 +170,57 @@
            android:textSize="@dimen/text_size_16"
            android:layout_marginStart="6dp"
           />
-       <com.calibrage.a3ffarmerapp.Activities.MultiSelectionSpinner
-           android:id="@+id/spinner"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:ms_multiline="false"
-           android:padding="@dimen/margin_10"
-           app:ms_dropDownHintView="@layout/dropdown_hint_item"
-           app:ms_hintView="@layout/hint_item"
-           app:ms_hint="@string/select_labour_type"
-           app:ms_enableFloatingLabel="true"
-           app:ms_enableErrorLabel="true"
-           app:ms_floatingLabelText="@string/select_labour_type"
-           app:ms_thickness="0.5dp"
-           app:ms_highlightColor="@color/green"
-           app:ms_errorColor="@color/blue"
-           app:ms_hintColor="@color/black"
-           app:ms_arrowColor="@color/black"
-           app:ms_arrowSize="16dp"
-           app:ms_alignLabels="true"
-           app:ms_floatingLabelColor="@color/black"/>
-       <View
-           android:layout_width="match_parent"
-           android:layout_height="2dp"
-           android:background="@color/grey"/>
+       <RelativeLayout
+           android:layout_width="wrap_content"
+           android:layout_height="40dp"
+           android:background="@drawable/spinner_bg"
+           android:layout_marginTop="10dp"
+           android:layout_margin="8dp"
+           android:elevation="2dp">
+           <com.calibrage.a3ffarmerapp.Activities.MultiSelectionSpinner
+               android:id="@+id/spinner"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:ms_multiline="false"
+               android:padding="@dimen/margin_10"
+               app:ms_dropDownHintView="@layout/dropdown_hint_item"
+               app:ms_hintView="@layout/hint_item"
+               app:ms_hint="@string/select_labour_type"
+               app:ms_enableFloatingLabel="true"
+               app:ms_enableErrorLabel="true"
+               app:ms_floatingLabelText="@string/select_labour_type"
+               app:ms_thickness="0.5dp"
+               app:ms_highlightColor="@color/green"
+               app:ms_errorColor="@color/blue"
+               app:ms_hintColor="@color/black"
+               app:ms_arrowColor="@color/black"
+               app:ms_arrowSize="16dp"
+               app:ms_alignLabels="true"
+               android:background="@null"
+               android:minHeight="0dp"
+               app:ms_floatingLabelColor="@color/black"/>
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentRight="true"
+               android:src="@drawable/ic_arrow_drop_down" />
+       </RelativeLayout>
+
+
        <com.calibrage.a3ffarmerapp.Activities.CommonEditText
            android:id="@+id/date_display"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:ems="10"
+           android:layout_marginStart="8dp"
+           android:layout_marginEnd="@dimen/_8dp"
            android:focusable="false"
-           android:layout_marginTop="@dimen/margin_15"
+
            android:editable="false"
            android:inputType="textPersonName"
-           android:hint="@string/date"
-           android:textAlignment="center"/>
+           android:hint="@string/date" />
 
       <!-- <EditText
            android:id="@+id/time"
@@ -215,8 +231,11 @@
            android:hint="@string/time"
            android:editable="false"
            android:textAlignment="center"/>-->
+
        <fr.ganfra.materialspinner.MaterialSpinner
            android:id="@+id/labour_duration"
+           android:layout_marginStart="8dp"
+           android:layout_marginEnd="@dimen/_8dp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            app:ms_multiline="false"
@@ -232,10 +251,13 @@
            app:ms_hintColor="@color/black"
            app:ms_arrowColor="@color/black"
            app:ms_arrowSize="16dp"
+           android:layout_marginTop="-10dp"
            app:ms_alignLabels="true"
            app:ms_floatingLabelColor="@color/black"/>
        <fr.ganfra.materialspinner.MaterialSpinner
            android:id="@+id/frequency"
+           android:layout_marginStart="8dp"
+           android:layout_marginEnd="@dimen/_8dp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            app:ms_multiline="false"
@@ -246,11 +268,12 @@
        app:ms_enableErrorLabel="true"
        app:ms_floatingLabelText="@string/frquency"
        app:ms_thickness="0.5dp"
-
+           android:layout_marginTop="-10dp"
        app:ms_highlightColor="@color/green"
        app:ms_errorColor="@color/blue"
        app:ms_hintColor="@color/black"
        app:ms_arrowColor="@color/black"
+
        app:ms_arrowSize="16dp"
        app:ms_alignLabels="true"
        app:ms_floatingLabelColor="@color/black"/>
@@ -262,7 +285,7 @@
 
        <com.google.android.material.textfield.TextInputEditText
            android:layout_width="match_parent"
-           android:layout_height="120dp"
+           android:layout_height="100dp"
            android:inputType="text"
            android:maxLines="1" />
    </com.google.android.material.textfield.TextInputLayout>
@@ -275,6 +298,8 @@
        android:padding="15dp"
        android:layout_marginRight="10dp"
        android:layout_marginLeft="10dp"
+
+
        android:layout_marginBottom="10dp"
        android:layout_marginTop="20dp"
        android:background="@drawable/shapescanbtn"

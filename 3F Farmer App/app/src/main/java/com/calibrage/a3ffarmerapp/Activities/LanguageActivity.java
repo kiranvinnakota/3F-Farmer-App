@@ -1,21 +1,28 @@
 package com.calibrage.a3ffarmerapp.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.calibrage.a3ffarmerapp.R;
-import com.calibrage.a3ffarmerapp.util.CommonUtil;
+
+import es.dmoral.toasty.Toasty;
 
 import static com.calibrage.a3ffarmerapp.util.CommonUtil.updateResources;
 
+
+
 public class LanguageActivity extends AppCompatActivity {
-    private String mLanguageCode = "te";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,7 @@ public class LanguageActivity extends AppCompatActivity {
                 Intent refresh = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(refresh);
                 finish();
+                Toasty.success(getApplicationContext(),R.string.language_notification, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -52,11 +60,12 @@ public class LanguageActivity extends AppCompatActivity {
                  */
 
                 rbTelugu.setBackgroundColor(Color.rgb(60,180,110));
-               updateResources(LanguageActivity.this, "te");
+                updateResources(LanguageActivity.this, "te");
                 SharedPrefsData.getInstance(LanguageActivity.this).updateIntValue(LanguageActivity.this, "lang", 2);
                 Intent refresh = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(refresh);
                 finish();
+                Toasty.success(getApplicationContext(),R.string.language_notification,Toast.LENGTH_SHORT).show();
 
               /*  LocaleHelper.setLocale(LanguageActivity.this, mLanguageCode);
 
@@ -65,7 +74,7 @@ public class LanguageActivity extends AppCompatActivity {
 
             }
         });
-
+     //   DisplayActionBar();
     }
 
     public void onBackPressed() {

@@ -91,6 +91,8 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     String[] videoIDArray;
     ArrayList<String> test = new ArrayList<>();
     ArrayList<String> titelsList = new ArrayList<>();
+    ArrayList<String> isVedios = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -148,6 +150,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
                     Log.d(TAG,"RESPONSE Encyclopedia======"+ jsonObject);
 
                     JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    Log.d(TAG,"RESPONSE alsoKnownAsArray======"+ alsoKnownAsArray);
                     if(alsoKnownAsArray!=null && alsoKnownAsArray.length()>0){
                         for (int i = 0; i < alsoKnownAsArray.length(); i++) {
                             String alsoKnown = alsoKnownAsArray.getString(i);
@@ -163,6 +166,7 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
                             embedUrl = leagueData.getString("embedUrl");
                             leagueData = alsoKnownAsArray.getJSONObject(i);
                             Log.d(TAG,"embedUrl============="+ embedUrl);
+
                             if (embedUrl.contains("://youtu.be/")){
                                 idString=embedUrl.substring(embedUrl.lastIndexOf("/") + 1);
                                 embedUrl="http://youtube.com/watch?v=" + idString;
@@ -185,13 +189,23 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
                                 Log.d(TAG,"embedUrl============="+ embedUrl);
 
                             }*/
+                            if (embedUrl.equals("null")) {
+                                Log.v("TAG --fileUrl ", fileUrl);
+                                Log.v("no videos", embedUrl);
+
+                            }else{
+                                isVedios.add("");
+                            }
                             if (fileType.equals("Video")){
 
                                 Log.v("kiran", embedUrl);
                                 if (embedUrl.equals("null")) {
+
+
                                     Log.v("TAG --fileUrl ", fileUrl);
+                                    Log.v("no videos", embedUrl);
 
-
+                                 Toast.makeText(getContext(),"no..",Toast.LENGTH_SHORT).show();
                                    /* textNoVideos.setVisibility(View.VISIBLE);
                                     textNoVideos.setText(R.string.no_videos);*/
                              /*    checkPermission(fileUrl);
@@ -321,9 +335,17 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
 
 
     private void populateRecyclerView(ArrayList<String> strArray, ArrayList<String> categoryArray) {
+        recyclerView.setVisibility(View.VISIBLE);
         final ArrayList<YoutubeVideoModel> youtubeVideoModelArrayList = generateDummyVideoList();
         YoutubeVideoAdapter adapter = new YoutubeVideoAdapter(getContext(), youtubeVideoModelArrayList);
         recyclerView.setAdapter(adapter);
+        if(isVedios.size()>0){
+            recyclerView.setVisibility(View.VISIBLE);
+            textNoVideos.setVisibility(View.GONE);
+        }else{
+            recyclerView.setVisibility(View.GONE);
+            textNoVideos.setVisibility(View.VISIBLE);
+        }
 
         //set click event
  /*       recyclerView.addOnItemTouchListener(new RecyclerViewOnClickListener(getContext(), new RecyclerViewOnClickListener.OnItemClickListener() {

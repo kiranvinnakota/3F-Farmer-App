@@ -19,10 +19,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.Fragments.HomeFragment;
 import com.calibrage.a3ffarmerapp.R;
 import com.google.zxing.integration.android.IntentIntegrator;
+
+import es.dmoral.toasty.Toasty;
 
 public class OrderPlacedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String[] Godown = { "Godown 1","Godown 2","Godown 1"};
@@ -65,6 +68,7 @@ public class OrderPlacedActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View view) {
                 //initiate scan with our custom scan activity
+                Toasty.success(getApplicationContext(), "Pole Request Submitted Successfully", Toast.LENGTH_LONG).show();
                 OrderPlacedActivity.this.finish();
                 // finish();
             //    getSupportActionBar().hide();

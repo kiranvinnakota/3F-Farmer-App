@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.R;
 
+import es.dmoral.toasty.Toasty;
+
 import static com.calibrage.a3ffarmerapp.util.CommonUtil.updateResources;
 
 public class InsideLanguageActivity extends AppCompatActivity {
@@ -39,7 +41,7 @@ public class InsideLanguageActivity extends AppCompatActivity {
                 Intent refresh = new Intent(getApplicationContext(), SideMenuActivity.class);
                 startActivity(refresh);
                 finish();
-                Toast.makeText(getApplicationContext(),R.string.language_notification,Toast.LENGTH_SHORT).show();
+                Toasty.success(getApplicationContext(),R.string.language_notification,Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -61,7 +63,7 @@ public class InsideLanguageActivity extends AppCompatActivity {
                 Intent refresh = new Intent(getApplicationContext(), SideMenuActivity.class);
                 startActivity(refresh);
                 finish();
-                Toast.makeText(getApplicationContext(),R.string.language_notification,Toast.LENGTH_SHORT).show();
+                Toasty.success(getApplicationContext(),R.string.language_notification,Toast.LENGTH_SHORT).show();
 
               /*  LocaleHelper.setLocale(LanguageActivity.this, mLanguageCode);
 

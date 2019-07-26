@@ -42,10 +42,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import es.dmoral.toasty.Toasty;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 
-public class LabourActivity extends AppCompatActivity implements OnItemSelectedListener, MultiSelectionSpinner.OnMultipleItemsSelectedListener {
+public class LabourActivity extends AppCompatActivity implements OnItemSelectedListener {
    Calendar myCalendar;
     EditText edittext;
     EditText chooseTime,ageTxt,villageTxt;
@@ -53,6 +54,8 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
     TextInputEditText age,village;
     final String[] select_labour_type = {
              "hired labour","farm labour "};
+    List<String> list = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,11 +79,14 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       Spinner  spinner1 = (MaterialSpinner) findViewById(R.id.spinner);
         spinner1.setAdapter(adapter);*/
-        String[] array = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
+
         MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner);
-        multiSelectionSpinner.setItems(select_labour_type);
-     //   multiSelectionSpinner.setSelection(new int[]{0, 0});
-        multiSelectionSpinner.setListener(this);
+        list.add("hired labour");
+        list.add("farm labour");
+
+
+        //set items to spinner from list
+        multiSelectionSpinner.setItems(list);
 
     //    spinner.setAdapter(arrayAdapter);
       /*  ArrayList<StateVO> listVOs = new ArrayList<>();
@@ -198,7 +204,9 @@ edittext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //initiate scan with our custom scan activity
            //   finish();
+                Toasty.success(getApplicationContext(), "Labour Request Submitted Successfully", Toast.LENGTH_LONG).show();
                 LabourActivity.this.finish();
+
 
             }
         });
@@ -257,14 +265,6 @@ edittext.setOnClickListener(new View.OnClickListener() {
 
     }
 
-    @Override
-    public void selectedIndices(List<Integer> indices) {
 
-    }
-
-    @Override
-    public void selectedStrings(List<String> strings) {
-
-    }
 }
 

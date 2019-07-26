@@ -24,11 +24,16 @@ public class KnowledgeZoneBaseAdapter extends BaseAdapter {
     private List<GetLookUpModel.ListResult> books;
     int[] covers = new int[]{
             R.drawable.encylopedia,
-            R.drawable.warehouse,
+            R.drawable.encylopedia,
+            R.drawable.encylopedia,
+            R.drawable.encylopedia,
+            R.drawable.encylopedia,
+            R.drawable.encylopedia,
+           /* R.drawable.warehouse,
             R.drawable.warehouse,
             R.drawable.category1,
             R.drawable.category2,
-            R.drawable.category3,
+            R.drawable.category3,*/
             /*  R.drawable.album5,
               R.drawable.album6,
               R.drawable.album7,
@@ -78,9 +83,14 @@ public class KnowledgeZoneBaseAdapter extends BaseAdapter {
 
 
         // 4
-      //  imageView.setImageResource(R.drawable.encylopedia);
-        textView.setText(book.getName());
-        imageView.setImageResource(covers[position]);
+        //  imageView.setImageResource(R.drawable.encylopedia);
+        try {
+            textView.setText(book.getName());
+            imageView.setImageResource(covers[position]);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return convertView;
     }
 

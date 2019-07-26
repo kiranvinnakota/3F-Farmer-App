@@ -229,12 +229,15 @@ public class HomeFragment extends Fragment {
 
                 SharedPreferences pref1 = getContext().getSharedPreferences("DATA", MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = pref1.edit();
-                editor1.putString("Id", String.valueOf(getCategoryList.get(position).getId()));  // Saving string data of your editext
+                editor1.putString("Id", String.valueOf(getCategoryList.get(position).getId()));
+                editor1.putString("name", String.valueOf(getCategoryList.get(position).getName()));// Saving string data of your editext
                 editor1.commit();// commit and
 
                 Intent intent =new Intent(getContext(), EncyclopediaActivity.class);
                 intent.putExtra("Id", getCategoryList.get(position).getId());
+                intent.putExtra("name", getCategoryList.get(position).getName());
                 Log.d(TAG, "Id kiran: "+ getCategoryList.get(position).getId());
+                Log.d(TAG, "Id kiran name: "+ getCategoryList.get(position).getName());
                 startActivity(intent);
            //     Album book = albumList.get(position);
                // book.toggleFavorite();
@@ -383,7 +386,9 @@ public class HomeFragment extends Fragment {
 
         String Id = "9";
 
-        String url = BASE_URL+"GetActiveLookUp/" + Id;
+       String url = BASE_URL+"GetActiveLookUp/" + Id;
+      //  String url="http://183.82.103.171:9096/API/api/GetActiveLookUp/9";
+
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -555,11 +560,12 @@ public class HomeFragment extends Fragment {
                 Log.d(TAG, "id======" + id);
                 strArray=new String[] {id};
                 superHero.setName(json.getString("name"));
+
                 superHero.setImageId( R.drawable.encylopedia);
-                superHero.setImageId( R.drawable.warehouse);
+               /* superHero.setImageId( R.drawable.warehouse);
                 superHero.setImageId( R.drawable.warehouse);
                 superHero.setImageId( R.drawable.category1);
-                superHero.setImageId( R.drawable.category2);
+                superHero.setImageId( R.drawable.category2);*/
 
                 //                superHero.setRank(json.getInt(Config.TAG_RANK));
               //  superHero.setRealName(json.getString(Config.TAG_REAL_NAME));

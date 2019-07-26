@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Environment;
 import android.os.StrictMode;
@@ -28,6 +29,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -45,6 +48,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.Activities.Downloader;
+import com.calibrage.a3ffarmerapp.Activities.LoadingDialog;
 import com.calibrage.a3ffarmerapp.Activities.PdfViewerActivity;
 import com.calibrage.a3ffarmerapp.Adapters.FileAdapter;
 import com.calibrage.a3ffarmerapp.Model.FileBean;
@@ -82,7 +86,8 @@ public class PhotoFragment extends Fragment {
     File folder;
     String id;
     private ProgressDialog dialog;
-
+    ArrayList<String> isPdfs = new ArrayList<>();
+    TextView text;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_photo, container, false);
@@ -90,6 +95,7 @@ public class PhotoFragment extends Fragment {
         list = new ArrayList<>();
         // setTitle("Pdf Reader");
         dialog = new ProgressDialog(getActivity());
+        text=(TextView)view.findViewById(R.id.text);
         //Check if permission is granted(for Marshmallow and higher versions)
 
             checkPermission();
@@ -99,38 +105,68 @@ public class PhotoFragment extends Fragment {
         //    folder = new File( Environment.getExternalStorageDirectory(), "KnowledgeZonePDF");
     //    String folderPath = Environment.getExternalStorageDirectory()+"/pathTo/folder";
         //get the absolute path of phone storage
-        path = Environment.getExternalStorageDirectory()+"/KnowledgeZonePDF";
+     //   path = Environment.getExternalStorageDirectory().getAbsolutePath();
+     //   path = Environment.getExternalStorageDirectory()+"/KnowledgeZonePDF";
 
         //calling the initList that will initialize the list to be given to Adapter for binding data
-        initList(path);
 
-        adapter = new FileAdapter(getContext(), R.layout.list_item, list);
 
-        //set the adapter on listView
-        listView.setAdapter(adapter);
-
+//        adapter = new FileAdapter(getContext(), R.layout.list_item, list);
+//
+//        //set the adapter on listView
+//        listView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//        listView.invalidateViews();
+//        listView.refreshDrawableState();
         //when user chooses a particular pdf file from list,
         //start another activity that will show the pdf
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), PdfViewerActivity.class);
-                intent.putExtra("keyName", list.get(position).getFileName());
-                intent.putExtra("keyPath",list.get(position).getFilePath());
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), PdfViewerActivity.class);
+//                intent.putExtra("keyName", list.get(position).getFileName());
+//                intent.putExtra("keyPath",list.get(position).getFilePath());
+//                startActivity(intent);
+
+                new    DownloadImageFile(getContext(),list.get(position).getFilePath(),list.get(position).getFileName(),".pdf",dialog).execute();
             }
         });
         getEncyclopedia();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+
+
+
+
         builder.detectFileUriExposure();
+        isStoragePermissionGranted();
         return view;
     }
 
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getActivity(),android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
     private void getEncyclopedia() {
         //  String id="APWGBDAB00010001";
+        LoadingDialog.showLoadingDialog(getContext(), "Loading...");
 
-    //    String Id = "1004";
+
+        //    String Id = "1004";
         dialog.setMessage("Loading, please wait.....");
         dialog.show();
         dialog.setCanceledOnTouchOutside(false);
@@ -145,6 +181,7 @@ public class PhotoFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "RESPONSE======" + response);
+                LoadingDialog.cancelLoading();
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
@@ -161,6 +198,7 @@ public class PhotoFragment extends Fragment {
                         category = leagueData.getString("category");
                         fileUrl = leagueData.getString("fileUrl");
                         fileName = leagueData.getString("name");
+
                         // Log.v("TAG --fileName ", fileName);
 
                         /*if (fileType.equals("Video")){
@@ -179,27 +217,43 @@ public class PhotoFragment extends Fragment {
 
 
                         }*/
+                        if (embedUrl.equals("null")) {
+                            Log.v("TAG --fileUrl ", fileUrl);
+                            Log.v("no videos", embedUrl);
+                            isPdfs.add("");
+                        }else{
+
+                        }
                         if (fileType.equals("PDF")) {
                             if (embedUrl.equals("null")) {
                                 Log.v("TAG --fileUrl ", fileType);
                                 Log.v("TAG --fileUrl ", fileUrl);
                                 Log.v("TAG --fileName ", fileName);
                                 //     path = Environment.getExternalStorageDirectory().getAbsolutePath();
-                             new    DownloadImageFile(getContext(),fileUrl,fileName,".pdf").execute();
-                              //  list.add(new FileBean(fileName, fileUrl));
+                          //   new    DownloadImageFile(getContext(),fileUrl,fileName,".pdf").execute();
+
+                                list.add(new FileBean(fileName, fileUrl));
+                                adapter = new FileAdapter(getContext(), R.layout.list_item, list);
+
+                                //set the adapter on listView
+                                listView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                listView.invalidateViews();
+                                listView.refreshDrawableState();
+
                                 //calling the initList that will initialize the list to be given to Adapter for binding data
                                 //   initList(fileName,fileUrl);
-//                                String extStorageDirectory = Environment.getExternalStorageDirectory()
-//                                        .toString();
-//                                File folder = new File(extStorageDirectory, "pdf");
-//
-//                                folder.mkdir();
-//                                File file = new File(folder, "Read.pdf");
-//                                try {
-//                                    file.createNewFile();
-//                                } catch (IOException e1) {
-//                                    e1.printStackTrace();
-//                                }
+                              /*  String extStorageDirectory = Environment.getExternalStorageDirectory()
+                                        .toString();
+                                File folder = new File(extStorageDirectory, "pdf");
+
+                           //     folder.mkdir();
+                                File file = new File(folder, "Read.pdf");
+                                try {
+                                    file.createNewFile();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }*/
 
                                 //Downloader.DownloadFile(fileUrl, file);
 
@@ -208,9 +262,16 @@ public class PhotoFragment extends Fragment {
                         }
 
                     }
+                    if(isPdfs.size()>0){
+                        listView.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.GONE);
+                    }else{
+                        listView.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+                    }
                     //   Log.d(TAG,"RESPONSE Encyclopedia jsonArray======"+ jsonArray);
 
-
+                  //  initList(path);
                     String success = jsonObject.getString("isSuccess");
                     Log.d(TAG, "success Encyclopedia======" + success);
                     if (success.equals("true")) {
@@ -290,6 +351,7 @@ public class PhotoFragment extends Fragment {
                     //choose only the pdf files
                     if(fileName.endsWith(".pdf")){
                         list.add(new FileBean(fileName, file1.getAbsolutePath()));
+
                     }
                 }
 
@@ -358,12 +420,46 @@ public class PhotoFragment extends Fragment {
         private String fileName;
         private String extension;
         File pdfFile;
-        private DownloadImageFile(Context context, String path, String fileName, String extension) {
+        private ProgressDialog dialog;
+        private DownloadImageFile(Context context, String path, String fileName, String extension,ProgressDialog progressBar) {
             this.context = context;
             this.path = path;
             this.fileName = fileName;
             this.extension = extension;
+            this.dialog = progressBar;
 
+        }
+        public boolean isExternalStorageWritable() {
+            String state = Environment.getExternalStorageState();
+            if (Environment.MEDIA_MOUNTED.equals(state)) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+                        //  adapter.notifyDataSetChanged();
+                        //Toast.makeText(context, "File exists in Folder", Toast.LENGTH_SHORT).show();
+
+                        if(dialog!=null){
+                            dialog.setMessage("downloading, please wait.....");
+                            dialog.show();
+                            dialog.setCanceledOnTouchOutside(false);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
         @Override
@@ -373,6 +469,10 @@ public class PhotoFragment extends Fragment {
             String fileName = this.fileName;  // -> maven.pdf
             String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
              folder = new File(extStorageDirectory, "KnowledgeZonePDF");
+            folder.mkdir();
+
+
+
 
             if (!folder.exists()) {
                 folder.mkdir();
@@ -397,7 +497,7 @@ public class PhotoFragment extends Fragment {
                     public void run() {
 
                         try {
-
+                          //  adapter.notifyDataSetChanged();
                             //Toast.makeText(context, "File exists in Folder", Toast.LENGTH_SHORT).show();
 
                         } catch (Exception e) {
@@ -415,9 +515,35 @@ public class PhotoFragment extends Fragment {
             super.onPostExecute(aVoid);
 
        //     showPdf(pdfFile);
+         //  adapter.notifyDataSetChanged();
+        /*    arraylist.clear();
+            arraylist.addAll(db.readAll());*/
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
+                    try {
+                        if(dialog!=null&&dialog.isShowing()){
+                            dialog.dismiss();
+                        }
+                        //  adapter.notifyDataSetChanged();
+                        //Toast.makeText(context, "File exists in Folder", Toast.LENGTH_SHORT).show();
 
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+//            Intent intent = new Intent(getContext(), PdfViewerActivity.class);
+//            intent.putExtra("keyName", fileName+".pdf");
+//            intent.putExtra("keyPath",pdfFile);
+//            startActivity(intent);
+            showPdf(pdfFile);
         }
+
+
+
+
     }
 
     public static void DownloadFile(String fileURL, File directory) {
