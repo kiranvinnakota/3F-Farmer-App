@@ -13,8 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.R;
+
+import es.dmoral.toasty.Toasty;
 
 public class RequestVisitDailogActivity extends AppCompatActivity {
 
@@ -59,6 +62,7 @@ public class RequestVisitDailogActivity extends AppCompatActivity {
         /* When positive (yes/ok) is clicked */
         alertDialog.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
+                Toasty.success(getApplicationContext(), "Submitted successfully", Toast.LENGTH_LONG).show();
                 RequestVisitDailogActivity.this.finish();
                // finish(); // Your custom code
             }
