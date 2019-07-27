@@ -24,7 +24,7 @@ android {
             buildConfigField "String", "SERVER_URL", '" "'
             buildConfigField "String", "AZURE_URL", '""'
             /* buildConfigField "String", "LOCAL_URL", '" "'*/
-          //  buildConfigField "String", "LOCAL_URL", '"http://183.82.103.171:9096/API/api/"'
+            //  buildConfigField "String", "LOCAL_URL", '"http://183.82.103.171:9096/API/api/"'
             buildConfigField "String", "LOCAL_URL", '"http://183.82.111.111/3FFarmerAPI/api/"'
         }
     }

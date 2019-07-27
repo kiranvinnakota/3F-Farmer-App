@@ -58,7 +58,8 @@
     <string name="confirm_req">Confirm Request</string>
     <string name="frquency">Frquency</string>
     <string name="pole">Pole</string>
-    <string name="fertilizer">Fertilizer</string>
+    <string name="fertilizer">Fertilizer\n</string>
+    <string name="uoM">uoM</string>
     <string name="loan">Loan</string>
     <string name="quickPay">Quick Pay</string>
     <string name="visit">Visit</string>

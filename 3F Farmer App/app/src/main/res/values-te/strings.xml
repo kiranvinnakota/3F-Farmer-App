@@ -23,6 +23,7 @@
         <string name = "submit"> సమర్పించండి</string>
         <string name = "submit_req">అభ్యర్థనను సమర్పించండి</string>
         <string name = "view">చూడండి</string>
+     <string name="uoM">uoM</string>
         <string name = "view_recommendations">ఆదాయాలను వీక్షించండి</string>
         <string name = "payment_summary">చెల్లింపు సారాంశం</string>
         <string name = "total_net_weight">మొత్తం నికర బరువు</string>
@@ -57,7 +58,7 @@
         <string name = "confirm_req">అభ్యర్థనను నిర్ధారించండి</string>
         <string name = "frquency">తరచుదనం</string>
         <string name = "pole">పోల్</string>
-        <string name = "fertilizer">ఎరువులు</string>
+        <string name = "fertilizer">ఎరువులు\n</string>
         <string name = "loan">లోన్</string>
         <string name = "quickPay">శీఘ్ర చెల్లింపు</string>
         <string name = "visit">సందర్శించండి</string>

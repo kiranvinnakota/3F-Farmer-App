@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ScannnerOtpActivity"></activity>
+        <activity android:name=".Activities.GetRecommendationsActivity"></activity>
+        <activity android:name=".Activities.ScannnerOtpActivity" />
         <activity
             android:name=".Activities.InsideLanguageActivity"
             android:parentActivityName=".Activities.PoleActivity" />
@@ -97,7 +98,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.SideMenuActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.LanguageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
