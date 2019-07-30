@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.GetRecommendationsActivity"></activity>
+        <activity android:name=".Activities.GetRecommendationsActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Activities.ScannnerOtpActivity" />
         <activity
             android:name=".Activities.InsideLanguageActivity"

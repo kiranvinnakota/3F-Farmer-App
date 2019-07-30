@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.calibrage.a3ffarmerapp.Activities.CollectionsActivity;
 import com.calibrage.a3ffarmerapp.Activities.LabourActivity;
 import com.calibrage.a3ffarmerapp.Model.MovieModal;
 import com.calibrage.a3ffarmerapp.Model.RecommendationModel;
@@ -21,13 +22,14 @@ import com.calibrage.a3ffarmerapp.R;
 import java.util.List;
 
 public class TableViewAdapter extends RecyclerView.Adapter<TableViewAdapter.ViewHolder>{
-    private MovieModal[] listdata;
+  //  private MovieModal[] listdata;
     public Context mContext;
-
+    //List of superHeroes
+    List<MovieModal> listdata;
     // RecyclerView recyclerView;
-    public TableViewAdapter(Context ctx,MovieModal[] listdata) {
+    public TableViewAdapter(List<MovieModal> listdata,  Context context) {
         this.listdata = listdata;
-        this.mContext=ctx;
+        this.mContext=context;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +41,7 @@ public class TableViewAdapter extends RecyclerView.Adapter<TableViewAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final MovieModal myListData = listdata[position];
+       /* final MovieModal myListData = listdata[position];
         holder.txtCollectionId.setText(listdata[position].getCollectionId());
         holder.txtDate.setText(listdata[position].getDate());
         holder.txtWeight.setText(listdata[position].getWeight());
@@ -49,25 +51,42 @@ public class TableViewAdapter extends RecyclerView.Adapter<TableViewAdapter.View
             holder.txtStatus.setTextColor(mContext.getResources().getColor(R.color.red));
         }else{
             holder.txtStatus.setTextColor(mContext.getResources().getColor(R.color.green));
-        }
-
+        }*/
+        MovieModal superHero =  listdata.get(position);
+        holder.txtCollectionId.setText(superHero.getCollectionId());
+        holder.txtDate.setText(superHero.getDate());
+        holder.txtWeight.setText(superHero.getWeight());
+        holder.txtCollectionId.setText(superHero.getCollectionId());
+        holder.txtCc.setText(superHero.getCc());
+        holder.txtStatus.setText(superHero.getStatus());
         //      holder.imageView.setImageResource(listdata[position].getImgId());
+        String powers = "";
 
+       /* for(int i = 0; i<superHero.getPowers().size(); i++){
+            powers+= superHero.getPowers().get(i);
+        }
+*/
+//        holder.textViewPowers.setText(powers);
     }
-
 
     @Override
     public int getItemCount() {
-        return listdata.length;
+        return listdata.size();
     }
 
+
+    /*  @Override
+      public int getItemCount() {
+          return listdata.length;
+      }
+  */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView txtCollectionId;
         public TextView txtDate;
         public TextView txtWeight;
         public TextView txtCc;
-        public TextView txtStatus;
+        public TextView txtStatus,textViewPowers;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +95,7 @@ public class TableViewAdapter extends RecyclerView.Adapter<TableViewAdapter.View
             txtWeight = itemView.findViewById(R.id.weight);
             txtCc = itemView.findViewById(R.id.cc);
             txtStatus = itemView.findViewById(R.id.status);
+            textViewPowers= (TextView) itemView.findViewById(R.id.textViewPowers);
         }
 
 

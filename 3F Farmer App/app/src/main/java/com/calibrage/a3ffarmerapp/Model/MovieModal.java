@@ -1,13 +1,15 @@
 package com.calibrage.a3ffarmerapp.Model;
 
+import java.util.ArrayList;
+
 public class MovieModal {
     private String collectionId;
     private String date;
     private String weight;
     private String cc;
     private String status;
-
-    public MovieModal(String collectionId, String date, String weight, String cc, String status) {
+    private ArrayList<MovieModal> powers;
+    public MovieModal() {
         this.collectionId = collectionId;
         this.date = date;
         this.weight = weight;
@@ -54,5 +56,12 @@ public class MovieModal {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+    public ArrayList<MovieModal> getPowers() {
+        return powers;
+    }
+
+    public void setPowers(ArrayList<MovieModal> powers) {
+        this.powers = powers;
     }
 }

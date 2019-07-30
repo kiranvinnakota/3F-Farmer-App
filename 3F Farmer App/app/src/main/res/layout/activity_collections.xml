@@ -92,15 +92,22 @@
 
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear1"
+        android:layout_margin="@dimen/margin_15"
+        android:id="@+id/relative1"
+        android:visibility="gone"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_below="@+id/linear1"
         android:layout_margin="@dimen/margin_15"
         android:id="@+id/linear2"
-        android:visibility="gone"
+
         >
 
 
@@ -108,12 +115,12 @@
             android:id="@+id/from_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="9"
+            android:ems="8"
             android:focusable="false"
             android:hint="@string/from_date"
             />
         <androidx.legacy.widget.Space
-            android:layout_width="@dimen/margin_15"
+            android:layout_width="@dimen/margin_10"
             android:layout_height="wrap_content"
             />
         <EditText
@@ -124,6 +131,24 @@
             android:ems="10"
             android:hint="@string/to_date" />
     </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:layout_below="@+id/linear2"
+            android:shadowColor="@android:color/transparent"
+            android:padding="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/shapescanbtn"
+            android:textColor="@color/white"
+            android:id="@+id/buttonSubmit"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
+
+    </RelativeLayout>
    <!-- <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -148,6 +173,19 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:scrollbars="vertical"
-        android:layout_below="@+id/linear2"
+        android:visibility="gone"
+        android:layout_below="@+id/relative1"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:text="No Data Found"
+        android:layout_marginTop="@dimen/text_size_20"
+        android:textSize="@dimen/text_size_20"
+        android:textColor="@color/colorAccent"
+        android:layout_centerInParent="true"
         />
 </RelativeLayout>
