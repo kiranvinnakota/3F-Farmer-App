@@ -26,6 +26,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import com.calibrage.a3ffarmerapp.Adapters.GetRecommendationsAdapter;
 import com.calibrage.a3ffarmerapp.Model.GetRecommendationsModel;
 import com.calibrage.a3ffarmerapp.R;
@@ -89,7 +90,7 @@ public class GetRecommendationsActivity extends AppCompatActivity {
 
                    /* JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
                     parseData(alsoKnownAsArray);*/
-                    parseData(alsoKnownAsArray);
+                    //parseData(alsoKnownAsArray);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -127,7 +128,7 @@ public class GetRecommendationsActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    //This method will parse json data
+
     private void parseData(JSONArray array){
         for(int i = 0; i<array.length(); i++) {
 

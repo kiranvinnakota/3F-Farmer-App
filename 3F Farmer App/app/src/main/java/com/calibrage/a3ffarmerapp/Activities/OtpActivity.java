@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.R;
+import com.calibrage.a3ffarmerapp.util.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +39,7 @@ public class OtpActivity extends AppCompatActivity {
     String farmerId;
     public static  String TAG="OtpActivity";
     public PinEntryEditText pinEntry;
+    public  SharedPreferences.Editor editor ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class OtpActivity extends AppCompatActivity {
         Typeface faceRegular = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
         TextView otpDesc=(TextView)findViewById(R.id.otp_desc);
         otpDesc.setTypeface(faceRegular);
+         editor = getSharedPreferences(Constants.SHARED_PREF_NAME, MODE_PRIVATE).edit();
        /* TextView resend=(TextView)findViewById(R.id.resendTxt);
         resend.setTypeface(faceBold);*/
         Button submitBtn=(Button)findViewById(R.id.buttonSubmit);
@@ -125,6 +129,11 @@ if(farmerId==null){
                     String success=jsonObject.getString("isSuccess");
                     Log.d(TAG,"success======"+ success);
                     if (success.equals("true")){
+
+                        SharedPrefsData.putBool(OtpActivity.this,Constants.IS_LOGIN,true,"2");
+
+                        editor.putBoolean(Constants.IS_LOGIN,true);
+                        editor.apply();
                         Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
                         startActivity(intent);
                         Toasty.success(getApplicationContext(), "OTP Valided Successfully", Toast.LENGTH_LONG).show();

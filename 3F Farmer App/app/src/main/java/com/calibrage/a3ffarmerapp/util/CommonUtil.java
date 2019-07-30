@@ -1,6 +1,7 @@
 package com.calibrage.a3ffarmerapp.util;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -8,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -26,6 +28,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -55,6 +58,7 @@ public class CommonUtil {
     private static NotificationManager manager;
 
     public static boolean isShowNotifiction = false;
+
 
     /*
      *   formate the date as required
@@ -354,6 +358,33 @@ public class CommonUtil {
             showServiceToast("No Application available to view PDF");
 
         }
+    }
+
+
+
+    public static String[] PERMISSIONS_REQUIRED = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_SMS,
+            Manifest.permission.RECEIVE_SMS
+    };
+    public static final int PERMISSION_CODE = 100;
+
+
+    public static boolean areAllPermissionsAllowed(final Context context, final String[] permissions) {
+        boolean isAllPermissionsGranted = false;
+        for (String permission : permissions) {
+            int result = ContextCompat.checkSelfPermission(context, permission);
+            if (result == PackageManager.PERMISSION_GRANTED) {
+                isAllPermissionsGranted = true;
+            }
+        }
+        return isAllPermissionsGranted;
     }
 }
 

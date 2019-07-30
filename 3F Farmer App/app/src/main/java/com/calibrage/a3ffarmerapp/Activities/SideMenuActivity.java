@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.calibrage.a3ffarmerapp.Fragments.HomeFragment;
 import com.calibrage.a3ffarmerapp.Fragments.MyRequestsFragment;
 import com.calibrage.a3ffarmerapp.R;
+import com.calibrage.a3ffarmerapp.util.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,6 +93,9 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
     public void onFooterClicked() {
         SharedPreferences sp = getSharedPreferences("checkbox", 0);
         boolean cb1 = sp.getBoolean("isLogin", true);
+
+        SharedPrefsData.putBool(SideMenuActivity.this, Constants.IS_LOGIN,false,"2");
+
         if (cb1 == true) {
             // Toast.makeText(this, "onFooterClicked", Toast.LENGTH_SHORT).show();
             Intent intent= new Intent(getApplicationContext(),LoginActivity.class);
@@ -179,6 +183,13 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
             logout.setTextColor(getResources().getColor(R.color.white));
             logout.setBackgroundColor(getResources().getColor(R.color.light_red));
             logout.setHeight(10);
+
+//            logout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    SharedPrefsData.putBool(SideMenuActivity.this, Constants.IS_LOGIN,false,"2");
+//                }
+//            });
         }
     }
 }

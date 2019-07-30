@@ -129,13 +129,13 @@ public class VideoFragment extends Fragment implements EncyclopediaActivity.OnAb
     private void getEncyclopedia() {
         //  String id="APWGBDAB00010001";
 
-        //  String Id="1004";
+          String Id="1004";
 
         dialog.setMessage("Loading, please wait....");
         dialog.show();
         dialog.setCanceledOnTouchOutside(false);
 
-        String url =learing_videos_pdfs+id;
+        String url =learing_videos_pdfs+Id;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

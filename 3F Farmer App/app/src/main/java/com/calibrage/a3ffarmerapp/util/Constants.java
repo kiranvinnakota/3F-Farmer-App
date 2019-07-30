@@ -10,4 +10,8 @@ public class Constants {
   //  public static String DEVELOPER_KEY = "YOUR_DEVELOPER_API_KEY";
     public static  String DEVELOPER_KEY = "AIzaSyBx7v0YOb140fDO7EbfMx4l87raxezDWFw";
 
+    public static String SHARED_PREF_NAME ="3f_palm";
+    public static String IS_LOGIN ="login_verfication";
+
+
 }
