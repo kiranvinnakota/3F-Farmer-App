@@ -50,6 +50,7 @@ import com.bumptech.glide.load.HttpException;
 import com.calibrage.a3ffarmerapp.Activities.CollectionsActivity;
 import com.calibrage.a3ffarmerapp.Activities.EncyclopediaActivity;
 import com.calibrage.a3ffarmerapp.Activities.FertilizerActivity;
+import com.calibrage.a3ffarmerapp.Activities.GetRecommendationByAges;
 import com.calibrage.a3ffarmerapp.Activities.GetRecommendationsActivity;
 import com.calibrage.a3ffarmerapp.Activities.LabourRecommendationsActivity;
 import com.calibrage.a3ffarmerapp.Activities.LoanActivity;
@@ -128,7 +129,7 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.recommendations_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getContext(), GetRecommendationsActivity.class);
+                Intent intent =new Intent(getContext(), GetRecommendationByAges.class);
                 startActivity(intent);
             }
         });

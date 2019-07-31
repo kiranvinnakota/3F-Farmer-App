@@ -76,11 +76,11 @@
         <string name = "name">రాము</string>
         <string name = "time_peroid">టైమ్ పెరాయిడ్</string>
         <string name = "from_date">తేదీ నుండి</string>
-        <string name = "to_date">తేదీకి</string>
+        <string name = "to_date">తేదీ వరకు</string>
         <string name = "collection_id">సేకరణ ID:</string>
         <string name = "date">తేదీని ఎంచుకోండి</string>
         <string name = "weight">బరువు:</string>
-        <string name = "cc">CC:</string>
+        <string name = "cc">సిసి:</string>
         <string name = "status">స్థితి:</string>
         <string name = "terms">నిబంధనలు మరియు షరతులు</string>
         <string name = "req_loan">రుణం కోసం అభ్యర్థన</string>

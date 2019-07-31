@@ -65,7 +65,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
     //  Button subBtn;
     private RecyclerView recyclerView;
     String currentDate;
-    // TableViewAdapter adapter;
+    //TableViewAdapter adapter;
     //Creating Views
     String financiyalYearFrom="";
     String financiyalYearTo="";
@@ -107,7 +107,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
                             }
                         }, year, month, day);
                 picker.show();
-                picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+               picker.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
        /* fromText.setOnTouchListener(new View.OnTouchListener() {
@@ -290,7 +290,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
             if (spin.getSelectedItem().toString().equals("Custom Time Period")) {
                 adapter.notifyDataSetChanged();
                 recyclerView.setVisibility(View.GONE); //
-
+                text.setVisibility(View.GONE);
                 Button buttonSubmit=(Button)findViewById(R.id.buttonSubmit);
 
                 buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -309,9 +309,13 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
                         {
                            // Toast.makeText(CollectionsActivity.this, "kiran", Toast.LENGTH_SHORT).show();
                             timePeroidLinear.setVisibility(View.GONE);
-                            recyclerView.setVisibility(View.VISIBLE);
+                       //     text.setVisibility(View.VISIBLE);
                             try {
+                                adapter.notifyDataSetChanged();
+                                recyclerView.invalidate();
+                         //       recyclerView.setVisibility(View.VISIBLE);
                                 getCustomCollections(fromString,toString);
+
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -324,7 +328,11 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
                             Toast.makeText(CollectionsActivity.this, "It's empty", Toast.LENGTH_SHORT).show();
                         }
                       getCollections();*/
+
+                        fromText.setText(null);
+                        toText.setText(null);
                     }
+
                 });
 
             }

@@ -55,11 +55,16 @@ public class TableViewAdapter extends RecyclerView.Adapter<TableViewAdapter.View
         MovieModal superHero =  listdata.get(position);
         holder.txtCollectionId.setText(superHero.getCollectionId());
         holder.txtDate.setText(superHero.getDate());
-        holder.txtWeight.setText(superHero.getWeight());
+        holder.txtWeight.setText(superHero.getWeight()+" "+"tonnes");
         holder.txtCollectionId.setText(superHero.getCollectionId());
         holder.txtCc.setText(superHero.getCc());
         holder.txtStatus.setText(superHero.getStatus());
-        //      holder.imageView.setImageResource(listdata[position].getImgId());
+
+        if(listdata.get(position).getStatus()=="Paid"){
+            holder.txtStatus.setTextColor(mContext.getResources().getColor(R.color.red));
+        }else{
+            holder.txtStatus.setTextColor(mContext.getResources().getColor(R.color.green));
+        }
         String powers = "";
 
        /* for(int i = 0; i<superHero.getPowers().size(); i++){
