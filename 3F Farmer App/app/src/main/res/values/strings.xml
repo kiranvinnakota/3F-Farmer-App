@@ -97,7 +97,7 @@
     <string name="issue_identified">Issue Identified</string>
     <string name="time">Select Time</string>
     <string name="plot_code">Plot Code</string>
-    <string name="recommendedorfertilizer">Recommended \n Fertilizer/Chemical</string>
+    <string name="recommendedorfertilizer">Recommended  Fertilizer/Chemical</string>
     <string name="dosage">Dosage(UOM)</string>
     <string name="age">Age</string>
     <string name="area">Area</string>
@@ -162,7 +162,8 @@
     <string name="pest_n_disease">Pest and Disease</string>
     <string name="general_info">General Information</string>
     <string name="harvest">Harvest</string>
-
+    <string name="remarks">Remarks</string>
+    <string name="quantity">Quantity</string>
     <!--  we need to use video ids instead of video link  -->
     <string-array name="video_id_array">
         <item>CqhpNxI8qYw</item>

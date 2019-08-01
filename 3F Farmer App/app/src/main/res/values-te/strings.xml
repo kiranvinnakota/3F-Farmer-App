@@ -155,7 +155,8 @@
      <string name="collections_total">2 వ మార్చి నుండి 3 వ జూన్ వరకు \nమొత్తం రేటుద్వారా సేకరణలు:</string>
      <string name="rate_adjustment">రేటు సర్దుబాటు:</string>
      <string name="transport_payment">రవాణా చెల్లింపు:</string>
-
+     <string name="remarks">వ్యాఖ్యలు</string>
+     <string name="quantity">మొత్తము</string>
      <string name="thumbnail_image_view_desc">Youtube Video thumbnail image view</string>
      <string name="close_player_activity">Close Player activity</string>
      <!--<string name="harvest">హార్వెస్ట్</string>-->

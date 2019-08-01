@@ -50,8 +50,8 @@ public class GetRecommendationsAdapter extends RecyclerView.Adapter<GetRecommend
         holder.year3.setText(superHero.getYear3());
         holder.year4And5.setText(superHero.getYear4And5());
         holder.year6And7.setText(superHero.getYear6And7());
-        holder.year8To17.setText(superHero.getYear8To17());
-        holder.remarks.setText(superHero.getRemarks());
+      //  holder.year8To17.setText(superHero.getYear8To17());
+     //   holder.remarks.setText(superHero.getRemarks());
         String powers = "";
 
         for(int i = 0; i<superHero.getPowers().size(); i++){
@@ -90,8 +90,8 @@ public class GetRecommendationsAdapter extends RecyclerView.Adapter<GetRecommend
             year3 = (TextView) itemView.findViewById(R.id.year3);
             year4And5= (TextView) itemView.findViewById(R.id.year4And5);
             year6And7= (TextView) itemView.findViewById(R.id.year6And7);
-            year8To17= (TextView) itemView.findViewById(R.id.year8To17);
-            remarks= (TextView) itemView.findViewById(R.id.remarks);
+         //   year8To17= (TextView) itemView.findViewById(R.id.year8To17);
+          //  remarks= (TextView) itemView.findViewById(R.id.remarks);
 
 
             textViewPowers= (TextView) itemView.findViewById(R.id.textViewPowers);

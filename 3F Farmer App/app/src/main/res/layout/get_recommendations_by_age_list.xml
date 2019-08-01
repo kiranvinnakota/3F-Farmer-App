@@ -74,7 +74,7 @@
 
             <TextView
                 android:id="@+id/uoMLabel"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:layout_below="@id/fertilizer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             <TextView
                 android:id="@+id/year"
                 android:hint="Year"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="15dp"
                 android:layout_below="@id/fertilizer"
                 android:layout_toRightOf="@+id/uoMLabel"
                 android:layout_width="wrap_content"
@@ -111,8 +111,7 @@
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/remarksLabel"
-                android:text="Remarks"
-
+                android:text="@string/remarks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/album_title_padding"

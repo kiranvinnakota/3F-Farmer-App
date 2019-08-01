@@ -21,49 +21,49 @@
 
             <TextView
                 android:id="@+id/fertilizerLabel"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fertilizer"
+                android:text="@string/plot_code"
                 android:paddingLeft="8dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
+
                 android:textColor="@color/album_title"
                 android:textStyle="bold"
-                android:textSize="@dimen/album_title" />
+                android:textSize="@dimen/album_title"
+                />
             <TextView
                 android:id="@+id/fertilizer"
+                android:layout_marginStart="170dp"
                 android:textColor="@color/orange"
-                android:maxWidth="120dp"
                 android:layout_toRightOf="@+id/fertilizerLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Text 1\nText 2\nText 3"
+                android:text="Text "
                 android:paddingLeft="4dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title"
-                android:lines="2"
-                android:inputType="textMultiLine"
-                android:layout_marginStart="14dp"/>
+                />
 
             <TextView
                 android:id="@+id/uoMLabel"
-                android:text="@string/uoM"
-                android:layout_marginStart="52dp"
+                android:layout_below="@id/fertilizerLabel"
+                android:text="@string/recommendedorfertilizer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
-                android:layout_toRightOf="@+id/fertilizer"
+
                 android:textStyle="bold"
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/uoM"
+                android:layout_marginStart="10dp"
                 android:hint="@string/uoM"
-                android:layout_marginStart="50dp"
+                android:layout_below="@id/fertilizerLabel"
                 android:layout_toRightOf="@+id/uoMLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,11 +74,11 @@
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/year1Label"
-                android:text="year1"
-
+                android:text="@string/dosage"
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fertilizerLabel"
+                android:layout_below="@id/uoMLabel"
                 android:paddingLeft="8dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
@@ -88,38 +88,28 @@
             <TextView
                 android:id="@+id/year1"
                 android:hint="year1"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="8dp"
                 android:layout_toRightOf="@+id/year1Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fertilizer"
-                android:layout_marginStart="42dp"
+                android:layout_below="@id/uoMLabel"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
-            <TextView
-                android:id="@+id/year17AboveLabel"
-                android:layout_marginStart="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="year17Above"
-                android:paddingLeft="@dimen/album_title_padding"
-                android:paddingRight="@dimen/album_title_padding"
-                android:paddingTop="@dimen/album_title_padding"
-                android:layout_toRightOf="@+id/year1"
-                android:textColor="@color/album_title"
-                android:layout_below="@+id/fertilizer"
-                android:textStyle="bold"
-                android:textSize="@dimen/album_title" />
+
             <TextView
                 android:id="@+id/year17Above"
-                android:layout_toRightOf="@+id/year17AboveLabel"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/year1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="year17Above"
-                android:layout_below="@id/fertilizer"
+                android:hint="year17"
+                android:layout_below="@id/uoMLabel"
                 android:paddingLeft="4dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
+                android:layout_marginStart="0dp"
                 android:textSize="@dimen/album_title" />
 
 
@@ -137,8 +127,8 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="year2"
-                android:layout_below="@id/year17AboveLabel"
+                android:text="@string/comments"
+                android:layout_below="@id/year17Above"
                 android:paddingLeft="8dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
@@ -147,36 +137,35 @@
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/year2"
+                android:layout_marginStart="160dp"
                 android:textColor="@color/orange"
-                android:layout_marginStart="40dp"
                 android:layout_toRightOf="@+id/year2Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="year2"
                 android:paddingLeft="4dp"
-                android:layout_below="@id/year17AboveLabel"
+                android:layout_below="@id/year17Above"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
 
             <TextView
                 android:id="@+id/year3Label"
-                android:text="year3"
-                android:layout_below="@id/year17AboveLabel"
-                android:layout_marginStart="50dp"
+                android:layout_below="@id/year2Label"
+                android:text="@string/issue_identified"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
-                android:layout_toRightOf="@+id/year2"
+
                 android:textStyle="bold"
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/year3"
                 android:hint="year3"
-                android:layout_marginStart="47dp"
+                android:layout_marginStart="130dp"
                 android:layout_toRightOf="@+id/year3Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,11 +174,11 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title"
-                android:layout_below="@id/year17AboveLabel"/>
+                android:layout_below="@id/year2Label"/>
             <TextView
                 android:id="@+id/year4And51Label"
-                android:text="year4And5"
-
+                android:text="@string/recommended_by"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/year3Label"
@@ -202,46 +191,49 @@
             <TextView
                 android:id="@+id/year4And5"
                 android:hint="year4And5"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/year4And51Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/year3"
-                android:layout_marginStart="10dp"
+                android:layout_below="@id/year3Label"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
+
             <TextView
                 android:id="@+id/year6And7Label"
-                android:layout_marginStart="52dp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="year6And7"
+                android:text="@string/recommended_on"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
-                android:layout_toRightOf="@+id/year1"
+
                 android:textColor="@color/album_title"
                 android:textStyle="bold"
-                android:layout_below="@id/year3"
+                android:layout_below="@id/year4And51Label"
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/year6And7"
                 android:layout_toRightOf="@+id/year6And7Label"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="year6And7"
-                android:layout_marginStart="14dp"
-                android:layout_below="@id/year3"
+                android:hint="year6"
+                android:layout_marginStart="115dp"
+                android:layout_below="@id/year4And51Label"
                 android:paddingLeft="4dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
 
+<!--
 
             <TextView
                 android:id="@+id/year8To17Label"
-                android:text="year8To17"
-
+                android:text="Plot Size"
+                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/year6And7Label"
@@ -254,53 +246,48 @@
             <TextView
                 android:id="@+id/year8To17"
                 android:hint="year8To17"
+                android:layout_marginTop="20dp"
                 android:layout_toRightOf="@+id/year8To17Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/year6And7"
-                android:layout_marginStart="10dp"
+                android:layout_below="@id/year6And7Label"
+                android:layout_marginStart="24dp"
                 android:textColor="@color/orange"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/remarksLabel"
-                android:layout_marginStart="52dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="80dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="remarks"
+                android:text="Remarks"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:layout_toRightOf="@+id/year1"
-                android:layout_below="@id/year6And7"
+                android:layout_below="@id/year6And7Label"
                 android:textColor="@color/album_title"
                 android:textStyle="bold"
                 android:textSize="@dimen/album_title" />
             <TextView
                 android:id="@+id/remarks"
+                android:layout_marginTop="20dp"
                 android:layout_toRightOf="@+id/remarksLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="remarks"
                 android:textColor="@color/orange"
                 android:layout_marginStart="30dp"
-                android:layout_below="@id/year6And7"
+                android:layout_below="@id/year6And7Label"
                 android:paddingLeft="4dp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textSize="@dimen/album_title" />
 
+-->
 
-            <ImageView
-                android:id="@+id/overflow"
-                android:layout_width="@dimen/ic_album_overflow_width"
-                android:layout_height="@dimen/ic_album_overflow_height"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:scaleType="centerCrop"
-                android:layout_margin="-10dp"
-                android:src="@drawable/arrow_right" />
 
 
         </RelativeLayout>

@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,10 +57,11 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
     private RecyclerView.Adapter adapter;
     Spinner spin;
     public static String text_year;
-
+    TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        text=(TextView)findViewById(R.id.noData);
         setContentView(R.layout.activity_get_recommendation_by_ages);
         ImageView backImg = (ImageView) findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,17 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SideMenuActivity.class);
                 startActivity(intent);
+            }
+        });
+        Button loginBtn=(Button)findViewById(R.id.view_recommendations);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), GetRecommendationsActivity.class);
+                startActivity(intent);
+
+
             }
         });
         // Spinner element
@@ -167,7 +181,7 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
 
     //This method will parse json data
     private void parseData(String text_year) {
-
+        listSuperHeroes.clear();
 
         String URL_TOKEN = BASE_URL + "GetRecommendationsByAge/" + GetRecommendationByAges.text_year;
 
@@ -182,6 +196,13 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
 
 
                     JSONArray jsonArray = new JSONArray(response);
+                   /* if(jsonArray.length()>0){
+                        recyclerView.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.GONE);
+                    }else{
+                        recyclerView.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+                    }*/
                     Log.e("jsonArray==", jsonArray.toString());
 
         for(int i = 0; i<jsonArray.length(); i++) {
