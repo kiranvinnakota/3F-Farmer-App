@@ -29,7 +29,7 @@
         <string name = "total_net_weight">మొత్తం నికర బరువు</string>
         <string name = "Collections">సేకరణలు</string>
         <string name = "recommendations">సిఫార్సులు</string>
-        <string name = "recommended_by">ద్వారా సిఫార్సు చేయబడింది</string>
+        <string name = "recommended_by">సిఫార్సు ద్వారా చేయబడింది</string>
          <string name = "recommended_on">సిఫార్సు చేయబడింది</string>
         <string name = "payments">చెల్లింపులు</string>
         <string name = "view_pay">చెల్లింపులను వీక్షించండి </string>
@@ -44,7 +44,7 @@
         <string name = "next">తదుపరి</string>
         <string name = "ledger_item">లెడ్జర్ అంశం:</string>
         <string name = "dop">చెల్లింపు తేదీ:</string>
-        <string name = "amount">మొత్తం:</string>
+      
         <string name = "Recommend">సిఫార్సులు</string>
         <string name = "req_services">సేవలను అభ్యర్థించండి</string>
         <string name = "labour">శ్రమ</string>
@@ -96,7 +96,7 @@
         <string name = "issue_identified">ఇష్యూ గుర్తించబడింది</string>
         <string name = "time">సమయం ఎంచుకోండి</string>
         <string name = "plot_code">ప్లాట్ కోడ్</string>
-        <string name = "recommendedorfertilizer">సిఫార్సు చేసిన ఎరువులు/రసాయన</string>
+        <string name = "recommendedorfertilizer">సిఫార్సు చేసిన\n ఎరువులు/రసాయన</string>
         <string name = "dosage"> మోతాదు (UOM) </string>
      <string name="collection_center_name">సేకరణ కేంద్రం</string>
      <string name="fertilizer_center_name">ఎరువుల కేంద్రం</string>
@@ -164,6 +164,13 @@
      <string name="pest_n_disease">తెగులు మరియు వ్యాధి</string>
      <string name="general_info">సాధారణ సమాచారం</string>
      <string name="harvest">హార్వెస్ట్</string>
+     <string name="ffb_qty">FFB పరిమాణం(MT)</string>
+
+     <string name="adhoc_rate">ఎమ్‌టికి అడోక్ రేటు రూ.</string>
+     <string name="invoice_rate">MT కి ఇన్వాయిస్ రేటు</string>
+     <string name="gr_amount">GR మొత్తం</string>
+     <string name="memo">మెమో</string>
+     <string name="amount">మొత్తం</string>
      <!--  we need to use video ids instead of video link  -->
      <string-array name="video_id_array">
          <item>CqhpNxI8qYw</item>

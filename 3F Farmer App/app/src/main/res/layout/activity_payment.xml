@@ -254,7 +254,7 @@
         android:layout_marginTop="10sp">
 
 
-        <com.calibrage.a3ffarmerapp.Activities.CommonTextView
+      <!--  <com.calibrage.a3ffarmerapp.Activities.CommonTextView
             android:id="@+id/tvtext_item_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -289,7 +289,8 @@
             android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
 
-    </RelativeLayout>
+-->    </RelativeLayout>
+
 
     <com.calibrage.a3ffarmerapp.Activities.CommonButton
         android:id="@+id/nextButton"
@@ -303,6 +304,7 @@
         android:textSize="@dimen/text_size_16"
         android:textColor="@color/white"
        />
+
 
 
 </RelativeLayout>

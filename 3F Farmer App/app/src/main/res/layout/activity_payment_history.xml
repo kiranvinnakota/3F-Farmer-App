@@ -36,63 +36,63 @@
 
 
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linear1"
+        android:layout_margin="@dimen/margin_15"
+        android:id="@+id/relative2"
         android:layout_below="@+id/backlinear"
-        android:weightSum="2">
-
-        <!--   <ImageView
-               android:layout_width="35dp"
-               android:layout_height="35dp"
-               android:src="@drawable/arrow_left"
-               android:layout_margin="10dp"
-               android:layout_weight="0.1"
-               android:id="@+id/back"/>-->
-
-        <TextView
-            android:id="@+id/textView"
+        >
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/time_peroid"
-            android:textStyle="bold"
-            android:textColor="@color/yellow"
-            android:textSize="@dimen/text_size_22"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/margin_10"
-            android:visibility="gone"
-            />
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_margin="@dimen/margin_15"
+            android:id="@+id/linear2"
+
+            >
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/spinner_bg"
-            android:layout_marginTop="10dp"
-            android:layout_margin="8dp"
-            android:elevation="2dp">
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-                android:textAlignment="center"
-                android:background="@null"
-                android:minHeight="0dp" />
-
-            <ImageView
+            <EditText
+                android:id="@+id/from_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_arrow_drop_down" />
-        </RelativeLayout>
+                android:ems="8"
+                android:focusable="false"
+                android:hint="@string/from_date"
+                />
+            <androidx.legacy.widget.Space
+                android:layout_width="@dimen/margin_10"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:id="@+id/to_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:ems="10"
+                android:hint="@string/to_date" />
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:layout_below="@+id/linear2"
+            android:shadowColor="@android:color/transparent"
+            android:padding="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/shapescanbtn"
+            android:textColor="@color/white"
+            android:id="@+id/buttonSubmit"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"/>
 
-
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -148,9 +148,21 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:scrollbars="vertical"
-        android:layout_below="@+id/linear2"
+        android:layout_below="@+id/relative2"
         />
-    <LinearLayout
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text"
+        android:visibility="gone"
+        android:textAlignment="center"
+        android:text="No Data Found"
+        android:layout_marginTop="@dimen/text_size_20"
+        android:textSize="@dimen/text_size_20"
+        android:textColor="@color/colorAccent"
+        android:layout_centerInParent="true"
+        />
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -175,7 +187,7 @@
 
             />
         </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
 </RelativeLayout>
 
 <!--

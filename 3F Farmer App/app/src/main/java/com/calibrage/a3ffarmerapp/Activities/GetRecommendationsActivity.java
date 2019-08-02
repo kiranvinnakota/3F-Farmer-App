@@ -51,6 +51,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +75,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
     public static String plotSelection;
     String reformattedStrFrom,reformattedStrTo;
     TextView text;
+    String datetimevalute;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -261,7 +263,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
 
             reformattedStrFrom = myFormat.format(fromUser.parse(fromString));
             reformattedStrTo = myFormat.format(fromUser.parse(toString));
-            Log.d("collection", "RESPONSE reformattedStr======" + reformattedStrFrom);
+            Log.d("recommendations", "RESPONSE reformattedStr======" + reformattedStrFrom);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -376,7 +378,26 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                 superHero.setYear2(json.getString("comments"));
                 superHero.setYear3(json.getString("issuIdentified"));
                 superHero.setYear4And5(json.getString("recommendedBy"));
-                superHero.setYear6And7(json.getString("recommendedOn"));
+
+                String date=json.getString("recommendedOn");
+              String  datee = date.substring(0, 10);
+                Log.e("datee===",datee);
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date oneWayTripDate = input.parse(datee);
+
+                    datetimevalute=output.format(oneWayTripDate);
+                    //datetimevalute.setText(output.format(oneWayTripDate));
+
+                    Log.e("===============","======currentData======"+output.format(oneWayTripDate));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                    superHero.setYear6And7(datetimevalute);
+
+
+
            //     superHero.setYear8To17(json.getString("plotSize"));
             //    superHero.setRemarks(json.getString("location"));
                 ArrayList<String> powers = new ArrayList<String>();

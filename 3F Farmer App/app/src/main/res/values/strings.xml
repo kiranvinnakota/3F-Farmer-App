@@ -44,7 +44,7 @@
     <string name="next">Next</string>
     <string name="ledger_item">Ledger Item:</string>
     <string name="dop">Date of payment:</string>
-    <string name="amount">Amount:</string>
+
     <string name="Recommend">Recommendations</string>
     <string name="req_services">Request Services</string>
     <string name="labour">Labour</string>
@@ -97,7 +97,7 @@
     <string name="issue_identified">Issue Identified</string>
     <string name="time">Select Time</string>
     <string name="plot_code">Plot Code</string>
-    <string name="recommendedorfertilizer">Recommended  Fertilizer/Chemical</string>
+    <string name="recommendedorfertilizer">Recommended\nFertilizer/Chemical</string>
     <string name="dosage">Dosage(UOM)</string>
     <string name="age">Age</string>
     <string name="area">Area</string>
@@ -164,6 +164,17 @@
     <string name="harvest">Harvest</string>
     <string name="remarks">Remarks</string>
     <string name="quantity">Quantity</string>
+
+    <string name="ffb_qty">FFB Qty(MT)</string>
+    <string name="adhoc_rate">Adhoc Rate per MT Rs.</string>
+    <string name="invoice_rate">Invoice Rate Per MT</string>
+    <string name="gr_amount">GR Amount</string>
+   <string name="memo">Memo</string>
+    <string name="amount">Amount</string>
+
+
+
+
     <!--  we need to use video ids instead of video link  -->
     <string-array name="video_id_array">
         <item>CqhpNxI8qYw</item>

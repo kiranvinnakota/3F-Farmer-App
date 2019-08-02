@@ -7,19 +7,42 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.R;
-public class PaymentActivity extends AppCompatActivity {
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+public class PaymentActivity extends AppCompatActivity {
+    public static  String TAG="PaymentActivity";
+    private  TextView accoontHolderName,accoontNumber,bankNamee,branchName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        accoontHolderName=(TextView)findViewById(R.id.tvtext_item_three);
+        accoontNumber=(TextView)findViewById(R.id.tvtext_item_five);
+        bankNamee=(TextView)findViewById(R.id.tvtext_item_seven);
+        branchName=(TextView)findViewById(R.id.tvtext_item_nine);
         ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +51,7 @@ public class PaymentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button submitBtn=(Button)findViewById(R.id.nextButton);
+       Button submitBtn=(Button)findViewById(R.id.nextButton);
        // submitBtn.setTypeface(faceBold);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,32 +61,119 @@ public class PaymentActivity extends AppCompatActivity {
 
             }
         });
-      //  DisplayActionBar();
+        getBankDetails();
     }
-    private void DisplayActionBar() {
-        final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-        // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
-        View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.MATCH_PARENT,
-                Gravity.CENTER);
-        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        textviewTitle.setText(R.string.view_pay);
-/*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
+    private void getBankDetails()  {
+      //  listSuperHeroes.clear();
 
-        textviewTitle.setText(Html.fromHtml(header));*/
 
-        abar.setCustomView(viewActionBar, params);
-        abar.setDisplayShowCustomEnabled(true);
-        abar.setDisplayShowTitleEnabled(false);
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String URL = "http://183.82.111.111/3FFarmerAPI/api/Payment/GetVendorLedger";
 
-        abar.setDisplayHomeAsUpEnabled(true);
 
-        abar.setHomeButtonEnabled(true);
+        RequestQueue queue= Volley.newRequestQueue(this);
 
-        abar.show();
+
+        Map<String, String> jsonParams = new HashMap<String, String>();
+       /* jsonParams.put( "plotCode","APAB0001000001");
+        jsonParams.put( "fromDate","2016-01-01T10:10:52.5116115+05:30");
+        jsonParams.put( "toDate","2019-08-01T10:10:52.5116115+05:30");*/
+        jsonParams.put( "fromDate","2019-04-02T10:57:42.62339+05:30");
+        jsonParams.put( "toDate","2019-08-02T10:57:42.62339+05:30");
+        jsonParams.put( "vendorCode","VWGBDAB00010001");
+
+        Log.d(TAG,"Json==slot:"+ new JSONObject(jsonParams));
+
+        JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, URL,new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        String result = response.toString();
+
+                        Log.d("result=====",result);
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(result);
+                            Log.d(TAG,"RESPONSE getBankDetails======"+ jsonObject);
+                            JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                            for(int i = 0; i<alsoKnownAsArray.length(); i++) {
+                                JSONObject leagueData = alsoKnownAsArray.getJSONObject(i);
+                                String cardName = leagueData.getString("cardName");
+                                String bank_Account = leagueData.getString("bank_Account");
+                                String bankName = leagueData.getString("bankName");
+                                String branch = leagueData.getString("branch");
+                                Log.d(TAG, "RESPONSE cardName======" + cardName);
+                                Log.d(TAG, "RESPONSE bank_Account======" + bank_Account);
+                                accoontHolderName.setText(cardName);
+                                accoontNumber.setText(bank_Account);
+                                bankNamee.setText(bankName);
+                                branchName.setText(branch);
+                            }
+
+                            String affectedRecords=jsonObject.getString("affectedRecords");
+                            Log.d(TAG,"RESPONSE getBankDetails======"+ affectedRecords);
+                           /* if(affectedRecords.contains("0") ){
+                                recyclerView.setVisibility(View.GONE);
+                                text.setVisibility(View.VISIBLE);
+
+                            }else{
+                                recyclerView.setVisibility(View.VISIBLE);
+                                text.setVisibility(View.GONE);
+                            }
+                            JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                            Log.d(TAG,"RESPONSE result======"+ alsoKnownAsArray);
+
+                            parseData(alsoKnownAsArray);*/
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+//        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+//            @SuppressLint("LongLogTag")
+//            @Override
+//            public void onResponse(String response) {
+//                //This code is executed if the server responds, whether or not the response contains data.
+//                //The String 'response' contains the server's response.
+//                Log.i("LOG_RESPONSE ", response);
+//
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    Log.d(TAG, "RESPONSE PLOT======" + jsonObject);
+//                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+//                    Log.i("LOG_RESPONSE PLOT", String.valueOf(alsoKnownAsArray.length()));
+//                    Log.d("data2===", "APAB0001000001");
+//                 //   parseData(jsonObject);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
+
+
+                    }
+                },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+// Handle Error
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String,String>();
+// headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+
+
+
+        };
+
+        queue.add(postRequest);
 
     }
 }

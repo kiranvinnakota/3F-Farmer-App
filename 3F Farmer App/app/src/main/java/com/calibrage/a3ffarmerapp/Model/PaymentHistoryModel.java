@@ -1,5 +1,7 @@
 package com.calibrage.a3ffarmerapp.Model;
 
+import java.util.ArrayList;
+
 public class PaymentHistoryModel {
     private String ledgerItem;
     private String dateOfPayment;
@@ -7,8 +9,11 @@ public class PaymentHistoryModel {
     private String bankAccountNumber;
     private String bankHolderName;
     private String bankName;
+    private String finalAmount;
+    private ArrayList<String> powers;
 
-    public PaymentHistoryModel( String dateOfPayment, String amount, String bankAccountNumber, String bankHolderName, String bankName) {
+    public PaymentHistoryModel() {
+        this.finalAmount = finalAmount;
         this.ledgerItem = ledgerItem;
         this.dateOfPayment = dateOfPayment;
         this.amount = amount;
@@ -63,5 +68,20 @@ public class PaymentHistoryModel {
 
     public void setBankName(String bankName) {
         this.bankName = bankName;
+    }
+    public ArrayList<String> getPowers() {
+        return powers;
+    }
+
+    public void setPowers(ArrayList<String> powers) {
+        this.powers = powers;
+    }
+
+    public String getFinalAmount() {
+        return finalAmount;
+    }
+
+    public void setFinalAmount(String finalAmount) {
+        this.finalAmount = finalAmount;
     }
 }
