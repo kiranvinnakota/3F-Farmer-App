@@ -47,12 +47,19 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
         setContentView(R.layout.activity_side_menu);
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
+        if(SharedPrefsData.getString(SideMenuActivity.this,Constants.USER_DETAILS,"2")!=null)
+        {
+            Gson gson = builder.create();
+            UserDetails userDetails = gson.fromJson(SharedPrefsData.getString(SideMenuActivity.this,Constants.USER_DETAILS,"2"), UserDetails.class);
+            System.out.println(userDetails);
+            Constants.FARMER_CODE = userDetails.getCode();
+            Constants.FARMER_FIRST_NAME =userDetails.getFirstName();
 
-        Gson gson = builder.create();
-        UserDetails userDetails = gson.fromJson(SharedPrefsData.getString(SideMenuActivity.this,Constants.USER_DETAILS,"2"), UserDetails.class);
-        System.out.println(userDetails);
-        Constants.FARMER_CODE = userDetails.getCode();
-        Constants.FARMER_FIRST_NAME =userDetails.getFirstName();
+        }
+
+
+
+
         Log.e(String.valueOf(SideMenuActivity.this), "farmercode: "+Constants.FARMER_CODE );
         mTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.menuOptions)));
 
