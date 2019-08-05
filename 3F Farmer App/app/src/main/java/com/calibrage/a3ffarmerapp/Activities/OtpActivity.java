@@ -133,8 +133,13 @@ if(farmerId==null){
                     String success=jsonObject.getString("isSuccess");
                     Log.d(TAG,"success======"+ success);
                     JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    if(alsoKnownAsArray.length()>0)
+                    {
+                        SharedPrefsData.putString(OtpActivity.this,Constants.USER_DETAILS,alsoKnownAsArray.getString(0),"2");
 
-                    SharedPrefsData.putString(OtpActivity.this,Constants.USER_DETAILS,alsoKnownAsArray.getString(0),"2");
+                    }
+
+
 
                    // Toasty.success(getApplicationContext(), userDetails.getAddress(), Toast.LENGTH_LONG).show();
 
