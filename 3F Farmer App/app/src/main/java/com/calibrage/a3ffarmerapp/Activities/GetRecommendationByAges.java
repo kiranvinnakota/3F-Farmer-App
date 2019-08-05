@@ -1,6 +1,7 @@
 package com.calibrage.a3ffarmerapp.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,13 +61,13 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
     Spinner spin;
     public static String text_year;
     boolean isLoading = false;
-
+    private ProgressDialog dialog;
     TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_get_recommendation_by_ages);
+        dialog = new ProgressDialog(this);
         text=(TextView)findViewById(R.id.noData);
         ImageView backImg = (ImageView) findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +154,9 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
 
     private void GetRecommendation() {
         //  String id="APWGBDAB00010001";
-
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
 
         String url = BASE_URL + "GetRecommendationAges";
 
@@ -163,6 +166,9 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "RESPONSE GetRecommendationAges======" + response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d(TAG, "RESPONSE GetRecommendationAges======" + jsonObject);
@@ -240,7 +246,10 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
     //This method will parse json data
     private void parseData(String text_year, final boolean lazyloading) {
 
-
+        //  String id="APWGBDAB00010001";
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         listSuperHeroes.clear();
 
         String URL_TOKEN = BASE_URL + "GetRecommendationsByAge/" + GetRecommendationByAges.text_year;
@@ -252,6 +261,9 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Doctor_Json" + response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
 
 if(lazyloading){

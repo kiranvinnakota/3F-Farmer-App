@@ -126,6 +126,7 @@
     <string name="size">size</string>
     <string name="landmark">landmark</string>
     <string name="select_godown">Select Godown</string>
+    <string name="select_plot_type">Select Plot Code</string>
     <array name="menuOptions">
         <item>Home</item>
         <item>My Requests</item>

@@ -171,6 +171,7 @@
      <string name="gr_amount">GR మొత్తం</string>
      <string name="memo">మెమో</string>
      <string name="amount">మొత్తం</string>
+     <string name="select_plot_type">ప్లాట్ కోడ్ ఎంచుకోండి</string>
      <!--  we need to use video ids instead of video link  -->
      <string-array name="video_id_array">
          <item>CqhpNxI8qYw</item>

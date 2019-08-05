@@ -99,7 +99,7 @@
             android:layout_marginTop="15sp"
             android:layout_toRightOf="@+id/dot2"
             android:text=""
-            android:textColor="#111"
+            android:textColor="@color/sliver"
             android:layout_marginLeft="10sp"
             android:textSize="@dimen/text_size"
             android:textStyle="bold"
@@ -146,7 +146,7 @@
             android:layout_toRightOf="@+id/dot3"
             android:text=""
             android:hint="31213254698"
-            android:textColor="#111"
+            android:textColor="@color/sliver"
             android:layout_marginLeft="10sp"
             android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
@@ -192,7 +192,7 @@
             android:layout_toRightOf="@+id/dot4"
             android:text=""
             android:hint="SBI"
-            android:textColor="#111"
+            android:textColor="@color/sliver"
             android:layout_marginLeft="10sp"
             android:textSize="@dimen/text_size"
             android:textStyle="bold"/>
@@ -238,7 +238,7 @@
             android:layout_toRightOf="@+id/dot5"
             android:text=""
             android:hint="JNTU"
-            android:textColor="#111"
+            android:textColor="@color/sliver"
             android:layout_marginLeft="10sp"
             android:textSize="@dimen/text_size"
             android:textStyle="bold"/>

@@ -195,6 +195,7 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
             TextView textUsername = header.findViewById(R.id.duo_view_header_text_title);
             textUsername.setTypeface(faceRegular);
             textUsername.setText(Constants.FARMER_FIRST_NAME);
+      //      textUsername.setText(getResources().getString(R.string.app_name)+Constants.FARMER_FIRST_NAME);
             TextView textrole = header.findViewById(R.id.duo_view_header_text_sub_title);
             textrole.setText("");
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -56,6 +57,8 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
+
 public class CollectionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     DatePickerDialog picker;
     EditText fromText,toText;
@@ -76,10 +79,13 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
     String fromString,toString;
     String reformattedStrFrom,reformattedStrTo;
     TextView text;
+    private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections);
+        dialog = new ProgressDialog(this);
         text=(TextView)findViewById(R.id.text);
         ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
@@ -401,6 +407,9 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         spin.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
     }
     private void get15days() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         //15 days date
         long yourDateMillis = System.currentTimeMillis() - (15 * 24 * 60 * 60 * 1000);
         Time yourDate = new Time();
@@ -408,14 +417,16 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         final String formattedDate = yourDate.format("%Y-%m-%d");
         Log.i("LOG_RESPONSE formattedDate ", formattedDate);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String URL = "http://183.82.111.111/3FFarmerAPI/api/Collection";
+        String URL = BASE_URL+"Collection";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.
                 //The String 'response' contains the server's response.
                 Log.i("LOG_RESPONSE ", response);
-
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
@@ -446,6 +457,9 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         MyRequestQueue.add(MyStringRequest);
     }
     private void get30days() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         //30 days date
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -1);
@@ -454,14 +468,16 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         final String dateOutput = format.format(date);
         Log.i("LOG_RESPONSE formattedDate2 ", dateOutput);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String URL = "http://183.82.111.111/3FFarmerAPI/api/Collection";
+        String URL = BASE_URL+"Collection";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.
                 //The String 'response' contains the server's response.
                 Log.i("LOG_RESPONSE ", response);
-
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
@@ -492,6 +508,9 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         MyRequestQueue.add(MyStringRequest);
     }
     private void getCustomCollections(final String fromString, final String toString) throws ParseException {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -512,7 +531,9 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
                 //This code is executed if the server responds, whether or not the response contains data.
                 //The String 'response' contains the server's response.
                 Log.i("LOG_RESPONSE ", response);
-
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
@@ -545,6 +566,9 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         MyRequestQueue.add(MyStringRequest);
     }
     private void getFullFinancialYear() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         //financial year
         int CurrentYear = Calendar.getInstance().get(Calendar.YEAR);
         int CurrentMonth = (Calendar.getInstance().get(Calendar.MONTH)+1);
@@ -571,7 +595,9 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
                 //This code is executed if the server responds, whether or not the response contains data.
                 //The String 'response' contains the server's response.
                 Log.i("LOG_RESPONSE ", response);
-
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
@@ -602,17 +628,22 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         MyRequestQueue.add(MyStringRequest);
     }
     private void getSinceApril2017Data() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         final String aprilDate = "2017/04/01";
         Log.i("LOG_RESPONSE april 2017 date ", aprilDate);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String URL = "http://183.82.111.111/3FFarmerAPI/api/Collection";
+        String URL = BASE_URL+"Collection";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.
                 //The String 'response' contains the server's response.
                 Log.i("LOG_RESPONSE ", response);
-
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d("", "RESPONSE Encyclopedia======" + jsonObject);

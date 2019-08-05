@@ -3,6 +3,7 @@ package com.calibrage.a3ffarmerapp.Activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -22,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.R;
+import com.calibrage.a3ffarmerapp.util.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,13 +34,17 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
+
 public class PaymentActivity extends AppCompatActivity {
     public static  String TAG="PaymentActivity";
     private  TextView accoontHolderName,accoontNumber,bankNamee,branchName;
+    private ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        dialog = new ProgressDialog(this);
         accoontHolderName=(TextView)findViewById(R.id.tvtext_item_three);
         accoontNumber=(TextView)findViewById(R.id.tvtext_item_five);
         bankNamee=(TextView)findViewById(R.id.tvtext_item_seven);
@@ -65,11 +71,13 @@ public class PaymentActivity extends AppCompatActivity {
     }
     private void getBankDetails()  {
       //  listSuperHeroes.clear();
-
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String URL = "http://183.82.111.111/3FFarmerAPI/api/Payment/GetVendorLedger";
-
+       // String URL = "http://183.82.111.111/3FFarmerAPI/api/Payment/GetVendorLedger";
+        String URL = BASE_URL+"Payment/GetVendorLedger";
 
         RequestQueue queue= Volley.newRequestQueue(this);
 
@@ -80,8 +88,11 @@ public class PaymentActivity extends AppCompatActivity {
         jsonParams.put( "toDate","2019-08-01T10:10:52.5116115+05:30");*/
         jsonParams.put( "fromDate","2019-04-02T10:57:42.62339+05:30");
         jsonParams.put( "toDate","2019-08-02T10:57:42.62339+05:30");
-        jsonParams.put( "vendorCode","VWGBDAB00010001");
 
+        String vendor= Constants.FARMER_CODE;
+        String splitVendor = vendor.replace("AP", "V");
+        Log.d(TAG,"newString:"+ splitVendor);
+        jsonParams.put( "vendorCode",splitVendor);
         Log.d(TAG,"Json==slot:"+ new JSONObject(jsonParams));
 
         JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, URL,new JSONObject(jsonParams),
@@ -91,6 +102,9 @@ public class PaymentActivity extends AppCompatActivity {
                         String result = response.toString();
 
                         Log.d("result=====",result);
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
                         JSONObject jsonObject = null;
                         try {
                             jsonObject = new JSONObject(result);

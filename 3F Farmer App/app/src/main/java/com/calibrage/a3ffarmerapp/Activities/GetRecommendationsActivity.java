@@ -3,6 +3,7 @@ package com.calibrage.a3ffarmerapp.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -41,6 +42,7 @@ import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.Adapters.GetRecommendationsAdapter;
 import com.calibrage.a3ffarmerapp.Model.GetRecommendationsModel;
 import com.calibrage.a3ffarmerapp.R;
+import com.calibrage.a3ffarmerapp.util.Constants;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -54,6 +56,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
@@ -64,6 +67,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
     public static  String TAG="GetRecommendationsActivity";
     private List<GetRecommendationsModel> listSuperHeroes;
     EditText fromText,toText;
+    private ProgressDialog dialog;
     //Creating Views
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -80,6 +84,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_recommendations);
+        dialog = new ProgressDialog(this);
         text=(TextView)findViewById(R.id.text);
        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -115,7 +120,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                             }
                         }, year, month, day);
                 picker.show();
-                picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+             //   picker.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
         toText=(EditText) findViewById(R.id.to_date);
@@ -136,7 +141,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                             }
                         }, year, month, day);
                 picker.show();
-                picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+            //    picker.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
         Button buttonSubmit=(Button)findViewById(R.id.buttonSubmit);
@@ -148,6 +153,8 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                 fromString = fromText.getText().toString().trim();
                 toString = toText.getText().toString().trim();
 
+
+
                 if(fromString.equalsIgnoreCase("")||toString.equalsIgnoreCase(""))
                 {
                     Toasty.error(GetRecommendationsActivity.this, "Please Enter From/To Date", Toast.LENGTH_SHORT).show();
@@ -156,11 +163,29 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                 }
                 else
                 {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     try {
-                        getCustomRecommendations(fromString,toString);
+                        Date date1 = dateFormat.parse(fromString);
+
+                        Date date2 = dateFormat.parse(toString);
+
+                        long diff = date2.getTime() - date1.getTime();
+                        Log.e("diff====", String.valueOf(diff));
+                        float dayCount = (float) diff / (24 * 60 * 60 * 1000);
+                        Log.e("dayCount =====", String.valueOf(dayCount));
+                        if(dayCount<=31.0){
+                            getCustomRecommendations(fromString,toString);
+                        }else{
+                            Toasty.error(GetRecommendationsActivity.this, "Please Select Date within One Month Only", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                   /* try {
+                        getCustomRecommendations(fromString,toString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }*/
                     // Toast.makeText(CollectionsActivity.this, "kiran", Toast.LENGTH_SHORT).show();
                   //  timePeroidLinear.setVisibility(View.GONE);
                     //     text.setVisibility(View.VISIBLE);
@@ -184,8 +209,10 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
 
     }
     private void GetRecommendations() {
-
-        String url = BASE_URL+"Farmer/GetPlotDetailsByFarmerCode/APWGBDAB00010001";
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        String url = BASE_URL+"Farmer/GetPlotDetailsByFarmerCode/"+ Constants.FARMER_CODE;
         //  String url="http://183.82.103.171:9096/API/api/GetActiveLookUp/9";
 
 
@@ -195,6 +222,9 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "RESPONSE Recommendations NEW======" + response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d(TAG, "RESPONSE Recommendations1======" + jsonObject);
@@ -255,6 +285,9 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
         requestQueue.add(stringRequest);
     }
     private void getCustomRecommendations(final String fromString, final String toString) throws ParseException {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
         listSuperHeroes.clear();
         SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -270,7 +303,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
 
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String URL = "http://183.82.111.111/3FFarmerAPI/api/Recommendations/GetRecommendationsByPlotCode";
+        String URL = BASE_URL+"Recommendations/GetRecommendationsByPlotCode";
 
 
         RequestQueue queue= Volley.newRequestQueue(this);
@@ -297,6 +330,9 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                         try {
                             jsonObject = new JSONObject(result);
                             Log.d(TAG,"RESPONSE result======"+ jsonObject);
+                            if (dialog.isShowing()) {
+                                dialog.dismiss();
+                            }
                              String affectedRecords=jsonObject.getString("affectedRecords");
                             Log.d(TAG,"RESPONSE affectedRecords======"+ affectedRecords);
                             if(affectedRecords.contains("0") ){
