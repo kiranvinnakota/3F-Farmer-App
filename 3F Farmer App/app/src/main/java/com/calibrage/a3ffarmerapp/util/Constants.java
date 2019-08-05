@@ -13,5 +13,9 @@ public class Constants {
     public static String SHARED_PREF_NAME ="3f_palm";
     public static String IS_LOGIN ="login_verfication";
 
+    public static String USER_DETAILS = "user_details";
+    public static String FARMER_CODE = "";
+    public static String FARMER_FIRST_NAME = "";
+
 
 }

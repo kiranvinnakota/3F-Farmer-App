@@ -3,6 +3,7 @@ package com.calibrage.a3ffarmerapp.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,12 +59,15 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
     private RecyclerView.Adapter adapter;
     Spinner spin;
     public static String text_year;
+    boolean isLoading = false;
+
     TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        text=(TextView)findViewById(R.id.noData);
+
         setContentView(R.layout.activity_get_recommendation_by_ages);
+        text=(TextView)findViewById(R.id.noData);
         ImageView backImg = (ImageView) findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +96,59 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
         recyclerView.setLayoutManager(layoutManager);
         listSuperHeroes = new ArrayList<>();
         GetRecommendation();
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == listSuperHeroes.size() - 1) {
+                        //bottom of list!
+                       // loadMore();
+                        isLoading = true;
+                    }
+                }
+            }
+        });
+    }
+
+
+    private void loadMore() {
+        listSuperHeroes.add(null);
+        adapter.notifyItemInserted(listSuperHeroes.size() - 1);
+
+        parseData(text_year,true);
+
+
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                listSuperHeroes.remove(listSuperHeroes.size() - 1);
+//                int scrollPosition = listSuperHeroes.size();
+//                adapter.notifyItemRemoved(scrollPosition);
+//                int currentSize = scrollPosition;
+//                int nextLimit = currentSize + 10;
+//
+//                while (currentSize - 1 < nextLimit) {
+//                   // listSuperHeroes.add("Item " + currentSize);
+//                    currentSize++;
+//                }
+//
+//                adapter.notifyDataSetChanged();
+//                isLoading = false;
+//            }
+//        }, 2000);
+
+
     }
 
     private void GetRecommendation() {
@@ -174,13 +232,15 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
         int index = spin.getSelectedItemPosition();
         text_year = spin.getItemAtPosition(spin.getSelectedItemPosition()).toString();
         Log.d("data===", text_year);
-        parseData(text_year);
+        parseData(text_year,false);
 
     }
 
 
     //This method will parse json data
-    private void parseData(String text_year) {
+    private void parseData(String text_year, final boolean lazyloading) {
+
+
         listSuperHeroes.clear();
 
         String URL_TOKEN = BASE_URL + "GetRecommendationsByAge/" + GetRecommendationByAges.text_year;
@@ -194,15 +254,13 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
                 Log.d(TAG, "Doctor_Json" + response);
                 try {
 
+if(lazyloading){
+    listSuperHeroes.remove(listSuperHeroes.size() - 1);
+    int scrollPosition = listSuperHeroes.size();
+    adapter.notifyItemRemoved(scrollPosition);
+}
 
                     JSONArray jsonArray = new JSONArray(response);
-                   /* if(jsonArray.length()>0){
-                        recyclerView.setVisibility(View.VISIBLE);
-                        text.setVisibility(View.GONE);
-                    }else{
-                        recyclerView.setVisibility(View.GONE);
-                        text.setVisibility(View.VISIBLE);
-                    }*/
                     Log.e("jsonArray==", jsonArray.toString());
 
         for(int i = 0; i<jsonArray.length(); i++) {
@@ -232,6 +290,9 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
             listSuperHeroes.add(superHero);
         }
 
+
+
+
         //Finally initializing our adapter
         adapter = new GetRecommendationsByAgeAdapter(listSuperHeroes, GetRecommendationByAges.this);
 
@@ -242,10 +303,31 @@ public class GetRecommendationByAges extends AppCompatActivity implements Adapte
                     e.printStackTrace();
                 }
                 //Finally initializing our adapter
-                adapter = new GetRecommendationsByAgeAdapter(listSuperHeroes, GetRecommendationByAges.this);
+//                adapter = new GetRecommendationsByAgeAdapter(listSuperHeroes, GetRecommendationByAges.this);
+//
+//                //Adding adapter to recyclerview
+//                recyclerView.setAdapter(adapter);
 
-                //Adding adapter to recyclerview
-                recyclerView.setAdapter(adapter);
+
+if(lazyloading){
+
+//    listSuperHeroes.remove(listSuperHeroes.size() - 1);
+//    int scrollPosition = listSuperHeroes.size();
+//    adapter.notifyItemRemoved(scrollPosition);
+   // int currentSize = scrollPosition;
+   // int nextLimit = currentSize + 10;
+    adapter.notifyDataSetChanged();
+    isLoading = false;
+
+}else {
+
+    adapter = new GetRecommendationsByAgeAdapter(listSuperHeroes, GetRecommendationByAges.this);
+
+    //Adding adapter to recyclerview
+    recyclerView.setAdapter(adapter);
+
+}
+
 
             }
         }, new Response.ErrorListener() {

@@ -25,9 +25,13 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.calibrage.a3ffarmerapp.Model.UserDetails;
 import com.calibrage.a3ffarmerapp.R;
 import com.calibrage.a3ffarmerapp.util.Constants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -128,6 +132,14 @@ if(farmerId==null){
                     Log.d(TAG,"RESPONSE======"+ jsonObject);
                     String success=jsonObject.getString("isSuccess");
                     Log.d(TAG,"success======"+ success);
+                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+
+                    SharedPrefsData.putString(OtpActivity.this,Constants.USER_DETAILS,alsoKnownAsArray.getString(0),"2");
+
+                   // Toasty.success(getApplicationContext(), userDetails.getAddress(), Toast.LENGTH_LONG).show();
+
+//                    jsonString = gson.toJson(student);
+//                    System.out.println(jsonString);
                     if (success.equals("true")){
 
                         SharedPrefsData.putBool(OtpActivity.this,Constants.IS_LOGIN,true,"2");
@@ -136,7 +148,7 @@ if(farmerId==null){
                         editor.apply();
                         Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
                         startActivity(intent);
-                        Toasty.success(getApplicationContext(), "OTP Valided Successfully", Toast.LENGTH_LONG).show();
+                        Toasty.success(getApplicationContext(), "OTP Valided Successfully", Toast.LENGTH_SHORT).show();
                         //  Toast.makeText(getApplicationContext(),success,Toast.LENGTH_SHORT).show();
                     }else{
                         Toasty.error(getApplicationContext(), "OTP Invalid", Toast.LENGTH_LONG).show();

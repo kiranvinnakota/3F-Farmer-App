@@ -47,6 +47,8 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
+import static com.calibrage.a3ffarmerapp.util.CommonUtil.ConvertDatetoTime;
+
 
 public class PaymentHistoryActivity extends AppCompatActivity  {
     private Animation animationUp, animationDown;
@@ -64,6 +66,7 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
     String selected_datep;Button submit;
     String reformattedStrFrom,reformattedStrTo;
     TextView text;
+    private Calendar calendar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,11 +96,12 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
         fromText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+                calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
                 // date picker dialog
+             //   picker.getDatePicker().setMaxDate(System.currentTimeMillis());
                 picker = new DatePickerDialog(PaymentHistoryActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
@@ -108,7 +112,7 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
                             }
                         }, year, month, day);
                 picker.show();
-              //  picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                picker.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
 
@@ -117,15 +121,17 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
         toText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+              Calendar  calendar1 = Calendar.getInstance();
+                int day = calendar1.get(Calendar.DAY_OF_MONTH);
+                int month = calendar1.get(Calendar.MONTH);
+                int year = calendar1.get(Calendar.YEAR);
                 // date picker dialog
-                picker = new DatePickerDialog(PaymentHistoryActivity.this,
+             DatePickerDialog   picker1 = new DatePickerDialog(PaymentHistoryActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+
                                 toText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
                                 String selected_date=(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
@@ -135,8 +141,9 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
                             }
                         }, year, month, day);
 
-                picker.show();
-             //   picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                picker1.show();
+                picker1.getDatePicker().setMinDate(ConvertDatetoTime(fromText.getText().toString()));
+                picker1.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {

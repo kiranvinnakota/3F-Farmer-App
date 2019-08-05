@@ -34,6 +34,7 @@ import androidx.core.content.FileProvider;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -385,6 +386,48 @@ public class CommonUtil {
             }
         }
         return isAllPermissionsGranted;
+    }
+
+
+    public static boolean CheckDates(String d1, String d2)   {
+        SimpleDateFormat dfDate  = new SimpleDateFormat("dd/MM/yyyy");
+        boolean b = false;
+        try {
+            if(dfDate.parse(d1).before(dfDate.parse(d2)))
+            {
+                b = true;//If start date is before end date
+            }
+            else if(dfDate.parse(d1).equals(dfDate.parse(d2)))
+            {
+                b = true;//If two dates are equal
+            }
+            else
+            {
+                b = false; //If start date is after the end date
+            }
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return b;
+    }
+
+    public static long ConvertDatetoTime(String dateString){
+        try {
+           // String dateString = "30/09/2014";
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = sdf.parse(dateString);
+
+            long startDate = date.getTime();
+            return startDate;
+
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+            return 0;
+        }
+
+
     }
 }
 

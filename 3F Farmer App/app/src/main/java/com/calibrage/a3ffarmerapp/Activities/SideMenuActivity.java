@@ -14,14 +14,18 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.calibrage.a3ffarmerapp.Fragments.HomeFragment;
 import com.calibrage.a3ffarmerapp.Fragments.MyRequestsFragment;
+import com.calibrage.a3ffarmerapp.Model.UserDetails;
 import com.calibrage.a3ffarmerapp.R;
 import com.calibrage.a3ffarmerapp.util.Constants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +45,15 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_side_menu);
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+
+        Gson gson = builder.create();
+        UserDetails userDetails = gson.fromJson(SharedPrefsData.getString(SideMenuActivity.this,Constants.USER_DETAILS,"2"), UserDetails.class);
+        System.out.println(userDetails);
+        Constants.FARMER_CODE = userDetails.getCode();
+        Constants.FARMER_FIRST_NAME =userDetails.getFirstName();
+        Log.e(String.valueOf(SideMenuActivity.this), "farmercode: "+Constants.FARMER_CODE );
         mTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.menuOptions)));
 
         // Initialize the views
@@ -59,6 +72,8 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
         goToFragment(new HomeFragment(), false);
         mMenuAdapter.setViewSelected(0, true);
         setTitle(mTitles.get(0));
+
+
     }
 
     private void handleToolbar() {
@@ -172,7 +187,7 @@ public class SideMenuActivity extends AppCompatActivity implements DuoMenuView.O
             Typeface faceRegular = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
             TextView textUsername = header.findViewById(R.id.duo_view_header_text_title);
             textUsername.setTypeface(faceRegular);
-            textUsername.setText(R.string.name);
+            textUsername.setText(Constants.FARMER_FIRST_NAME);
             TextView textrole = header.findViewById(R.id.duo_view_header_text_sub_title);
             textrole.setText("");
 
