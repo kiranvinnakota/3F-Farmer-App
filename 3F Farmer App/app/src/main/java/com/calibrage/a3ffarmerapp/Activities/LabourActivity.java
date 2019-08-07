@@ -3,12 +3,15 @@ package com.calibrage.a3ffarmerapp.Activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,9 +22,24 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.Adapters.SpinnerAdapter;
 import com.calibrage.a3ffarmerapp.Model.StateVO;
 import com.calibrage.a3ffarmerapp.R;
+import com.calibrage.a3ffarmerapp.util.Constants;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -42,8 +60,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import es.dmoral.toasty.Toasty;
 import fr.ganfra.materialspinner.MaterialSpinner;
+
+import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
 
 
 public class LabourActivity extends AppCompatActivity implements OnItemSelectedListener {
@@ -55,11 +79,16 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
     final String[] select_labour_type = {
              "hired labour","farm labour "};
     List<String> list = new ArrayList<String>();
-
+    Spinner spin;
+    private ProgressDialog dialog;
+    public static  String TAG="LabourActivity";
+    ArrayList<String> listdata =new ArrayList<String>();
+    MultiSelectionSpinner multiSelectionSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour);
+        dialog = new ProgressDialog(this);
         ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,14 +109,10 @@ public class LabourActivity extends AppCompatActivity implements OnItemSelectedL
       Spinner  spinner1 = (MaterialSpinner) findViewById(R.id.spinner);
         spinner1.setAdapter(adapter);*/
 
-        MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner);
-        list.add("hired labour");
-        list.add("farm labour");
+        multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner_labour_type);
 
-
-        //set items to spinner from list
-        multiSelectionSpinner.setItems(list);
-
+        spin = (Spinner) findViewById(R.id.spinner_new);
+        spin.setOnItemSelectedListener(this);
     //    spinner.setAdapter(arrayAdapter);
       /*  ArrayList<StateVO> listVOs = new ArrayList<>();
 
@@ -210,33 +235,163 @@ edittext.setOnClickListener(new View.OnClickListener() {
 
             }
         });
-     //   DisplayActionBar();
+        GetRecommendations();
+        GetSpinnerLabourType();
     }
-    private void DisplayActionBar() {
-        final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-        // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
-        View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.MATCH_PARENT,
-                Gravity.CENTER);
-        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        textviewTitle.setText(R.string.labour);
-/*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
+    private void GetRecommendations() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        String url = BASE_URL+"Farmer/GetPlotDetailsByFarmerCode/"+Constants.FARMER_CODE;
+        //  String url="http://183.82.103.171:9096/API/api/GetActiveLookUp/9";
 
-        textviewTitle.setText(Html.fromHtml(header));*/
 
-        abar.setCustomView(viewActionBar, params);
-        abar.setDisplayShowCustomEnabled(true);
-        abar.setDisplayShowTitleEnabled(false);
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "RESPONSE Recommendations NEW======" + response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d(TAG, "RESPONSE Recommendations1======" + jsonObject);
+                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    Log.i("LOG_RESPONSE alsoKnownAsArray", String.valueOf(alsoKnownAsArray.length()));
+                    for(int i = 0; i<alsoKnownAsArray.length(); i++) {
+                        JSONObject leagueData = alsoKnownAsArray.getJSONObject(i);
+                        String plotCode = leagueData.getString("code");
+                        Log.d(TAG, "RESPONSE plotCode======" + plotCode);
 
-        abar.setDisplayHomeAsUpEnabled(true);
+                        listdata.add(plotCode);
+//
+                    }
 
-        abar.setHomeButtonEnabled(true);
 
-        abar.show();
+                    spin.setAdapter(new ArrayAdapter<String>(LabourActivity.this, android.R.layout.simple_spinner_dropdown_item, listdata));
+                  /*  String success = jsonObject.getString("isSuccess");
+                    Log.d(TAG, "success Recommendations======" + success);*/
 
+
+                   /* JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    parseData(alsoKnownAsArray);*/
+                    //parseData(alsoKnownAsArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                if (error instanceof NetworkError) {
+                    Log.i("one:" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Log.i("two:" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof AuthFailureError) {
+                    Log.i("three:" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "AuthFailure Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Log.i("four::" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Parse Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NoConnectionError) {
+                    Log.i("five::" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "NoConnection Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof TimeoutError) {
+                    Log.i("six::" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Timeout Error", Toast.LENGTH_SHORT).show();
+                } else {
+                    System.out.println("Checking error in else");
+                }
+            }
+        });
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
+    }
+    private void GetSpinnerLabourType() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        String url = BASE_URL+"TypeCdDmt/6";
+        //  String url="http://183.82.103.171:9096/API/api/GetActiveLookUp/9";
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "RESPONSE Recommendations NEW======" + response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d(TAG, "RESPONSE Recommendations1======" + jsonObject);
+                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    Log.i("LOG_RESPONSE alsoKnownAsArray", String.valueOf(alsoKnownAsArray.length()));
+                    for(int i = 0; i<alsoKnownAsArray.length(); i++) {
+                        JSONObject leagueData = alsoKnownAsArray.getJSONObject(i);
+                        String desc = leagueData.getString("desc");
+                        Log.d(TAG, "RESPONSE plotCode======" + desc);
+
+                        list.add(desc);
+
+                        //set items to spinner from list
+                     //   multiSelectionSpinner.setItems(list);
+//
+                    }
+
+
+                    multiSelectionSpinner.setAdapter(new ArrayAdapter<String>(LabourActivity.this, android.R.layout.simple_spinner_dropdown_item, list));
+                  /*  String success = jsonObject.getString("isSuccess");
+                    Log.d(TAG, "success Recommendations======" + success);*/
+
+
+                   /* JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    parseData(alsoKnownAsArray);*/
+                    //parseData(alsoKnownAsArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                if (error instanceof NetworkError) {
+                    Log.i("one:" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Log.i("two:" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof AuthFailureError) {
+                    Log.i("three:" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "AuthFailure Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Log.i("four::" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Parse Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof NoConnectionError) {
+                    Log.i("five::" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "NoConnection Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof TimeoutError) {
+                    Log.i("six::" + TAG, error.toString());
+                    Toasty.error(getApplicationContext(), "Timeout Error", Toast.LENGTH_SHORT).show();
+                } else {
+                    System.out.println("Checking error in else");
+                }
+            }
+        });
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        requestQueue.add(stringRequest);
     }
     private void updateLabel() {
         String myFormat = "MM/dd/yy"; //In which you need put here

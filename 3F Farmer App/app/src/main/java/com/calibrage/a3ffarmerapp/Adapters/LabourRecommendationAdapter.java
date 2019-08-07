@@ -59,8 +59,8 @@ public class LabourRecommendationAdapter extends RecyclerView.Adapter<LabourReco
 
                 mContext.startActivity(intent);*/
 
-                mContext.startActivity(new Intent(mContext, LabourActivity.class));
-                ((Activity)mContext).finish();
+              /*  mContext.startActivity(new Intent(mContext, LabourActivity.class));
+                ((Activity)mContext).finish();*/
 
             }
 

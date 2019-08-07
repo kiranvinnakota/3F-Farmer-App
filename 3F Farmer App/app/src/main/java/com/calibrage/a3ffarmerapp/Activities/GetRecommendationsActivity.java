@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ import com.calibrage.a3ffarmerapp.Adapters.GetRecommendationsAdapter;
 import com.calibrage.a3ffarmerapp.Model.GetRecommendationsModel;
 import com.calibrage.a3ffarmerapp.R;
 import com.calibrage.a3ffarmerapp.util.Constants;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -67,42 +70,53 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
     public static  String TAG="GetRecommendationsActivity";
     private List<GetRecommendationsModel> listSuperHeroes;
     EditText fromText,toText;
+    String financiyalYearFrom,financiyalYearTo;
     private ProgressDialog dialog;
     //Creating Views
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     ArrayList<String> listdata =new ArrayList<String>();
-    Spinner spin;
+    Spinner spin,sinner_timeperiod;
     DatePickerDialog picker;
     String fromString,toString;
     public static String plotSelection;
     String reformattedStrFrom,reformattedStrTo;
     TextView text;
+    String currentDate;
     String datetimevalute;
+    RelativeLayout timePeroidLinear;
+    String[] time = { "Last 15 Days", "Last 30 Days", "Full Financial year", "Since April 2017", "Custom Time Period"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_recommendations);
         dialog = new ProgressDialog(this);
-        text=(TextView)findViewById(R.id.text);
-       recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        text = (TextView) findViewById(R.id.text);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        ImageView backImg=(ImageView)findViewById(R.id.back);
+        timePeroidLinear=(RelativeLayout) findViewById(R.id.relative2);
+        ImageView backImg = (ImageView) findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(getApplicationContext(),SideMenuActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SideMenuActivity.class);
                 startActivity(intent);
             }
         });
+
+        currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        Log.i("LOG_RESPONSE date ", currentDate);
         //Initializing our superheroes list
-       listSuperHeroes = new ArrayList<>();
+        listSuperHeroes = new ArrayList<>();
         spin = (Spinner) findViewById(R.id.spinner);
+        sinner_timeperiod = (Spinner) findViewById(R.id.spinner2);
+
+
         spin.setOnItemSelectedListener(this);
-        fromText=(EditText) findViewById(R.id.from_date);
+        fromText = (EditText) findViewById(R.id.from_date);
         fromText.setInputType(InputType.TYPE_NULL);
         fromText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,10 +134,10 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                             }
                         }, year, month, day);
                 picker.show();
-             //   picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                //   picker.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
-        toText=(EditText) findViewById(R.id.to_date);
+        toText = (EditText) findViewById(R.id.to_date);
         toText.setInputType(InputType.TYPE_NULL);
         toText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,10 +155,10 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                             }
                         }, year, month, day);
                 picker.show();
-            //    picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                //    picker.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
-        Button buttonSubmit=(Button)findViewById(R.id.buttonSubmit);
+        Button buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,15 +168,11 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                 toString = toText.getText().toString().trim();
 
 
-
-                if(fromString.equalsIgnoreCase("")||toString.equalsIgnoreCase(""))
-                {
+                if (fromString.equalsIgnoreCase("") || toString.equalsIgnoreCase("")) {
                     Toasty.error(GetRecommendationsActivity.this, "Please Enter From/To Date", Toast.LENGTH_SHORT).show();
                     /*timePeroidLinear.setVisibility(View.VISIBLE); //
                     recyclerView.setVisibility(View.GONE);*/
-                }
-                else
-                {
+                } else {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     try {
                         Date date1 = dateFormat.parse(fromString);
@@ -173,9 +183,9 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                         Log.e("diff====", String.valueOf(diff));
                         float dayCount = (float) diff / (24 * 60 * 60 * 1000);
                         Log.e("dayCount =====", String.valueOf(dayCount));
-                        if(dayCount<=31.0){
-                            getCustomRecommendations(fromString,toString);
-                        }else{
+                        if (dayCount <= 31.0) {
+                            getCustomRecommendations(fromString, toString);
+                        } else {
                             Toasty.error(GetRecommendationsActivity.this, "Please Select Date within One Month Only", Toast.LENGTH_SHORT).show();
                         }
                     } catch (ParseException e) {
@@ -187,7 +197,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                         e.printStackTrace();
                     }*/
                     // Toast.makeText(CollectionsActivity.this, "kiran", Toast.LENGTH_SHORT).show();
-                  //  timePeroidLinear.setVisibility(View.GONE);
+                    //  timePeroidLinear.setVisibility(View.GONE);
                     //     text.setVisibility(View.VISIBLE);
 
                 }
@@ -206,6 +216,274 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
 
         });
         GetRecommendations();
+
+    }
+
+    private void get15days() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+//30 days date
+        long yourDateMillis = System.currentTimeMillis() - (15 * 24 * 60 * 60 * 1000);
+        Time yourDate = new Time();
+        yourDate.set(yourDateMillis);
+        final String formattedDate = yourDate.format("%Y-%m-%d");
+        Log.i("formattedDate== ", formattedDate);
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String URL = "http://183.82.111.111/3FFarmerAPI/api/Recommendations/GetRecommendationsByPlotCode";
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+//This code is executed if the server responds, whether or not the response contains data.
+//The String 'response' contains the server's response.
+                Log.i("get15days==== ", response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
+                    String affectedRecords=jsonObject.getString("affectedRecords");
+                    Log.d(TAG,"RESPONSE affectedRecords======"+ affectedRecords);
+                    if(affectedRecords.contains("0") ){
+                        recyclerView.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+
+                    }else{
+                        recyclerView.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.GONE);
+                    }
+                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    Log.d(TAG, "RESPONSE result======" + alsoKnownAsArray);
+
+                    parseData(alsoKnownAsArray);
+
+                    parseData(alsoKnownAsArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put( "plotCode",plotSelection);
+                MyData.put("fromDate", formattedDate);
+                MyData.put("toDate", currentDate);
+
+                Log.e("MyData===",MyData.toString());
+                return MyData;
+            }
+        };
+
+        MyRequestQueue.add(MyStringRequest);
+    }
+    private void get30days() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+//30 days date
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        Date date = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        final String dateOutput = format.format(date);
+        Log.i(" dateOutput===", dateOutput);
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String URL = "http://183.82.111.111/3FFarmerAPI/api/Recommendations/GetRecommendationsByPlotCode";
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+//This code is executed if the server responds, whether or not the response contains data.
+//The String 'response' contains the server's response.
+                Log.i("LOG_RESPONSE ", response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
+                    String affectedRecords=jsonObject.getString("affectedRecords");
+                    Log.d(TAG,"RESPONSE affectedRecords======"+ affectedRecords);
+                    if(affectedRecords.contains("0") ){
+                        recyclerView.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+
+                    }else{
+                        recyclerView.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.GONE);
+                    }
+                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    Log.d(TAG, "RESPONSE result======" + alsoKnownAsArray);
+
+                    parseData(alsoKnownAsArray);
+
+                    parseData(alsoKnownAsArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put( "plotCode",plotSelection);
+                MyData.put("fromDate", dateOutput);
+                MyData.put("toDate", currentDate);
+                return MyData;
+            }
+        };
+
+        MyRequestQueue.add(MyStringRequest);
+    }
+    @SuppressLint("LongLogTag")
+    private void getFullFinancialYear() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        //financial year
+        int CurrentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int CurrentMonth = (Calendar.getInstance().get(Calendar.MONTH)+1);
+
+        if(CurrentMonth<4)
+        {
+            financiyalYearFrom=(CurrentYear-1)+"-04-01";
+            financiyalYearTo=(CurrentYear)+"-03-31";
+            Log.i("LOG_RESPONSE financiyalYearFrom ", financiyalYearFrom);
+            Log.i("LOG_RESPONSE financiyalYearTo ", financiyalYearTo);
+        }
+        else
+        {
+            financiyalYearFrom=(CurrentYear)+"-04-01";
+            financiyalYearTo=(CurrentYear+1)+"-03-31";;
+            Log.i("LOG_RESPONSE financiyalYearFrom2 ", financiyalYearFrom);
+            Log.i("LOG_RESPONSE financiyalYearTo2 ", financiyalYearTo);
+        }
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String URL = "http://183.82.111.111/3FFarmerAPI/api/Recommendations/GetRecommendationsByPlotCode";
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+                Log.i("LOG_RESPONSE ", response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
+                    String affectedRecords=jsonObject.getString("affectedRecords");
+                    Log.d(TAG,"RESPONSE affectedRecords======"+ affectedRecords);
+                    if(affectedRecords.contains("0") ){
+                        recyclerView.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+
+                    }else{
+                        recyclerView.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.GONE);
+                    }
+                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    Log.d(TAG,"RESPONSE result======"+ alsoKnownAsArray);
+
+                    parseData(alsoKnownAsArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put( "plotCode",plotSelection);
+                MyData.put("fromDate", financiyalYearFrom);
+                MyData.put("toDate", financiyalYearTo);
+                return MyData;
+            }
+        };
+
+        MyRequestQueue.add(MyStringRequest);
+    }
+    @SuppressLint("LongLogTag")
+    private void getSinceApril2017Data() {
+        dialog.setMessage("Loading, please wait....");
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        final String aprilDate = "2017/04/01";
+        Log.i("LOG_RESPONSE april 2017 date ", aprilDate);
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String URL = "http://183.82.111.111/3FFarmerAPI/api/Recommendations/GetRecommendationsByPlotCode";
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+                Log.i("LOG_RESPONSE ", response);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Log.d("", "RESPONSE Encyclopedia======" + jsonObject);
+                    String affectedRecords=jsonObject.getString("affectedRecords");
+                    Log.d(TAG,"RESPONSE affectedRecords======"+ affectedRecords);
+                    if(affectedRecords.contains("0") ){
+                        recyclerView.setVisibility(View.GONE);
+                        text.setVisibility(View.VISIBLE);
+
+                    }else{
+                        recyclerView.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.GONE);
+                    }
+                    JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
+                    Log.d(TAG,"RESPONSE result======"+ alsoKnownAsArray);
+
+                    parseData(alsoKnownAsArray);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put( "plotCode",plotSelection);
+                MyData.put("fromDate", aprilDate);
+                MyData.put("toDate", currentDate);
+                return MyData;
+            }
+        };
+
+        MyRequestQueue.add(MyStringRequest);
 
     }
     private void GetRecommendations() {
@@ -333,7 +611,7 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                             if (dialog.isShowing()) {
                                 dialog.dismiss();
                             }
-                             String affectedRecords=jsonObject.getString("affectedRecords");
+                            String affectedRecords=jsonObject.getString("affectedRecords");
                             Log.d(TAG,"RESPONSE affectedRecords======"+ affectedRecords);
                             if(affectedRecords.contains("0") ){
                                 recyclerView.setVisibility(View.GONE);
@@ -373,8 +651,8 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
 
 
 
-            }
-        },new Response.ErrorListener() {
+                    }
+                },new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 // Handle Error
@@ -409,14 +687,14 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                 json = array.getJSONObject(i);
                 superHero.setFertilizer(json.getString("plotCode"));
                 superHero.setUoM(json.getString("recommendedFertilizerName"));
-                  superHero.setYear1(json.getString("dosage"));
-                 superHero.setYear17Above(json.getString("uom"));
+                superHero.setYear1(json.getString("dosage"));
+                superHero.setYear17Above(json.getString("uom"));
                 superHero.setYear2(json.getString("comments"));
                 superHero.setYear3(json.getString("issuIdentified"));
                 superHero.setYear4And5(json.getString("recommendedBy"));
 
                 String date=json.getString("recommendedOn");
-              String  datee = date.substring(0, 10);
+                String  datee = date.substring(0, 10);
                 Log.e("datee===",datee);
                 SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
@@ -430,12 +708,12 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                    superHero.setYear6And7(datetimevalute);
+                superHero.setYear6And7(datetimevalute);
 
 
 
-           //     superHero.setYear8To17(json.getString("plotSize"));
-            //    superHero.setRemarks(json.getString("location"));
+                //     superHero.setYear8To17(json.getString("plotSize"));
+                //    superHero.setRemarks(json.getString("location"));
                 ArrayList<String> powers = new ArrayList<String>();
 
                 //  JSONArray jsonArray = json.getJSONArray(Config.TAG_POWERS);
@@ -464,8 +742,139 @@ public class GetRecommendationsActivity extends AppCompatActivity implements Ada
         plotSelection = spin.getItemAtPosition(spin.getSelectedItemPosition()).toString();
         Log.d("data===", plotSelection);
 
+        sinner_timeperiod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String time_period = sinner_timeperiod.getItemAtPosition(sinner_timeperiod.getSelectedItemPosition()).toString();
+                Log.e("time=========", sinner_timeperiod.getSelectedItem().toString());
+                Log.e("time_period===========", time_period);
+
+                int index = sinner_timeperiod.getSelectedItemPosition();
+                if (index == 0) {
+// String Month = MonthArray[index];
+                    if (sinner_timeperiod.getSelectedItem().toString().equals("Last 15 Days")) {
+
+                        recyclerView.setVisibility(View.VISIBLE); //
+                        get15days();
+                    } else {
+                        recyclerView.setVisibility(View.GONE);
+
+                    }
+                }
+                if (index == 1) {
+// String Month = MonthArray[index];
+                    if (sinner_timeperiod.getSelectedItem().toString().equals("Last 30 Days")) {
+
+                        recyclerView.setVisibility(View.VISIBLE); //
+                        get30days();
+                    } else {
+                        recyclerView.setVisibility(View.GONE);
+
+                    }
+                }
+
+                if (index == 2) {
+// String Month = MonthArray[index];
+                    if (sinner_timeperiod.getSelectedItem().toString().equals("Full Financial year")) {
+
+                        recyclerView.setVisibility(View.VISIBLE); //
+                        getFullFinancialYear();
+
+
+                    } else {
+                        recyclerView.setVisibility(View.GONE);
+
+                    }
+                }
+                if (index == 3) {
+// String Month = MonthArray[index];
+                    if (sinner_timeperiod.getSelectedItem().toString().equals("Since April 2017")) {
+// adapter.notifyDataSetChanged();
+                        recyclerView.setVisibility(View.VISIBLE); //
+                        getSinceApril2017Data();
+
+                    } else {
+                        recyclerView.setVisibility(View.GONE);
+
+                    }
+                }
+                if (index == 4) {
+// String Month = MonthArray[index];
+                    if (sinner_timeperiod.getSelectedItem().toString().equals("Custom Time Period")) {
+                        //  adapter.notifyDataSetChanged();
+                        recyclerView.setVisibility(View.GONE); //
+                        text.setVisibility(View.GONE);
+                        Button buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
+
+                        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                fromString = fromText.getText().toString().trim();
+                                toString = toText.getText().toString().trim();
+
+                                if (fromString.equalsIgnoreCase("") || toString.equalsIgnoreCase("")) {
+                                    Toasty.error(GetRecommendationsActivity.this, "Please Enter From/To Date", Toast.LENGTH_SHORT).show();
+                                    text.setVisibility(View.VISIBLE); //
+                                    recyclerView.setVisibility(View.GONE);
+                                } else {
+// Toast.makeText(CollectionsActivity.this, "kiran", Toast.LENGTH_SHORT).show();
+                                    text.setVisibility(View.GONE);
+// text.setVisibility(View.VISIBLE);
+                                    try {
+                                        //  adapter.notifyDataSetChanged();
+                                        recyclerView.invalidate();
+// recyclerView.setVisibility(View.VISIBLE);
+                                        getCustomRecommendations(fromString, toString);
+
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (fromString.length() <= 0) {
+                                    Toast.makeText(GetRecommendationsActivity.this, "It's empty", Toast.LENGTH_SHORT).show();
+                                }
+                                if (toString.length() <= 0) {
+                                    Toast.makeText(GetRecommendationsActivity.this, "It's empty", Toast.LENGTH_SHORT).show();
+                                }
+// getCollections();
+
+/*fromText.setText(null);
+toText.setText(null);*/
+                            }
+
+                        });
+
+                    } else {
+                        recyclerView.setVisibility(View.GONE);
+
+                    }
+                }
+                if(sinner_timeperiod.getSelectedItem().toString().equals("Custom Time Period")){
+// Toast.makeText(getApplicationContext(),"hiddd" , Toast.LENGTH_LONG).show();
+                    timePeroidLinear.setVisibility(View.VISIBLE); //
+
+// subBtn.setVisibility(View.VISIBLE);
+
+//do something
+                }else {
+                    timePeroidLinear.setVisibility(View.GONE);
+// subBtn.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // DO Nothing here
+            }
+        });
+        //ArrayAdapter is a BaseAdapter that is backed by an array of arbitrary objects
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,time);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        sinner_timeperiod.setAdapter(aa);
 
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {

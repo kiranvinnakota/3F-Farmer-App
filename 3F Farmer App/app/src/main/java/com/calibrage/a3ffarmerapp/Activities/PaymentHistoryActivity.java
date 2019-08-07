@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -32,7 +31,6 @@ import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.Adapters.PaymentHistoryAdapter;
 import com.calibrage.a3ffarmerapp.Model.PaymentHistoryModel;
 import com.calibrage.a3ffarmerapp.R;
-import com.calibrage.a3ffarmerapp.util.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +48,6 @@ import java.util.Map;
 import es.dmoral.toasty.Toasty;
 
 import static com.calibrage.a3ffarmerapp.util.CommonUtil.ConvertDatetoTime;
-import static com.calibrage.a3ffarmerapp.util.UrlConstants.BASE_URL;
 
 
 public class PaymentHistoryActivity extends AppCompatActivity  {
@@ -59,7 +56,6 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
     public static  String TAG="PaymentHistoryActivity";
     String[] country = { "Last 15 days", "Last 30 days", "Full Financial year", "Since April 2017", "Custom Time Period"};
     Spinner spin;
-    private ProgressDialog dialog;
     EditText fromText,toText;
     String fromString,toString;
     DatePickerDialog picker;
@@ -75,7 +71,6 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_history);
-        dialog = new ProgressDialog(this);
         text=(TextView)findViewById(R.id.text);
         ImageView backImg=(ImageView)findViewById(R.id.back);
         backImg.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +80,7 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
-         submit=(Button)findViewById(R.id.buttonSubmit);
+        submit=(Button)findViewById(R.id.buttonSubmit);
 
         listSuperHeroes = new ArrayList<>();
 
@@ -106,7 +101,7 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
                 // date picker dialog
-             //   picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+                //   picker.getDatePicker().setMaxDate(System.currentTimeMillis());
                 picker = new DatePickerDialog(PaymentHistoryActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
@@ -126,12 +121,12 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
         toText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              Calendar  calendar1 = Calendar.getInstance();
+                Calendar  calendar1 = Calendar.getInstance();
                 int day = calendar1.get(Calendar.DAY_OF_MONTH);
                 int month = calendar1.get(Calendar.MONTH);
                 int year = calendar1.get(Calendar.YEAR);
                 // date picker dialog
-             DatePickerDialog   picker1 = new DatePickerDialog(PaymentHistoryActivity.this,
+                DatePickerDialog   picker1 = new DatePickerDialog(PaymentHistoryActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -147,7 +142,7 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
                         }, year, month, day);
 
                 picker1.show();
-            //    picker1.getDatePicker().setMinDate(ConvertDatetoTime(fromText.getText().toString()));
+                   picker1.getDatePicker().setMinDate(ConvertDatetoTime(fromText.getText().toString()));
                 picker1.getDatePicker().setMaxDate(System.currentTimeMillis());
             }
         });
@@ -214,7 +209,7 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
 
                 }
 
-               // return (d2.getTime() - d1.getTime()) / (24 * 60 * 60 * 1000);
+                // return (d2.getTime() - d1.getTime()) / (24 * 60 * 60 * 1000);
 
 //                if (fromString.compareTo(toString) <= 31) {
 //                    System.out.println("earlier");
@@ -249,10 +244,9 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
     }
     private void getPaymentDetails(String fromString, String toString)  {
         //  listSuperHeroes.clear();
-   listSuperHeroes.clear();
-        dialog.setMessage("Loading, please wait....");
-        dialog.show();
-        dialog.setCanceledOnTouchOutside(false);
+
+        listSuperHeroes.clear();
+
         SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -266,8 +260,8 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
             e.printStackTrace();
         }
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-     //   String URL = "http://183.82.111.111/3FFarmerAPI/api/Payment/GetVendorLedger";
-        String URL = BASE_URL+"Payment/GetVendorLedger";
+        String URL = "http://183.82.111.111/3FFarmerAPI/api/Payment/GetVendorLedger";
+
 
         RequestQueue queue= Volley.newRequestQueue(this);
 
@@ -280,11 +274,8 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
         jsonParams.put( "toDate","2019-08-02T10:57:42.62339+05:30");*/
         jsonParams.put( "fromDate", reformattedStrFrom);
         jsonParams.put( "toDate", reformattedStrTo);
-      //  jsonParams.put( "vendorCode","VWGBDAB00010001");
-        String vendor= Constants.FARMER_CODE;
-        String splitVendor = vendor.replace("AP", "V");
-        Log.d(TAG,"newString:"+ splitVendor);
-        jsonParams.put( "vendorCode",splitVendor);
+        jsonParams.put( "vendorCode","VWGBDAB00010001");
+
         Log.d(TAG,"Json==slot:"+ new JSONObject(jsonParams));
 
         JsonObjectRequest postRequest = new JsonObjectRequest( Request.Method.POST, URL,new JSONObject(jsonParams),
@@ -295,9 +286,6 @@ public class PaymentHistoryActivity extends AppCompatActivity  {
                         String result = response.toString();
 
                         Log.d("getPaymentDetails=====",result);
-                        if (dialog.isShowing()) {
-                            dialog.dismiss();
-                        }
                         JSONObject jsonObject = null;
                         try {
                             jsonObject = new JSONObject(result);

@@ -18,9 +18,11 @@ import com.calibrage.a3ffarmerapp.Adapters.LabourRecommendationAdapter;
 import com.calibrage.a3ffarmerapp.Adapters.RecommendationAdapter;
 import com.calibrage.a3ffarmerapp.Model.RecommendationModel;
 import com.calibrage.a3ffarmerapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class LabourRecommendationsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,32 +49,14 @@ public class LabourRecommendationsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-      //  DisplayActionBar();
+        floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_btn_add_labour);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getApplicationContext(),LabourActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-    private void DisplayActionBar() {
-        final ActionBar abar = getSupportActionBar();
-        abar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-        // abar.setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbar_background));//line under the action bar
-        View viewActionBar = getLayoutInflater().inflate(R.layout.toolbar_all, null);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.MATCH_PARENT,
-                Gravity.CENTER);
-        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.custom_action_bar_title);
-        textviewTitle.setText(R.string.labour);
-/*        String header ="<b><font color='#1748DB'>" + getString(R.string.app_vzit) + "</font><b><font color='#32be16'>" + getString(R.string.app_doc) + "</font>";
 
-        textviewTitle.setText(Html.fromHtml(header));*/
-
-        abar.setCustomView(viewActionBar, params);
-        abar.setDisplayShowCustomEnabled(true);
-        abar.setDisplayShowTitleEnabled(false);
-
-        abar.setDisplayHomeAsUpEnabled(true);
-
-        abar.setHomeButtonEnabled(true);
-
-        abar.show();
-
-    }
 }

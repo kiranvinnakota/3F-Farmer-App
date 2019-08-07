@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import com.android.volley.toolbox.Volley;
 import com.calibrage.a3ffarmerapp.Adapters.TableViewAdapter;
 import com.calibrage.a3ffarmerapp.Model.MovieModal;
 import com.calibrage.a3ffarmerapp.R;
+import com.calibrage.a3ffarmerapp.util.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,6 +82,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
     String reformattedStrFrom,reformattedStrTo;
     TextView text;
     private ProgressDialog dialog;
+    String farmerCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,16 +216,8 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         Log.i("LOG_RESPONSE date ", currentDate);
 
-
-
-
-
-
-
-        //get april 2017 date
-
-
-       // calendar.setTime(date);
+         farmerCode= Constants.FARMER_CODE;
+        Log.i("LOG_RESPONSE farmerCode ", farmerCode);
     }
 
 
@@ -447,7 +442,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("farmerCode", "APNLVMVM00110008");
+                MyData.put("farmerCode", farmerCode);
                 MyData.put("fromDate", formattedDate);
                 MyData.put("toDate", currentDate);
                 return MyData;
@@ -498,7 +493,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("farmerCode", "APNLVMVM00110008");
+                MyData.put("farmerCode", farmerCode);
                 MyData.put("fromDate", dateOutput);
                 MyData.put("toDate", currentDate);
                 return MyData;
@@ -524,7 +519,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         }
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String URL = "http://183.82.111.111/3FFarmerAPI/api/Collection";
+        String URL = BASE_URL+"Collection";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -554,7 +549,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("farmerCode", "APNLVMVM00110008");
+                MyData.put("farmerCode", farmerCode);
                 MyData.put("fromDate", reformattedStrFrom);
                 MyData.put("toDate", reformattedStrTo);
                 Log.i("fromDate ", fromString);
@@ -588,7 +583,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
             Log.i("LOG_RESPONSE financiyalYearTo2 ", financiyalYearTo);
         }
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String URL = "http://183.82.111.111/3FFarmerAPI/api/Collection";
+        String URL = BASE_URL+"Collection";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -618,7 +613,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("farmerCode", "APNLVMVM00110008");
+                MyData.put("farmerCode", farmerCode);
                 MyData.put("fromDate", financiyalYearFrom);
                 MyData.put("toDate", financiyalYearTo);
                 return MyData;
@@ -663,8 +658,9 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
             }
         }) {
             protected Map<String, String> getParams() {
+
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("farmerCode", "APNLVMVM00110008");
+                MyData.put("farmerCode", farmerCode);
                 MyData.put("fromDate", aprilDate);
                 MyData.put("toDate", currentDate);
                 return MyData;
@@ -674,6 +670,7 @@ public class CollectionsActivity extends AppCompatActivity implements AdapterVie
         MyRequestQueue.add(MyStringRequest);
 
     }
+    @SuppressLint("LongLogTag")
     private void parseData(JSONObject jsonObject) throws JSONException {
         JSONArray alsoKnownAsArray = jsonObject.getJSONArray("listResult");
         Log.i("LOG_RESPONSE alsoKnownAsArray", String.valueOf(alsoKnownAsArray.length()));
